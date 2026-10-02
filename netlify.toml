@@ -1,0 +1,9 @@
+# Pages live in concepts/ and brandkit/; shared assets live in dist/ and src/.
+# dist/ is gitignored and must be generated before publishing.
+[build]
+  base = "."
+  command = "npm run build && npm run check"
+  publish = "."
+
+[build.environment]
+  NODE_VERSION = "24"

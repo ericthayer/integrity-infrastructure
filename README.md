@@ -25,6 +25,28 @@ npm run serve
 
 Then open http://localhost:4174/concepts/ (hub), `/concepts/work-light/`, `/concepts/as-built/`, `/concepts/crew/`, `/concepts/lit-fiber/`, `/brandkit/` (concept boards) and `/harness/` (every design system preview in all four themes). The server root (`/`) is the saved copy of the live site, kept for comparison.
 
+## Deploy the concepts to Netlify
+
+The root `netlify.toml` configures Git-based deployments. Connect this repository to the Netlify project and deploy `main` with these settings:
+
+| Setting | Value |
+| --- | --- |
+| Base directory | Repository root (`.`) |
+| Package directory | Leave unset |
+| Build command | `npm run build && npm run check` |
+| Publish directory | Repository root (`.`), **not** `dist/` or `concepts/` |
+| Node.js version | `24` (set in `netlify.toml`) |
+
+Netlify installs the npm dependencies before running the build. Leave `NODE_ENV` unset and do not omit dev dependencies: the build needs Tabler icons, GSAP and three.js from `devDependencies`. File-based settings override the corresponding Netlify UI settings.
+
+`dist/` is intentionally gitignored. Deploying the committed HTML without running the build leaves `/dist/integrity.css`, `/dist/integrity.js`, fonts and vendored scripts missing. The browser then shows unstyled content and the interactions do not run. Publishing only `concepts/` also drops the shared assets; publishing only `dist/` drops the pages. The current build requires the repository's static directory layout, including `src/img/`.
+
+Publishing the repository root also exposes ordinary source, tooling and design-system files, the QA harness and the saved original homepage. This is a prototype deployment, not a private source archive; `.gitignore` is not a deployment allowlist. Keep confidential files out of the published tree. Use the limited staging layout below if you only want the concepts and brand boards online.
+
+Commit and push `netlify.toml`, then trigger a new Git-based deploy. After it succeeds, open `/concepts/` and each of the four concept home pages. Check that `/dist/integrity.css`, `/dist/integrity.js`, `/dist/fonts/` files and, for Lit Fiber, `/dist/vendor/` scripts return HTTP 200 with no browser console errors. No SPA catch-all rewrite is needed for these static HTML pages.
+
+For a manual upload of prebuilt output to the existing site's Deploys dropzone, run `npm ci` and `npm run build && npm run check` locally first, then upload a staging folder containing `concepts/`, `brandkit/`, `dist/` and `src/img/` at their existing relative paths. Include `harness/` only if you want the QA previews, and `index.html` plus `integrity-infrastructure_files/` only if you want the saved original site at `/`. Do not upload `node_modules/`, `.git/`, environment files or credentials. Uploading only the `concepts/` folder will not work. Logged-in Netlify Drop can detect and build supported framework projects, but this custom builder should use the explicit Git-based build settings or prebuilt output rather than relying on framework detection.
+
 ## Layout
 
 | Path | What |
