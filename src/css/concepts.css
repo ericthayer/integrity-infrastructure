@@ -7,7 +7,8 @@
 
 /* Work Light: dark, cinematic. Orange is the light source. All-sharp corners,
    with a notch cut from the logo's stencil breaks on primary actions. */
-:root, [data-theme="work-light"] {
+:root,
+[data-theme="work-light"] {
   color-scheme: dark;
   --display-weight: 800;
   --display-transform: uppercase;
@@ -196,7 +197,7 @@
   --radius-media: var(--radius-xl);
   --radius-tag: var(--radius-pill);
   --notch: 0px;
-  --glass-line: rgba(254, 253, 251, 0.10);
+  --glass-line: rgba(254, 253, 251, 0.1);
   --glass-line-strong: rgba(254, 253, 251, 0.18);
   --glass-fill: rgba(254, 253, 251, 0.04);
   --glass-core: rgba(254, 253, 251, 0.03);
