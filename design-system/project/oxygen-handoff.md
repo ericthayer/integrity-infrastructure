@@ -2,6 +2,16 @@
 
 How this system moves into WordPress with the Oxygen builder. Everything here is written for Oxygen 6 (Variables, class-first styling, Components); notes for Oxygen Classic 4.x are at the end. Only the chosen concept ships: its theme values become the production variables.
 
+## Generate the handoff
+
+Run `npm run build:ds` from the repository root. It prepares shared token/icon data, then writes the standalone handoff only under ignored `exports/`. The normal Vite build writes the website to `dist/` separately; neither build regenerates authored concept or brandkit pages.
+
+- **Oxygen static assets:** `exports/tokens.css`, `exports/integrity.css`, `exports/integrity.js`, `exports/fonts/` and `exports/vendor/`. `integrity.css` already includes token CSS and font declarations with sibling `fonts/` URLs; do not also load `tokens.css` when using it. Keep those relative paths when hosting the files.
+- **Importable design-system artifact:** `exports/design-system/project/` copies this project's assets, fonts, metadata and guidelines, then replaces its component bundles, type declarations and 38 previews with generated versions. Its `components/bundle.css` intentionally excludes tokens because the artifact supplies them from `tokens.json`. Its previews retain blob image URLs and pinned CDN vendor URLs for the artifact host; they are not standalone browser pages.
+- **Local QA:** serve `exports/` as a static HTTP root and open `/harness/`. Its 38 component pages use local `../integrity.css`, `../integrity.js`, `../vendor/`, copied `../src/img/` images and `../src/data/` sample data. No `dist/` directory is needed inside the export.
+
+The tracked root `harness/` and tracked `design-system/project/components/` generated files are legacy snapshots, not current build output. Use `exports/harness/` for verification and the exported artifact for handoff. Do not edit generated files; change the token JSON, source CSS, `src/behaviors/site.ts`, or `src/ds/components/` preview templates and rebuild.
+
 ## 1. Fonts
 
 - Self-host Montserrat (variable, roman and italic) and, for As-Built only, Michroma. The files in `fonts/` are the Latin subset; add the Latin Extended files with a `unicode-range` if names with accents appear.
@@ -24,7 +34,7 @@ Create one Oxygen Variables collection per token family and keep the token names
 
 ## 3. Global stylesheet
 
-Paste `components/bundle.css` into one global stylesheet, in order: base, the chosen concept's expression block (drop the other two), components. It is flat CSS with `ii-` prefixed classes, no nesting and no `@layer`, so Oxygen's own un-layered CSS cannot silently out-rank it. Remove the unused concept's selectors to keep the file small.
+Paste `components/bundle.css` from the exported artifact into one global stylesheet, in order: base, the chosen concept's expression block (drop the other three), components. Supply variables through Oxygen as described above, or prepend the generated `exports/tokens.css` with font URLs adapted to their WordPress location. Alternatively, enqueue `exports/integrity.css` with its sibling `fonts/` directory for a complete static stylesheet. The component CSS is flat with `ii-` prefixed classes, no nesting and no `@layer`, so Oxygen's own un-layered CSS cannot silently out-rank it. Remove the unused concept's selectors to keep the file small.
 
 ## 4. Classes
 
@@ -42,9 +52,9 @@ Build one Oxygen Component per system component, with properties for the content
 
 ## 6. Behavior
 
-Enqueue `components/bundle.js` once, in the footer. It is dependency-free and self-initializing (`window.IntegrityDS`); every behavior hooks onto `data-ii-*` attributes: `data-ii-header` (stuck state), `data-ii-nav-toggle` and `data-ii-drawer` (mobile drawer), `data-ii-marquee`, `data-ii-form`, `data-ii-jobs`. Scroll reveals are CSS only (`data-ii-reveal`). Nothing listens to scroll events.
+Enqueue the exported artifact's `components/bundle.js` (or the identical `exports/integrity.js`) once, in the footer. It is a classic IIFE compiled from `src/behaviors/site.ts`, dependency-free and self-initializing (`window.IntegrityDS`), with the `@ds-bundle` namespace marker preserved. Optional motion libraries are type-only imports and are not bundled. Every behavior hooks onto `data-ii-*` attributes: `data-ii-header` (stuck state), `data-ii-nav-toggle` and `data-ii-drawer` (mobile drawer), `data-ii-marquee`, `data-ii-form`, `data-ii-jobs`. Scroll reveals are CSS only (`data-ii-reveal`). Nothing listens to scroll events.
 
-**Lit Fiber only.** Enqueue GSAP core and ScrollTrigger (self-hosted, 3.13 or later, free for commercial use) before the bundle on every page, and three.js (`three.module.min.js` with `three.core.min.js` beside it) as a script module on the Home template only, followed by a code block with `IntegrityDS.scene.mountAll(THREE)`. Add `@view-transition { navigation: auto; }` to the global stylesheet so the island header holds its place between pages. The ServiceSheet is a native `<dialog>` in a code block after the ServiceIndex. Test the Home page on a mid-range phone before launch: the scene is the heaviest thing on the site.
+**Lit Fiber only.** Enqueue GSAP core and ScrollTrigger from `exports/vendor/` (self-hosted, 3.13 or later, free for commercial use) before the bundle on every page, and import three.js from `exports/vendor/three.module.js` with its sibling `three.core.js` on the Home template only, followed by `IntegrityDS.scene.mountAll(THREE)`. The artifact previews instead use the pinned CDN's `three.module.min.js` and sibling `three.core.min.js`. Add `@view-transition { navigation: auto; }` to the global stylesheet so the island header holds its place between pages. The ServiceSheet is a native `<dialog>` in a code block after the ServiceIndex. Test the Home page on a mid-range phone before launch: the scene is the heaviest thing on the site.
 
 ## 7. Forms
 

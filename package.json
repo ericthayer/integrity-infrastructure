@@ -5,15 +5,30 @@
   "description": "Brand kit, design system and concept prototypes for the Integrity Infrastructure redesign (WordPress + Oxygen target).",
   "type": "module",
   "scripts": {
-    "build": "node tools/build.mjs",
+    "dev": "vite",
+    "serve": "vite",
+    "prepare:data": "node tools/prepare.mjs",
+    "typecheck": "npm run prepare:data && tsc --noEmit",
+    "build": "npm run typecheck && vite build",
+    "preview": "vite preview",
+    "pretest": "npm run prepare:data",
+    "test": "node --test tests/*.test.mjs",
+    "test:build": "node --test tests/production/site.test.mjs",
+    "build:ds": "node tools/build.mjs",
     "check": "node tools/check.mjs",
-    "serve": "python3 -m http.server 4174 --bind 127.0.0.1"
+    "verify": "npm test && npm run build && npm run check && npm run test:build"
   },
   "devDependencies": {
     "@fontsource-variable/montserrat": "^5.3.0",
     "@fontsource/michroma": "^5.3.0",
     "@tabler/icons": "^3.48.0",
+    "@types/node": "^24.19.1",
+    "@types/three": "^0.186.0",
+    "esbuild": "^0.28.2",
     "gsap": "^3.15.0",
-    "three": "^0.186.1"
+    "lightningcss": "^1.33.0",
+    "three": "^0.186.1",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.2"
   }
 }

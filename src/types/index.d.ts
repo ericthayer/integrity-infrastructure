@@ -1,6 +1,7 @@
 // Integrity Infrastructure design system: types as documentation.
-// Components are vanilla HTML + ii- classes (Oxygen global classes); behavior ships in
-// components/bundle.js as window.IntegrityDS. Each <Comp>Props interface documents the
+// Components are vanilla HTML + ii- classes (Oxygen global classes). Vite loads typed
+// behaviors via src/main.ts; build:ds exports window.IntegrityDS in integrity.js and
+// design-system/project/components/bundle.js under exports/. Each <Comp>Props interface documents the
 // markup contract a consumer fills in: modifier classes, attributes and content slots.
 
 export type Theme = 'work-light' | 'as-built' | 'crew' | 'lit-fiber';
@@ -14,7 +15,7 @@ export type IconName =
   | 'shield-check' | 'first-aid-kit' | 'certificate' | 'cone' | 'clipboard-check' | 'eye-check' | 'users-group' | 'user-check'
   | 'briefcase' | 'school' | 'trending-up' | 'heart-handshake' | 'steering-wheel' | 'truck' | 'tools' | 'license' | 'award' | 'camera';
 
-/** Inline icon: `<svg class="ii-icon" data-ii-icon="phone"></svg>`, expanded at build time or by IntegrityDS.hydrateIcons(). */
+/** Inline icon: `<svg class="ii-icon" data-ii-icon="phone"></svg>`, expanded in DS exports at build time or by IntegrityDS.hydrateIcons() in app pages. */
 export interface IconProps { name: IconName; /** Only for meaningful icons; decorative icons get aria-hidden. */ label?: string; size?: 'md' | 'lg' | 'xl' }
 
 /** `<a|button class="ii-btn ii-btn--primary">` */
@@ -45,7 +46,7 @@ export interface TagProps { label: string; accent?: boolean; icon?: IconName }
 
 export interface NavItem { label: 'Services' | 'Safety' | 'About' | 'Careers' | 'Subcontractors' | 'Contact'; href: string; current?: boolean }
 
-/** `<header class="ii-header" data-ii-header>` + sibling `<div class="ii-drawer" data-ii-drawer>` (src/partials/header.html). */
+/** `<header class="ii-header" data-ii-header>` + sibling `<div class="ii-drawer" data-ii-drawer>` (DS preview source: src/partials/header.html; app HTML is edited manually). */
 export interface SiteHeaderProps {
   /** ii-header--overlay: transparent over a full-bleed hero until the page scrolls (data-ii-header-offset="80"). */
   overlay?: boolean;
@@ -56,7 +57,7 @@ export interface SiteHeaderProps {
   cta: ButtonProps;
 }
 
-/** `<footer class="ii-footer">` (src/partials/footer.html). */
+/** `<footer class="ii-footer">` (DS preview source: src/partials/footer.html; app HTML is edited manually). */
 export interface SiteFooterProps {
   offices: { state: 'Oregon' | 'Colorado'; lines: string[] }[];
   phone: string;

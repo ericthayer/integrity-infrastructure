@@ -6,18 +6,15 @@
 <title>Integrity Infrastructure | Built to carry the signal</title>
 <meta name="description" content="Integrity Infrastructure bores, builds aerial, splices fiber, installs ISP networks and restores pavement, with offices in Oregon and Colorado.">
 <meta name="robots" content="noindex">
-<link rel="preload" href="../../dist/fonts/montserrat-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="../../dist/fonts/michroma-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../../dist/integrity.css?v=muqjf1gf">
+<link rel="preload" href="/src/fonts/montserrat-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/src/fonts/michroma-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <style>
   /* Cross-document view transitions: the island header keeps its place while pages swap
      (every Lit Fiber page carries this rule; browsers without it navigate normally). */
   @view-transition { navigation: auto; }
   @media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }
 </style>
-<script src="../../dist/vendor/gsap.min.js?v=muqjf1gf" defer></script>
-<script src="../../dist/vendor/ScrollTrigger.min.js?v=muqjf1gf" defer></script>
-<script src="../../dist/integrity.js?v=muqjf1gf" defer></script>
+<script type="module" src="/src/main.ts"></script>
 </head>
 <body>
 <a class="ii-skip" href="#main">Skip to content</a>
@@ -405,9 +402,5 @@
   @media (max-width: 479px) { .cx-bar__label { display: none; } .cx-bar a { padding: 8px 9px; font-size: 11px; } }
 </style>
 
-<script type="module">
-  import * as THREE from '../../dist/vendor/three.module.js?v=muqjf1gf';
-  if (window.IntegrityDS) window.IntegrityDS.scene.mountAll(THREE);
-</script>
 </body>
 </html>

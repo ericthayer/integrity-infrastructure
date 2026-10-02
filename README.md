@@ -1,29 +1,38 @@
 # Integrity Infrastructure redesign
 
-Brand kit, design system and concept prototypes for the integrityinfrastructure.com redesign. The production target is WordPress + Oxygen; everything here is vanilla HTML, CSS and JS so it ports 1:1.
+Brand kit, design system and concept prototypes for the integrityinfrastructure.com redesign. The production target is WordPress + Oxygen; the app uses vanilla HTML, CSS and TypeScript with Vite, with a separate standalone CSS/JS export for Oxygen.
 
-- **Design System artifact**: https://claude.ai/artifact/Kpu4F3WUqjDfFScsB2xRra (source in `design-system/project/`)
+- **Design System artifact**: [open the artifact](https://claude.ai/artifact/Kpu4F3WUqjDfFScsB2xRra) (source in `design-system/project/`)
 - **Concepts**: Work Light and As-Built (primary), Crew and Lit Fiber (backups; Lit Fiber is the motion-led one). One brand core, one component set; a concept is a `data-theme`.
 
 ## Run it
 
+Use **Node.js 24 (recommended)**. Vite requires Node.js 20.19+ or 22.12+; older versions are unsupported. Python is not required to develop, build or verify the project.
+
 ```bash
 npm install
+npm run dev
 ```
 
-```bash
-npm run build
-```
+Vite opens `http://127.0.0.1:5173/concepts/` (hub). The concept pages are at `/concepts/work-light/`, `/concepts/as-built/`, `/concepts/crew/`, `/concepts/lit-fiber/`; boards are at `/brandkit/`. The root `/` redirects to `/concepts/`; the saved original site is under `/reference/`.
 
-```bash
-npm run check
-```
+| Command | What |
+| --- | --- |
+| `npm run dev` | Development server on port 5173, opening `/concepts/` |
+| `npm run typecheck` | Prepare token/icon data and check TypeScript without emitting app code |
+| `npm run build` | Typecheck and build the production website into `dist/` |
+| `npm run preview` | Inspect the existing production build at `http://127.0.0.1:4173/concepts/`; build first, not a production hosting server |
+| `npm test` | Run automated tests |
+| `npm run check` | Check contrast, tokens and copy rules |
+| `npm run test:build` | Check the built production website |
+| `npm run verify` | Full gate: `npm test && npm run build && npm run check && npm run test:build` |
+| `npm run build:ds` | Generate the separate Oxygen/design-system handoff and QA harness under `exports/` |
 
-```bash
-npm run serve
-```
+Edit `concepts/**/*.html` and `brandkit/index.html` directly; these and the root redirect `index.html` are Vite inputs. Manual page edits are permanent: neither build regenerates or overwrites them. `src/partials/` is **only design-system preview source**, not an app HTML auto-include system. Changing a partial does not update the app pages; edit their HTML manually when making a shared markup change.
 
-Then open http://localhost:4174/concepts/ (hub), `/concepts/work-light/`, `/concepts/as-built/`, `/concepts/crew/`, `/concepts/lit-fiber/`, `/brandkit/` (concept boards) and `/harness/` (every design system preview in all four themes). The server root (`/`) is the saved copy of the live site, kept for comparison.
+In development, HTML changes trigger a full page reload and imported CSS changes use HMR. Editing `design-system/project/tokens.json` regenerates token CSS and triggers a full reload. `src/generated/` contains ignored token CSS and icon data; edit the token JSON or icon/type source, not generated files.
+
+`npm run build` writes production website output only to `dist/` (with shared preparation in `src/generated/`). `npm run build:ds` writes the separate handoff under `exports/`. The concepts are prototypes: linked Contact, About and Services pages that are not implemented remain out of scope.
 
 ## Deploy the concepts to Netlify
 
@@ -33,48 +42,54 @@ The root `netlify.toml` configures Git-based deployments. Connect this repositor
 | --- | --- |
 | Base directory | Repository root (`.`) |
 | Package directory | Leave unset |
-| Build command | `npm run build && npm run check` |
-| Publish directory | Repository root (`.`), **not** `dist/` or `concepts/` |
+| Build command | `npm run verify` |
+| Publish directory | `dist` |
 | Node.js version | `24` (set in `netlify.toml`) |
 
 Netlify installs the npm dependencies before running the build. Leave `NODE_ENV` unset and do not omit dev dependencies: the build needs Tabler icons, GSAP and three.js from `devDependencies`. File-based settings override the corresponding Netlify UI settings.
 
-`dist/` is intentionally gitignored. Deploying the committed HTML without running the build leaves `/dist/integrity.css`, `/dist/integrity.js`, fonts and vendored scripts missing. The browser then shows unstyled content and the interactions do not run. Publishing only `concepts/` also drops the shared assets; publishing only `dist/` drops the pages. The current build requires the repository's static directory layout, including `src/img/`.
+`dist/` is intentionally gitignored and is the complete deployment unit: generated HTML, hashed CSS/JS and assets, plus the original snapshot and its assets under `dist/reference/`. Publish its contents as the site root, not the repository, `concepts/` alone or `exports/`. The website does not depend on the repository's source layout or standalone Oxygen bundles at runtime.
 
-Publishing the repository root also exposes ordinary source, tooling and design-system files, the QA harness and the saved original homepage. This is a prototype deployment, not a private source archive; `.gitignore` is not a deployment allowlist. Keep confidential files out of the published tree. Use the limited staging layout below if you only want the concepts and brand boards online.
+After a Git-based deploy succeeds, check the `/` redirect, `/concepts/`, all four concept home pages, `/brandkit/` and `/reference/`. Confirm the referenced `/assets/` resources load without browser console errors, including Lit Fiber's optional motion/scene chunks. No SPA catch-all rewrite is needed for these static HTML pages.
 
-Commit and push `netlify.toml`, then trigger a new Git-based deploy. After it succeeds, open `/concepts/` and each of the four concept home pages. Check that `/dist/integrity.css`, `/dist/integrity.js`, `/dist/fonts/` files and, for Lit Fiber, `/dist/vendor/` scripts return HTTP 200 with no browser console errors. No SPA catch-all rewrite is needed for these static HTML pages.
-
-For a manual upload of prebuilt output to the existing site's Deploys dropzone, run `npm ci` and `npm run build && npm run check` locally first, then upload a staging folder containing `concepts/`, `brandkit/`, `dist/` and `src/img/` at their existing relative paths. Include `harness/` only if you want the QA previews, and `index.html` plus `integrity-infrastructure_files/` only if you want the saved original site at `/`. Do not upload `node_modules/`, `.git/`, environment files or credentials. Uploading only the `concepts/` folder will not work. Logged-in Netlify Drop can detect and build supported framework projects, but this custom builder should use the explicit Git-based build settings or prebuilt output rather than relying on framework detection.
+For a manual upload to the existing site's Deploys dropzone, run `npm ci` and `npm run verify` locally, then upload the complete `dist/` folder as the publish root. No separate source, harness or asset folders are needed. Do not upload `node_modules/`, `.git/`, environment files or credentials.
 
 ## Layout
 
 | Path | What |
-|---|---|
-| `design-system/project/tokens.json` | **Source of truth** for tokens (the Design System type's format): brand primitives, three concept themes, type, spacing, radius, shadows, layout, breakpoints, z-index |
+| --- | --- |
+| `design-system/project/tokens.json` | **Source of truth** for tokens (the Design System type's format): brand primitives, four concept themes, type, spacing, radius, shadows, layout, breakpoints, z-index |
 | `src/css/base.css` | Reset, fluid type scale, layout primitives |
 | `src/css/concepts.css` | Concept expression layer (corners, type treatment, rhythm, image grade, motion) keyed on `data-theme` |
 | `src/css/components.css` | All `ii-` components, written once against semantic tokens |
-| `src/js/site.js` | `window.IntegrityDS`: icons, sticky header, drawer, marquee, forms, Paylocity job list; for Lit Fiber the pointer glow, the tile-to-sheet view transition, GSAP choreography and the three.js fiber scene |
-| `src/partials/` | Header, footer, section, form and brand-board partials shared by pages and DS previews |
-| `src/pages/` | Concept Home pages, the hub and the brand boards (built to `concepts/` and `brandkit/`) |
-| `src/ds/components/<Comp>/preview.html` | Design System previews (built to `design-system/project/components/`) |
+| `src/behaviors/site.ts` | Typed `window.IntegrityDS` behaviors: icons, sticky header, drawer, marquee, forms and optional GSAP/three.js motion |
+| `src/partials/` | Header, footer, section, form and brand-board partials for DS previews only; not automatically included in app HTML |
+| `src/ds/components/<Comp>/preview.html` | Design System previews (built under `exports/design-system/project/components/`) |
+| `src/main.ts` | Vite runtime entry with imported CSS and optional motion/scene modules |
+| `src/generated/` | Ignored token CSS and icon data generated during typecheck/build |
 | `src/img/`, `src/fonts/`, `src/data/` | Web photos and logo variants, self-hosted Montserrat and Michroma, sample job feed |
-| `tools/build.mjs` | Builds `dist/`, the DS bundle and previews, pages and the harness |
+| `tools/build.mjs` | Builds the separate Oxygen/design-system export in `exports/`; does not generate app pages |
 | `tools/check.mjs` | Contrast matrix per concept, token notes, dash and eyebrow and CTA-label rules |
-| `tools/png.py` | Trims the logo and makes the provisional reversed variant (pure Python) |
-| `dist/` | `tokens.css`, `integrity.css`, `integrity.js`, fonts, and `vendor/` (GSAP, ScrollTrigger, three.js copied from `node_modules` at build time): what pages and Oxygen consume |
-| `index.html`, `integrity-infrastructure_files/` | Snapshot of the live site, kept as reference |
+| `tools/lib/build-data.mjs` | Shared token compiler, icon loader and generated-data preparation |
+| `dist/` | Vite production HTML, hashed CSS/JS, fonts, images and optional motion/scene chunks |
+| `exports/` | Standalone Oxygen CSS/JS, tokens, fonts, vendor files, artifact and local QA harness |
+| `concepts/`, `brandkit/`, `index.html` | Authored app HTML and root redirect; edit in place |
+| `reference/`, `integrity-infrastructure_files/` | Saved snapshot of the original live site |
+| `harness/`, `design-system/project/components/` | Tracked historical preview/bundle snapshots; current generated output is under `exports/` |
 
-Generated folders (`dist/`, `concepts/`, `brandkit/`, `harness/`, DS `components/*/preview.html`, `bundle.*`, `index.d.ts`) are rebuilt by `npm run build`; edit `src/` and `tokens.json` instead.
+The app HTML is authored in place and is never generated by either build command. Only `dist/`, `exports/`, and ignored `src/generated/` files are build outputs.
 
 ## Updating the Design System artifact
 
-Edit sources, run `npm run build && npm run check`, then publish only the changed files under `design-system/project/` to the artifact URL. Images are uploads: their blob ids live in `design-system/asset-map.json` and the build rewrites preview image paths to them.
+Edit sources, run `npm run build:ds` and `npm run check`, then upload the generated `exports/design-system/project/` files to the original Design System artifact linked above. Images are uploads: their blob ids live in `design-system/asset-map.json`, and the export builder rewrites artifact preview image paths to them. Artifact previews retain blob/CDN references for that host; they are not standalone browser pages.
+
+For local QA, serve `exports/` as a static HTTP root and open `/harness/` (the generated `exports/harness/`, not the historical root harness). The export includes the images and sample data these previews need; it does not need `dist/`.
+
+For Oxygen, use `exports/integrity.css`, `exports/integrity.js`, `exports/tokens.css`, `exports/fonts/` and `exports/vendor/`. Keep the sibling relative paths intact. `integrity.css` already includes tokens and font declarations, so do not also load `tokens.css` when using the complete stylesheet. The exported JS is a dependency-free, self-initializing classic IIFE; optional GSAP/three.js libraries remain separate vendor files. These are handoff assets, not Vite website output. Follow [the Oxygen handoff](design-system/project/oxygen-handoff.md) for artifact bundles, variables and optional library setup.
 
 ## Adding a concept
 
-See `design-system/project/concepts.md`: one theme in `tokens.json`, one expression block in `src/css/concepts.css`, section variant choices, a Home page and a board built from existing partials.
+See `design-system/project/concepts.md`: one theme in `tokens.json`, one expression block in `src/css/concepts.css`, section variant choices, an authored Home page and a brand board. Reuse existing markup manually in app HTML; partial includes are resolved only for DS previews.
 
 ## Open client inputs
 
