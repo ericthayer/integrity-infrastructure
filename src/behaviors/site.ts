@@ -413,7 +413,7 @@ export function motion(root: ParentNode = doc): void {
   });
 
   if (!ST) return;
-  // Card stack: each stuck card scales down and dims as the next one arrives.
+  // Card stack: each stuck card gently scales down as the next one arrives.
   root.querySelectorAll<HTMLElement>('[data-ii-stack]').forEach(list => {
     if (!once(list, 'Stack')) return;
     const cards = Array.from(list.children);
@@ -421,7 +421,7 @@ export function motion(root: ParentNode = doc): void {
       const next = cards[i + 1];
       if (!next) return;
       g.to(card, {
-        scale: 0.94, filter: 'brightness(0.42)', ease: 'none',
+        scale: 0.965, ease: 'none',
         scrollTrigger: { trigger: next, start: 'top bottom', end: 'top top+=' + (140 + i * 16), scrub: true, invalidateOnRefresh: true },
       });
     });
