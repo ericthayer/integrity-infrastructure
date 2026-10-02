@@ -1,9 +1,8 @@
-# Pages live in concepts/ and brandkit/; shared assets live in dist/ and src/.
-# dist/ is gitignored and must be generated before publishing.
+# Vite builds the editable HTML entries and their assets into a standalone site.
 [build]
   base = "."
-  command = "npm run build && npm run check"
-  publish = "."
+  command = "npm run verify"
+  publish = "dist"
 
 [build.environment]
   NODE_VERSION = "24"
