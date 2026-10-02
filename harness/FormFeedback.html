@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en" data-theme="work-light">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FormFeedback (harness)</title>
+<link rel="stylesheet" href="../dist/integrity.css">
+<script src="../dist/vendor/gsap.min.js"></script>
+<script src="../dist/vendor/ScrollTrigger.min.js"></script>
+<script src="../dist/integrity.js"></script>
+<style>
+  .pv { display: grid; gap: var(--space-4); padding: var(--space-6); grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); align-items: start; }
+</style>
+<style>.hx-bar{position:fixed;right:8px;bottom:8px;z-index:9999;display:flex;gap:4px;font:12px/1 system-ui,sans-serif}.hx-bar button{padding:6px 8px;border:1px solid #888;background:#fff;color:#111;cursor:pointer}.hx-bar button[aria-pressed="true"]{background:#111;color:#fff}</style>
+</head>
+<body>
+
+<div class="pv">
+  <div class="ii-notice ii-notice--danger" tabindex="-1">
+    <svg class="ii-icon" data-ii-icon="alert-triangle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 9v4" /> <path d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0" /> <path d="M12 16h.01" /></svg>
+    <div class="ii-notice__body">
+      <p class="ii-notice__title">Check the highlighted fields</p>
+      <ul>
+        <li><a href="#f-email">Enter an email address like name@company.com</a></li>
+        <li><a href="#f-services">Choose at least one service</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ii-notice ii-notice--success" tabindex="-1">
+    <svg class="ii-icon" data-ii-icon="circle-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /> <path d="M9 12l2 2l4 -4" /></svg>
+    <div class="ii-notice__body">
+      <p class="ii-notice__title">Thanks, your request is in</p>
+      <p>We will review the details and follow up. For urgent work, call (503) 502-5339.</p>
+    </div>
+  </div>
+</div>
+
+<div class="hx-bar" role="group" aria-label="Theme"><button type="button" data-t="work-light" aria-pressed="true">work-light</button><button type="button" data-t="as-built" aria-pressed="false">as-built</button><button type="button" data-t="crew" aria-pressed="false">crew</button><button type="button" data-t="lit-fiber" aria-pressed="false">lit-fiber</button></div>
+<script>document.querySelector('.hx-bar').addEventListener('click',function(e){var t=e.target.closest('button');if(!t)return;document.documentElement.setAttribute('data-theme',t.dataset.t);this.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',String(b===t))});});</script>
+</body>
+</html>

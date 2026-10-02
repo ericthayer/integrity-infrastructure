@@ -1,0 +1,51 @@
+<!-- @dsCard group="Careers" height=640 subtitle="Paylocity feed rendered as job rows; loading, empty and error states. Sample roles only." -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>JobList</title>
+<style>
+  .pv { display: flex; flex-direction: column; gap: var(--space-8); padding: var(--space-6); }
+  .pv__label { font-size: var(--fs-body-sm); font-weight: 700; color: var(--text-muted); margin-bottom: var(--space-3); }
+  .pv__states { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); align-items: start; }
+</style>
+</head>
+<body>
+<div class="pv">
+  <div>
+    <p class="pv__label">Loaded (sample data)</p>
+    <!-- @include careers/job-list.html id="jobs-loaded" base="#" -->
+  </div>
+  <div class="pv__states">
+    <div>
+      <p class="pv__label">Loading</p>
+      <!-- @include careers/job-list.html id="jobs-loading" base="#" -->
+    </div>
+    <div>
+      <p class="pv__label">Empty</p>
+      <!-- @include careers/job-list.html id="jobs-empty" base="#" -->
+    </div>
+    <div>
+      <p class="pv__label">Feed error</p>
+      <!-- @include careers/job-list.html id="jobs-error" base="#" -->
+    </div>
+  </div>
+</div>
+<script>
+  (function () {
+    var sample = { jobs: [
+      { JobId: 's1', Title: 'Fiber Splicing Technician (sample)', HiringDepartment: 'Field Operations', PublishedDate: '2026-09-12T00:00:00Z', JobLocation: { City: 'Sherwood', State: 'OR' }, ApplyUrl: 'https://recruiting.paylocity.com/' },
+      { JobId: 's2', Title: 'Directional Drill Operator (sample)', HiringDepartment: 'Underground', PublishedDate: '2026-09-05T00:00:00Z', JobLocation: { City: 'Centennial', State: 'CO' }, ApplyUrl: 'https://recruiting.paylocity.com/' },
+      { JobId: 's3', Title: 'Aerial Lineworker (sample)', HiringDepartment: 'Aerial', PublishedDate: '2026-08-28T00:00:00Z', JobLocation: { City: 'Sherwood', State: 'OR' }, ApplyUrl: 'https://recruiting.paylocity.com/' }
+    ] };
+    function run() {
+      var ds = window.IntegrityDS;
+      ds.jobs.render(document.getElementById('jobs-loaded'), sample);
+      ds.jobs.render(document.getElementById('jobs-empty'), { jobs: [] });
+      ds.jobs.renderError(document.getElementById('jobs-error'));
+    }
+    if (window.IntegrityDS) run(); else window.addEventListener('load', run);
+  })();
+</script>
+</body>
+</html>

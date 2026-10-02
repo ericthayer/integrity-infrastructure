@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en" data-theme="work-light">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tag (harness)</title>
+<link rel="stylesheet" href="../dist/integrity.css">
+<script src="../dist/vendor/gsap.min.js"></script>
+<script src="../dist/vendor/ScrollTrigger.min.js"></script>
+<script src="../dist/integrity.js"></script>
+<style>.pv { padding: var(--space-6); }</style>
+<style>.hx-bar{position:fixed;right:8px;bottom:8px;z-index:9999;display:flex;gap:4px;font:12px/1 system-ui,sans-serif}.hx-bar button{padding:6px 8px;border:1px solid #888;background:#fff;color:#111;cursor:pointer}.hx-bar button[aria-pressed="true"]{background:#111;color:#fff}</style>
+</head>
+<body>
+
+<div class="pv">
+  <ul class="ii-tag-list" role="list">
+    <li><span class="ii-tag ii-tag--accent">Now hiring</span></li>
+    <li><span class="ii-tag"><svg class="ii-icon" data-ii-icon="map-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /> <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0" /></svg>Sherwood, OR</span></li>
+    <li><span class="ii-tag"><svg class="ii-icon" data-ii-icon="map-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /> <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0" /></svg>Centennial, CO</span></li>
+    <li><span class="ii-tag">Fiber splicing</span></li>
+    <li><span class="ii-tag">Full time</span></li>
+  </ul>
+</div>
+
+<div class="hx-bar" role="group" aria-label="Theme"><button type="button" data-t="work-light" aria-pressed="true">work-light</button><button type="button" data-t="as-built" aria-pressed="false">as-built</button><button type="button" data-t="crew" aria-pressed="false">crew</button><button type="button" data-t="lit-fiber" aria-pressed="false">lit-fiber</button></div>
+<script>document.querySelector('.hx-bar').addEventListener('click',function(e){var t=e.target.closest('button');if(!t)return;document.documentElement.setAttribute('data-theme',t.dataset.t);this.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',String(b===t))});});</script>
+</body>
+</html>

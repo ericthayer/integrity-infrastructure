@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en" data-theme="work-light">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Motion (harness)</title>
+<link rel="stylesheet" href="../dist/integrity.css">
+<script src="../dist/vendor/gsap.min.js"></script>
+<script src="../dist/vendor/ScrollTrigger.min.js"></script>
+<script src="../dist/integrity.js"></script>
+<style>
+  .pv { display: grid; gap: var(--space-8); padding: var(--space-10) var(--space-8); }
+  .pv__grid { display: grid; gap: var(--space-4); }
+  @media (min-width: 768px) { .pv__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .pv__tile { display: flex; flex-direction: column; gap: var(--space-3); min-height: 150px; padding: calc(var(--shell-inset, 0px) + var(--space-6)); background: var(--card-bg); border: var(--card-border); border-radius: var(--radius-card); box-shadow: var(--card-shadow); }
+  .pv__tile strong { font-weight: var(--heading-weight); letter-spacing: var(--heading-tracking); }
+  .pv__tile p { font-size: var(--fs-body-sm); color: var(--text-muted); }
+</style>
+<style>.hx-bar{position:fixed;right:8px;bottom:8px;z-index:9999;display:flex;gap:4px;font:12px/1 system-ui,sans-serif}.hx-bar button{padding:6px 8px;border:1px solid #888;background:#fff;color:#111;cursor:pointer}.hx-bar button[aria-pressed="true"]{background:#111;color:#fff}</style>
+</head>
+<body>
+
+<div class="pv">
+  <h2 class="ii-display ii-display--lg" data-ii-words>Words rise out of masks.</h2>
+  <div class="ii-hero__actions">
+    <a class="ii-btn ii-btn--primary ii-btn--lg ii-btn--orb" href="#quote" data-ii-magnetic>Request a quote<svg class="ii-icon ii-icon--trail" data-ii-icon="arrow-up-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M17 7l-10 10" /> <path d="M8 7l9 0l0 9" /></svg></a>
+    <a class="ii-btn ii-btn--secondary ii-btn--lg" href="#services" data-ii-magnetic>Our services</a>
+  </div>
+  <div class="pv__grid" data-ii-glow>
+    <div class="pv__tile ii-shell"><strong>data-ii-glow</strong><p>Move the pointer over a glass shell: the orange glow follows it. No GSAP needed.</p></div>
+    <div class="pv__tile ii-shell"><strong>data-ii-magnetic</strong><p>Pills lean toward the pointer and spring back. Hover devices only.</p></div>
+    <div class="pv__tile ii-shell"><strong>data-ii-stack, data-ii-rail, data-ii-sheet-host</strong><p>ScrollTrigger drives the card stack and the pinned values rail; a view transition morphs service tiles into sheets. Without them: sticky cards, a scroll-snap rail, a plain dialog.</p></div>
+  </div>
+</div>
+
+<div class="hx-bar" role="group" aria-label="Theme"><button type="button" data-t="work-light" aria-pressed="true">work-light</button><button type="button" data-t="as-built" aria-pressed="false">as-built</button><button type="button" data-t="crew" aria-pressed="false">crew</button><button type="button" data-t="lit-fiber" aria-pressed="false">lit-fiber</button></div>
+<script>document.querySelector('.hx-bar').addEventListener('click',function(e){var t=e.target.closest('button');if(!t)return;document.documentElement.setAttribute('data-theme',t.dataset.t);this.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',String(b===t))});});</script>
+</body>
+</html>

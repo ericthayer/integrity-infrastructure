@@ -1,0 +1,158 @@
+{
+  "v": 3,
+  "layout": "files",
+  "createdOnFiles": {
+    "v": 1,
+    "at": "2026-09-29T04:59:42Z"
+  },
+  "title": "Integrity Infrastructure",
+  "namespace": "IntegrityDS",
+  "libraries": [
+    {
+      "name": "gsap",
+      "version": "3.15.0",
+      "global": "gsap",
+      "file": "components/lib/gsap.min.js"
+    },
+    {
+      "name": "ScrollTrigger",
+      "version": "3.15.0",
+      "global": "ScrollTrigger",
+      "file": "components/lib/ScrollTrigger.min.js"
+    }
+  ],
+  "sections": {},
+  "groups": [
+    "Logos",
+    "Photography",
+    "Icons-legacy"
+  ],
+  "assetGroups": {
+    "Logos": {
+      "name": "Logos",
+      "tile": "l",
+      "order": [
+        "integrity-infrastructure-logo.png",
+        "integrity-infrastructure-logo-reversed.png"
+      ],
+      "files": {
+        "integrity-infrastructure-logo.png": {
+          "name": "integrity-infrastructure-logo.png",
+          "blob": "c9aa06eae15686223d26bbe8de31d587",
+          "size": 95222,
+          "type": "image/png"
+        },
+        "integrity-infrastructure-logo-reversed.png": {
+          "name": "integrity-infrastructure-logo-reversed.png",
+          "blob": "a2e7d4b6a82ccd793feb85b978174f73",
+          "size": 108296,
+          "type": "image/png"
+        }
+      }
+    },
+    "Photography": {
+      "name": "Photography",
+      "tile": "m",
+      "order": [
+        "fleet-mountains.jpg",
+        "night-van-crew.jpg",
+        "night-van-splicer.jpg",
+        "splice-tray.jpg",
+        "fiber-hands.jpg",
+        "conduit-reel.jpg"
+      ],
+      "files": {
+        "fleet-mountains.jpg": {
+          "name": "fleet-mountains.jpg",
+          "blob": "068c2c5ef3a261c743499835d42106e7",
+          "size": 739126,
+          "type": "image/jpeg"
+        },
+        "night-van-crew.jpg": {
+          "name": "night-van-crew.jpg",
+          "blob": "afd45c67632aec381ddc5bac53c78a46",
+          "size": 629415,
+          "type": "image/jpeg"
+        },
+        "night-van-splicer.jpg": {
+          "name": "night-van-splicer.jpg",
+          "blob": "687edd790502d6e18eb34cfe1366384c",
+          "size": 480444,
+          "type": "image/jpeg"
+        },
+        "splice-tray.jpg": {
+          "name": "splice-tray.jpg",
+          "blob": "7ebb6d53762584d0bc8db6b74b637d27",
+          "size": 512852,
+          "type": "image/jpeg"
+        },
+        "fiber-hands.jpg": {
+          "name": "fiber-hands.jpg",
+          "blob": "fa639dfcc0feacff03e22f1973317bf1",
+          "size": 540891,
+          "type": "image/jpeg"
+        },
+        "conduit-reel.jpg": {
+          "name": "conduit-reel.jpg",
+          "blob": "75f7a9f9e74799e301c5f5213d4028e3",
+          "size": 459662,
+          "type": "image/jpeg"
+        }
+      }
+    },
+    "Icons-legacy": {
+      "name": "Icons-legacy",
+      "tile": "xs",
+      "order": [
+        "legacy-fiber-splicing.png",
+        "legacy-boring.png",
+        "legacy-aerial-installations.png",
+        "legacy-isp-installation.png",
+        "legacy-restoration.png"
+      ],
+      "files": {
+        "legacy-fiber-splicing.png": {
+          "name": "legacy-fiber-splicing.png",
+          "blob": "932f5d935c675ffb8b6d0669af1857d6",
+          "size": 6084,
+          "type": "image/png"
+        },
+        "legacy-boring.png": {
+          "name": "legacy-boring.png",
+          "blob": "aeaa49a3fd9c50b5a6d32475d6f6f5f4",
+          "size": 5181,
+          "type": "image/png"
+        },
+        "legacy-aerial-installations.png": {
+          "name": "legacy-aerial-installations.png",
+          "blob": "679b4456c05618b0d90ad48c4dd3ad3f",
+          "size": 9273,
+          "type": "image/png"
+        },
+        "legacy-isp-installation.png": {
+          "name": "legacy-isp-installation.png",
+          "blob": "df25626c3ace3d14e1c2535bd6ce18fe",
+          "size": 7101,
+          "type": "image/png"
+        },
+        "legacy-restoration.png": {
+          "name": "legacy-restoration.png",
+          "blob": "41b556d96b6699b047cf846aa2ec44fe",
+          "size": 5272,
+          "type": "image/png"
+        }
+      }
+    }
+  },
+  "blobs": {},
+  "docs": {
+    "readme": "project/README.md",
+    "sections": []
+  },
+  "lastChange": {
+    "by": "Claude",
+    "at": "2026-09-30T05:55:27Z",
+    "via": "Claude Code",
+    "note": "Fourth concept, Lit Fiber: theme, glass expression layer, motion (GSAP libraries, three.js scene, tile-to-sheet view transition) and six new cards."
+  }
+}

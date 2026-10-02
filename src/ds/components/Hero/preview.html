@@ -1,0 +1,81 @@
+<!-- @dsCard group="Sections" height=640 width=1280 subtitle="Variant follows the theme: cinematic, split, editorial, scene" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hero</title>
+<style>
+  .pv .ii-hero--cinematic { min-height: 600px; }
+  .pv .ii-hero--cinematic .ii-hero__inner { padding-top: var(--space-16); }
+  .pv .ii-hero--split, .pv .ii-hero--editorial { padding-block: var(--space-12); }
+  .pv .ii-hero--scene { min-height: 640px; }
+</style>
+</head>
+<body>
+<div class="pv">
+  <section class="ii-hero ii-hero--cinematic" data-for-theme="work-light" aria-label="Cinematic hero">
+    <div class="ii-hero__media" style="--focus: 50% 32%"><img src="{{asset:Photography/night-van-crew.jpg}}" alt="An Integrity technician in a hard hat and high-visibility jacket works at the back of a lit service van at night"></div>
+    <div class="ii-container ii-hero__inner">
+      <div class="ii-hero__content">
+        <h1 class="ii-display">Fiber. Underground. Aerial.</h1>
+        <p class="ii-lead">Splicing, boring, aerial and ISP installation, then restoration that returns the site to its original condition.</p>
+        <div class="ii-hero__actions">
+          <a class="ii-btn ii-btn--primary ii-btn--lg" href="#quote">Request a quote<svg class="ii-icon ii-icon--trail" data-ii-icon="arrow-right"></svg></a>
+          <a class="ii-btn ii-btn--on-photo ii-btn--lg" href="tel:+15035025339"><svg class="ii-icon" data-ii-icon="phone"></svg>(503) 502-5339</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ii-hero ii-hero--split" data-for-theme="as-built" aria-label="Split hero" hidden>
+    <div class="ii-container ii-hero__grid">
+      <div class="ii-hero__content">
+        <span class="ii-eyebrow">Telecom and utility infrastructure</span>
+        <h1 class="ii-display ii-display--lg">Installed and restored to spec.</h1>
+        <p class="ii-lead ii-muted">Fiber splicing, boring, aerial and ISP installation, and concrete and asphalt restoration for carriers, utilities and builders.</p>
+        <div class="ii-hero__actions">
+          <a class="ii-btn ii-btn--primary ii-btn--lg" href="#quote">Request a quote<svg class="ii-icon ii-icon--trail" data-ii-icon="arrow-right"></svg></a>
+          <a class="ii-btn ii-btn--secondary ii-btn--lg" href="#services">Our services</a>
+        </div>
+      </div>
+      <div class="ii-hero__aside">
+        <figure class="ii-media" style="--focus: 50% 80%"><img src="{{asset:Photography/fleet-mountains.jpg}}" alt="Three Integrity trucks parked in front of snow-covered mountains"></figure>
+        <dl class="ii-plate">
+          <div class="ii-plate__cell"><dt class="ii-plate__label">Service lines</dt><dd class="ii-plate__value">5</dd></div>
+          <div class="ii-plate__cell"><dt class="ii-plate__label">Part of</dt><dd class="ii-plate__value">Integrity Corps</dd></div>
+          <div class="ii-plate__cell"><dt class="ii-plate__label">Offices</dt><dd class="ii-plate__value">Sherwood, OR<br>Centennial, CO</dd></div>
+          <div class="ii-plate__cell"><dt class="ii-plate__label">Call</dt><dd class="ii-plate__value"><a href="tel:+15035025339">(503) 502-5339</a></dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="ii-hero ii-hero--editorial" data-for-theme="crew" aria-label="Editorial hero" hidden>
+    <div class="ii-container">
+      <h1 class="ii-display">Build by building people.</h1>
+      <div class="ii-hero__grid">
+        <div class="ii-hero__content">
+          <p class="ii-lead">A lasting impact through the infrastructure we build, and the people we grow along the way.</p>
+          <div class="ii-hero__actions">
+            <a class="ii-btn ii-btn--primary ii-btn--lg" href="#quote">Request a quote<svg class="ii-icon ii-icon--trail" data-ii-icon="arrow-right"></svg></a>
+            <a class="ii-btn ii-btn--secondary ii-btn--lg" href="#careers">View open roles</a>
+          </div>
+        </div>
+        <div class="ii-hero__photos">
+          <figure class="ii-media ii-media--portrait" style="--focus: 60% 30%"><img src="{{asset:Photography/night-van-splicer.jpg}}" alt="A technician in a carbon hard hat prepares fiber at a van workbench"></figure>
+          <figure class="ii-media" style="--focus: 40% 55%"><img src="{{asset:Photography/fiber-hands.jpg}}" alt="Hands sorting color-coded optical fibers before splicing"></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div data-for-theme="lit-fiber" hidden>
+    <!-- @include sections/hero-scene.html base="#" services="#services" -->
+  </div>
+</div>
+<!-- @include ds/theme-follow.html -->
+<script type="module">
+  import * as THREE from '{{vendor:three}}';
+  if (window.IntegrityDS) window.IntegrityDS.scene.mountAll(THREE);
+</script>
+</body>
+</html>

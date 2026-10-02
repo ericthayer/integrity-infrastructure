@@ -1,0 +1,24 @@
+<!-- @dsCard group="Navigation" height=160 width=1280 subtitle="Bar or island (Lit Fiber); one line at 1024px+, drawer or veil below" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SiteHeader</title>
+<style>
+  .pv-body { min-height: 96px; padding: var(--space-6) 0; }
+</style>
+</head>
+<body>
+<div class="pv">
+<div data-for-theme="work-light as-built crew">
+<!-- @include header.html active="services" base="#" -->
+<main id="main" tabindex="-1" class="pv-body"><div class="ii-container ii-muted ii-small">Page content scrolls under the sticky header; below 1024px the nav collapses into the drawer.</div></main>
+</div>
+<div data-for-theme="lit-fiber" hidden>
+<!-- @include header.html active="services" base="#" header-class=" ii-header--island" drawer-class=" ii-drawer--veil" drawer-id="ii-drawer-island" offset="40" -->
+<main id="main-island" tabindex="-1" class="ii-under-island" style="min-height: 150px"><div class="ii-container ii-muted ii-small">The island floats over the page; below 1024px the burger opens the full-screen veil.</div></main>
+</div>
+</div>
+<!-- @include ds/theme-follow.html -->
+</body>
+</html>

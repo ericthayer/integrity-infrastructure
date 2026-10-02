@@ -1,0 +1,23 @@
+<!-- @dsCard group="Sections" height=620 width=1280 subtitle="Sticky cards that pile up; scroll inside the card (GSAP scales them back on the page)" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CardStack</title>
+<style>
+  .pv { height: 620px; overflow: auto; overscroll-behavior: contain; padding-block: var(--space-10) 50vh; --stack-top: var(--space-4); }
+  .pv .ii-reasons--stack .ii-reason { min-height: 360px; }
+</style>
+</head>
+<body>
+<div class="pv">
+  <div class="ii-container">
+    <div class="ii-section-head">
+      <h2 class="ii-h2">Why partners choose Integrity</h2>
+      <p class="ii-lead ii-muted">Four things a bid partner can count on, on every route. Scroll this card to see the pile.</p>
+    </div>
+    <!-- @include sections/reasons.html modifier=" ii-reasons--stack" attrs="" -->
+  </div>
+</div>
+</body>
+</html>

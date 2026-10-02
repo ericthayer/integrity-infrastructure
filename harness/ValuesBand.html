@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en" data-theme="work-light">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ValuesBand (harness)</title>
+<link rel="stylesheet" href="../dist/integrity.css">
+<script src="../dist/vendor/gsap.min.js"></script>
+<script src="../dist/vendor/ScrollTrigger.min.js"></script>
+<script src="../dist/integrity.js"></script>
+
+<style>.hx-bar{position:fixed;right:8px;bottom:8px;z-index:9999;display:flex;gap:4px;font:12px/1 system-ui,sans-serif}.hx-bar button{padding:6px 8px;border:1px solid #888;background:#fff;color:#111;cursor:pointer}.hx-bar button[aria-pressed="true"]{background:#111;color:#fff}</style>
+</head>
+<body>
+
+<div class="pv">
+<section class="ii-section ii-values ii-values--marquee" data-for-theme="work-light" aria-label="Ways of BEING, marquee">
+  <div class="ii-container">
+    <div class="ii-section-head">
+      <h2 class="ii-h2">Doing what&rsquo;s right when nobody is looking.</h2>
+      <p class="ii-lead ii-muted">Our mantra, and the six Ways of BEING.</p>
+    </div>
+  </div>
+  <div class="ii-marquee-wrap" data-ii-marquee>
+  <div class="ii-marquee">
+    <div class="ii-marquee__track">
+      <ul class="ii-marquee__list" role="list" aria-label="Our Ways of BEING">
+        <li>Be generous</li><li>Be accountable</li><li>Be coachable</li><li>Be safe</li><li>Be caring</li><li>Always be better</li>
+      </ul>
+      <ul class="ii-marquee__list" role="list" aria-hidden="true">
+        <li>Be generous</li><li>Be accountable</li><li>Be coachable</li><li>Be safe</li><li>Be caring</li><li>Always be better</li>
+      </ul>
+    </div>
+  </div>
+  <div class="ii-container ii-marquee__controls">
+    <button class="ii-btn ii-btn--secondary ii-btn--sm" type="button" aria-pressed="false" data-ii-marquee-toggle><span data-ii-label>Pause</span><span class="ii-visually-hidden"> the values ticker</span></button>
+  </div>
+</div>
+
+</section>
+<section class="ii-section ii-values ii-values--grid" data-for-theme="as-built" aria-label="Ways of BEING, grid" hidden>
+  <div class="ii-container">
+    <div class="ii-section-head">
+      <h2 class="ii-h2">Doing what&rsquo;s right when nobody is looking.</h2>
+      <p class="ii-lead ii-muted">Our mantra, and the six Ways of BEING.</p>
+    </div>
+    <dl class="ii-plate" data-ii-reveal>
+  <div class="ii-plate__cell"><dt class="ii-plate__label">Be</dt><dd class="ii-plate__value">Generous</dd></div>
+  <div class="ii-plate__cell"><dt class="ii-plate__label">Be</dt><dd class="ii-plate__value">Accountable</dd></div>
+  <div class="ii-plate__cell"><dt class="ii-plate__label">Be</dt><dd class="ii-plate__value">Coachable</dd></div>
+  <div class="ii-plate__cell"><dt class="ii-plate__label">Be</dt><dd class="ii-plate__value">Safe</dd></div>
+  <div class="ii-plate__cell"><dt class="ii-plate__label">Be</dt><dd class="ii-plate__value">Caring</dd></div>
+  <div class="ii-plate__cell"><dt class="ii-plate__label">Always be</dt><dd class="ii-plate__value">Better</dd></div>
+</dl>
+
+  </div>
+</section>
+<section class="ii-section ii-values ii-values--field ii-on-accent" data-for-theme="crew" aria-label="Ways of BEING, color field" hidden>
+  <div class="ii-container">
+    <h2 class="ii-eyebrow">Our Ways of BEING</h2>
+    <ul class="ii-values__words" role="list" aria-label="Our Ways of BEING" data-ii-reveal="stagger">
+  <li>Be generous.</li><li>Be accountable.</li><li>Be coachable.</li><li>Be safe.</li><li>Be caring.</li><li>Always be better.</li>
+</ul>
+
+    <p class="ii-values__mantra">Doing what&rsquo;s right when nobody is looking.</p>
+  </div>
+</section>
+<section class="ii-section ii-values ii-values--rail" data-for-theme="lit-fiber" aria-label="Ways of BEING, rail" hidden>
+  <div class="ii-container">
+    <div class="ii-section-head">
+      <h2 class="ii-h2">Doing what&rsquo;s right when nobody is looking.</h2>
+      <p class="ii-lead ii-muted">Our mantra, and the six Ways of BEING. Scroll the rail; on the page it pins and follows vertical scroll.</p>
+    </div>
+    <div class="ii-rail">
+  <ol class="ii-rail__track" role="list" aria-label="Our Ways of BEING" data-ii-rail-track>
+    <li class="ii-rail__item ii-shell"><span class="ii-rail__index">01</span><p class="ii-rail__word">Be <em>generous.</em></p></li>
+    <li class="ii-rail__item ii-shell"><span class="ii-rail__index">02</span><p class="ii-rail__word">Be <em>accountable.</em></p></li>
+    <li class="ii-rail__item ii-shell"><span class="ii-rail__index">03</span><p class="ii-rail__word">Be <em>coachable.</em></p></li>
+    <li class="ii-rail__item ii-shell"><span class="ii-rail__index">04</span><p class="ii-rail__word">Be <em>safe.</em></p></li>
+    <li class="ii-rail__item ii-shell"><span class="ii-rail__index">05</span><p class="ii-rail__word">Be <em>caring.</em></p></li>
+    <li class="ii-rail__item ii-shell"><span class="ii-rail__index">06</span><p class="ii-rail__word">Always be <em>better.</em></p></li>
+  </ol>
+</div>
+
+  </div>
+</section>
+</div>
+<script>
+  /* Preview helper: show the variant each concept uses, following the DS theme switcher. */
+  (function () {
+    var root = document.documentElement;
+    function sync() {
+      var theme = root.getAttribute('data-theme') || 'work-light';
+      document.querySelectorAll('[data-for-theme]').forEach(function (el) {
+        el.hidden = el.getAttribute('data-for-theme').split(' ').indexOf(theme) === -1;
+      });
+    }
+    sync();
+    new MutationObserver(sync).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+  })();
+</script>
+
+
+<div class="hx-bar" role="group" aria-label="Theme"><button type="button" data-t="work-light" aria-pressed="true">work-light</button><button type="button" data-t="as-built" aria-pressed="false">as-built</button><button type="button" data-t="crew" aria-pressed="false">crew</button><button type="button" data-t="lit-fiber" aria-pressed="false">lit-fiber</button></div>
+<script>document.querySelector('.hx-bar').addEventListener('click',function(e){var t=e.target.closest('button');if(!t)return;document.documentElement.setAttribute('data-theme',t.dataset.t);this.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',String(b===t))});});</script>
+</body>
+</html>

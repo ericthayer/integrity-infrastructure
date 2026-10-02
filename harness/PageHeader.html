@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en" data-theme="work-light">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PageHeader (harness)</title>
+<link rel="stylesheet" href="../dist/integrity.css">
+<script src="../dist/vendor/gsap.min.js"></script>
+<script src="../dist/vendor/ScrollTrigger.min.js"></script>
+<script src="../dist/integrity.js"></script>
+
+<style>.hx-bar{position:fixed;right:8px;bottom:8px;z-index:9999;display:flex;gap:4px;font:12px/1 system-ui,sans-serif}.hx-bar button{padding:6px 8px;border:1px solid #888;background:#fff;color:#111;cursor:pointer}.hx-bar button[aria-pressed="true"]{background:#111;color:#fff}</style>
+</head>
+<body>
+
+<header class="ii-page-header">
+  <div class="ii-container ii-page-header__inner">
+    <nav class="ii-breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Services</a></li>
+        <li aria-current="page">Fiber splicing</li>
+      </ol>
+    </nav>
+    <h1 class="ii-display ii-display--lg">Fiber splicing</h1>
+    <p class="ii-lead ii-muted">Single-mode and multi-mode splicing that minimizes signal loss and supports long-lasting reliability.</p>
+  </div>
+</header>
+
+<div class="hx-bar" role="group" aria-label="Theme"><button type="button" data-t="work-light" aria-pressed="true">work-light</button><button type="button" data-t="as-built" aria-pressed="false">as-built</button><button type="button" data-t="crew" aria-pressed="false">crew</button><button type="button" data-t="lit-fiber" aria-pressed="false">lit-fiber</button></div>
+<script>document.querySelector('.hx-bar').addEventListener('click',function(e){var t=e.target.closest('button');if(!t)return;document.documentElement.setAttribute('data-theme',t.dataset.t);this.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',String(b===t))});});</script>
+</body>
+</html>

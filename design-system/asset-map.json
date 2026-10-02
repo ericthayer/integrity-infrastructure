@@ -1,0 +1,15 @@
+{
+  "Logos/integrity-infrastructure-logo.png": { "blob": "c9aa06eae15686223d26bbe8de31d587", "size": 95222, "type": "image/png" },
+  "Logos/integrity-infrastructure-logo-reversed.png": { "blob": "a2e7d4b6a82ccd793feb85b978174f73", "size": 108296, "type": "image/png" },
+  "Photography/fleet-mountains.jpg": { "blob": "068c2c5ef3a261c743499835d42106e7", "size": 739126, "type": "image/jpeg" },
+  "Photography/night-van-crew.jpg": { "blob": "afd45c67632aec381ddc5bac53c78a46", "size": 629415, "type": "image/jpeg" },
+  "Photography/night-van-splicer.jpg": { "blob": "687edd790502d6e18eb34cfe1366384c", "size": 480444, "type": "image/jpeg" },
+  "Photography/splice-tray.jpg": { "blob": "7ebb6d53762584d0bc8db6b74b637d27", "size": 512852, "type": "image/jpeg" },
+  "Photography/fiber-hands.jpg": { "blob": "fa639dfcc0feacff03e22f1973317bf1", "size": 540891, "type": "image/jpeg" },
+  "Photography/conduit-reel.jpg": { "blob": "75f7a9f9e74799e301c5f5213d4028e3", "size": 459662, "type": "image/jpeg" },
+  "Icons-legacy/legacy-fiber-splicing.png": { "blob": "932f5d935c675ffb8b6d0669af1857d6", "size": 6084, "type": "image/png" },
+  "Icons-legacy/legacy-boring.png": { "blob": "aeaa49a3fd9c50b5a6d32475d6f6f5f4", "size": 5181, "type": "image/png" },
+  "Icons-legacy/legacy-aerial-installations.png": { "blob": "679b4456c05618b0d90ad48c4dd3ad3f", "size": 9273, "type": "image/png" },
+  "Icons-legacy/legacy-isp-installation.png": { "blob": "df25626c3ace3d14e1c2535bd6ce18fe", "size": 7101, "type": "image/png" },
+  "Icons-legacy/legacy-restoration.png": { "blob": "41b556d96b6699b047cf846aa2ec44fe", "size": 5272, "type": "image/png" }
+}

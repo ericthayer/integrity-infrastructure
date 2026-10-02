@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en" data-theme="work-light">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FeatureSplit (harness)</title>
+<link rel="stylesheet" href="../dist/integrity.css">
+<script src="../dist/vendor/gsap.min.js"></script>
+<script src="../dist/vendor/ScrollTrigger.min.js"></script>
+<script src="../dist/integrity.js"></script>
+<style>.pv { padding-block: var(--space-10); }</style>
+<style>.hx-bar{position:fixed;right:8px;bottom:8px;z-index:9999;display:flex;gap:4px;font:12px/1 system-ui,sans-serif}.hx-bar button{padding:6px 8px;border:1px solid #888;background:#fff;color:#111;cursor:pointer}.hx-bar button[aria-pressed="true"]{background:#111;color:#fff}</style>
+</head>
+<body>
+
+<div class="pv">
+  <div class="ii-container ii-split ii-split--reverse">
+    <figure class="ii-split__media">
+      <div class="ii-media ii-media--tall" style="--focus: 55% 40%"><img src="../src/img/photos/night-van-splicer.jpg" alt="A technician in a carbon hard hat and high-visibility hoodie prepares fiber at a van workbench"></div>
+    </figure>
+    <div class="ii-split__content">
+      <h2 class="ii-h2">Safety is our top priority</h2>
+      <p class="ii-lead ii-muted">We follow strict safety guidelines so every project finishes without incident, protecting our crews and your property.</p>
+      <ul class="ii-checks" role="list">
+        <li><svg class="ii-icon" data-ii-icon="shield-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M11.46 20.846a12 12 0 0 1 -7.96 -14.846a12 12 0 0 0 8.5 -3a12 12 0 0 0 8.5 3a12 12 0 0 1 -.09 7.06" /> <path d="M15 19l2 2l4 -4" /></svg>Strict safety guidelines on every project</li>
+        <li><svg class="ii-icon" data-ii-icon="users-group" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /> <path d="M8 21v-1a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v1" /> <path d="M15 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /> <path d="M17 10h2a2 2 0 0 1 2 2v1" /> <path d="M5 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /> <path d="M3 13v-1a2 2 0 0 1 2 -2h2" /></svg>Crews protected, sites protected</li>
+        <li><svg class="ii-icon" data-ii-icon="clipboard-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" /> <path d="M9 5a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2" /> <path d="M9 14l2 2l4 -4" /></svg>Safety record and documents for bid partners</li>
+      </ul>
+      <a class="ii-arrow-link" href="#safety">See our safety program<svg class="ii-icon" data-ii-icon="arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12l14 0" /> <path d="M13 18l6 -6" /> <path d="M13 6l6 6" /></svg></a>
+    </div>
+  </div>
+</div>
+
+<div class="hx-bar" role="group" aria-label="Theme"><button type="button" data-t="work-light" aria-pressed="true">work-light</button><button type="button" data-t="as-built" aria-pressed="false">as-built</button><button type="button" data-t="crew" aria-pressed="false">crew</button><button type="button" data-t="lit-fiber" aria-pressed="false">lit-fiber</button></div>
+<script>document.querySelector('.hx-bar').addEventListener('click',function(e){var t=e.target.closest('button');if(!t)return;document.documentElement.setAttribute('data-theme',t.dataset.t);this.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',String(b===t))});});</script>
+</body>
+</html>

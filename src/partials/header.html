@@ -1,0 +1,46 @@
+<a class="ii-skip" href="#main">Skip to content</a>
+<header class="ii-header{{header-class|}}" data-ii-header data-ii-header-offset="{{offset|8}}">
+  <div class="ii-container ii-header__bar">
+    <a class="ii-header__brand" href="{{base|}}index.html">
+      <img class="ii-logo ii-logo--for-light" src="{{asset:Logos/integrity-infrastructure-logo.png}}" alt="Integrity Infrastructure home" width="1400" height="605">
+      <img class="ii-logo ii-logo--for-dark" src="{{asset:Logos/integrity-infrastructure-logo-reversed.png}}" alt="Integrity Infrastructure home" width="1400" height="605">
+    </a>
+    <nav class="ii-nav" aria-label="Primary">
+      <ul class="ii-nav__list" role="list">
+        <li><a class="ii-nav__link" href="{{base|}}services.html"{{current:services}}>Services</a></li>
+        <li><a class="ii-nav__link" href="{{base|}}safety.html"{{current:safety}}>Safety</a></li>
+        <li><a class="ii-nav__link" href="{{base|}}about.html"{{current:about}}>About</a></li>
+        <li><a class="ii-nav__link" href="{{base|}}careers.html"{{current:careers}}>Careers</a></li>
+        <li><a class="ii-nav__link" href="{{base|}}subcontractors.html"{{current:subcontractors}}>Subcontractors</a></li>
+        <li><a class="ii-nav__link" href="{{base|}}contact.html"{{current:contact}}>Contact</a></li>
+      </ul>
+    </nav>
+    <div class="ii-header__actions">
+      <a class="ii-header__phone" href="tel:+15035025339" aria-label="Call (503) 502-5339"><svg class="ii-icon" data-ii-icon="phone"></svg><span class="ii-header__phone-number">(503) 502-5339</span></a>
+      <a class="ii-btn ii-btn--primary ii-btn--sm ii-header__cta" href="{{base|}}contact.html#quote">Request a quote</a>
+      <button class="ii-header__toggle" type="button" aria-expanded="false" aria-controls="{{drawer-id|ii-drawer}}" data-ii-nav-toggle><svg class="ii-icon" data-ii-icon="menu-2"></svg><span class="ii-visually-hidden">Menu</span></button>
+    </div>
+  </div>
+</header>
+<div class="ii-drawer{{drawer-class|}}" id="{{drawer-id|ii-drawer}}" role="dialog" aria-modal="true" aria-label="Menu" hidden data-ii-drawer>
+  <button class="ii-drawer__backdrop" type="button" tabindex="-1" aria-hidden="true" data-ii-drawer-close></button>
+  <div class="ii-drawer__panel">
+    <div class="ii-drawer__top">
+      <img class="ii-logo ii-logo--for-light" src="{{asset:Logos/integrity-infrastructure-logo.png}}" alt="" width="1400" height="605">
+      <img class="ii-logo ii-logo--for-dark" src="{{asset:Logos/integrity-infrastructure-logo-reversed.png}}" alt="" width="1400" height="605">
+      <button class="ii-header__toggle" type="button" data-ii-drawer-close><svg class="ii-icon" data-ii-icon="x"></svg><span class="ii-visually-hidden">Close menu</span></button>
+    </div>
+    <ul class="ii-drawer__list" role="list">
+      <li><a class="ii-drawer__link" href="{{base|}}services.html"{{current:services}}>Services<svg class="ii-icon" data-ii-icon="chevron-right"></svg></a></li>
+      <li><a class="ii-drawer__link" href="{{base|}}safety.html"{{current:safety}}>Safety<svg class="ii-icon" data-ii-icon="chevron-right"></svg></a></li>
+      <li><a class="ii-drawer__link" href="{{base|}}about.html"{{current:about}}>About<svg class="ii-icon" data-ii-icon="chevron-right"></svg></a></li>
+      <li><a class="ii-drawer__link" href="{{base|}}careers.html"{{current:careers}}>Careers<svg class="ii-icon" data-ii-icon="chevron-right"></svg></a></li>
+      <li><a class="ii-drawer__link" href="{{base|}}subcontractors.html"{{current:subcontractors}}>Subcontractors<svg class="ii-icon" data-ii-icon="chevron-right"></svg></a></li>
+      <li><a class="ii-drawer__link" href="{{base|}}contact.html"{{current:contact}}>Contact<svg class="ii-icon" data-ii-icon="chevron-right"></svg></a></li>
+    </ul>
+    <div class="ii-drawer__foot">
+      <a class="ii-btn ii-btn--primary ii-btn--block" href="{{base|}}contact.html#quote">Request a quote</a>
+      <a class="ii-call" href="tel:+15035025339"><span class="ii-call__label">Call for a quote</span><span class="ii-call__number">(503) 502-5339</span></a>
+    </div>
+  </div>
+</div>

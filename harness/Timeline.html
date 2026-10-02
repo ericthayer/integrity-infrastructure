@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en" data-theme="work-light">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Timeline (harness)</title>
+<link rel="stylesheet" href="../dist/integrity.css">
+<script src="../dist/vendor/gsap.min.js"></script>
+<script src="../dist/vendor/ScrollTrigger.min.js"></script>
+<script src="../dist/integrity.js"></script>
+<style>.pv { padding: var(--space-8) var(--space-8) 0; max-width: 42rem; }</style>
+<style>.hx-bar{position:fixed;right:8px;bottom:8px;z-index:9999;display:flex;gap:4px;font:12px/1 system-ui,sans-serif}.hx-bar button{padding:6px 8px;border:1px solid #888;background:#fff;color:#111;cursor:pointer}.hx-bar button[aria-pressed="true"]{background:#111;color:#fff}</style>
+</head>
+<body>
+
+<div class="pv">
+  <ol class="ii-timeline" role="list">
+    <li class="ii-timeline__item"><span class="ii-pending">Year: client to provide</span><h3 class="ii-h5">Integrity Infrastructure is founded</h3><p class="ii-muted">The founding story and first projects, in the company&rsquo;s own words.</p></li>
+    <li class="ii-timeline__item"><span class="ii-pending">Year: client to provide</span><h3 class="ii-h5">Colorado office opens in Centennial</h3><p class="ii-muted">A second office alongside Sherwood, Oregon.</p></li>
+    <li class="ii-timeline__item"><span class="ii-pending">Year: client to provide</span><h3 class="ii-h5">Part of the Integrity Corps family</h3><p class="ii-muted">Alongside Integrity Traffic and Integrity Equipment Services.</p></li>
+  </ol>
+</div>
+
+<div class="hx-bar" role="group" aria-label="Theme"><button type="button" data-t="work-light" aria-pressed="true">work-light</button><button type="button" data-t="as-built" aria-pressed="false">as-built</button><button type="button" data-t="crew" aria-pressed="false">crew</button><button type="button" data-t="lit-fiber" aria-pressed="false">lit-fiber</button></div>
+<script>document.querySelector('.hx-bar').addEventListener('click',function(e){var t=e.target.closest('button');if(!t)return;document.documentElement.setAttribute('data-theme',t.dataset.t);this.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',String(b===t))});});</script>
+</body>
+</html>

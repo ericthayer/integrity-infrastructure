@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" data-theme="work-light">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Logo (harness)</title>
+<link rel="stylesheet" href="../dist/integrity.css">
+<script src="../dist/vendor/gsap.min.js"></script>
+<script src="../dist/vendor/ScrollTrigger.min.js"></script>
+<script src="../dist/integrity.js"></script>
+<style>
+  .pv { display: grid; gap: var(--space-4); padding: var(--space-6); grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .pv__plate { display: flex; flex-direction: column; justify-content: space-between; gap: var(--space-8); margin: 0; padding: var(--space-10); border: 1px solid var(--border); }
+  .pv__plate--light { background: var(--neutral-0); }
+  .pv__plate--dark { background: var(--neutral-950); }
+  .pv__plate img { width: 100%; max-width: 280px; height: auto; }
+  .pv__clear { outline: 1px dashed var(--brand-orange); outline-offset: 30px; }
+  .pv__plate figcaption { font-size: var(--fs-body-sm); line-height: 1.55; }
+  .pv__plate--light figcaption { color: var(--neutral-600); }
+  .pv__plate--dark figcaption { color: var(--neutral-400); }
+  .pv__plate strong { color: inherit; font-weight: 700; }
+  .pv__plate--light strong { color: var(--ink); }
+  .pv__plate--dark strong { color: var(--neutral-50); }
+</style>
+<style>.hx-bar{position:fixed;right:8px;bottom:8px;z-index:9999;display:flex;gap:4px;font:12px/1 system-ui,sans-serif}.hx-bar button{padding:6px 8px;border:1px solid #888;background:#fff;color:#111;cursor:pointer}.hx-bar button[aria-pressed="true"]{background:#111;color:#fff}</style>
+</head>
+<body>
+
+<div class="pv">
+  <figure class="pv__plate pv__plate--light">
+    <img class="pv__clear" src="../src/img/logo/integrity-infrastructure-logo.png" alt="Integrity Infrastructure logo, full color" width="1400" height="605">
+    <figcaption><strong>Full color</strong> on light grounds. Keep clear space equal to the flame's width on every side (dashed line); never below 44px tall on screen.</figcaption>
+  </figure>
+  <figure class="pv__plate pv__plate--dark">
+    <img src="../src/img/logo/integrity-infrastructure-logo-reversed.png" alt="Integrity Infrastructure logo, reversed" width="1400" height="605">
+    <figcaption><strong>Reversed, provisional</strong> for dark grounds and photography. Wordmark recolored to neutral-50, flame untouched. Needs client approval and vector files.</figcaption>
+  </figure>
+</div>
+
+<div class="hx-bar" role="group" aria-label="Theme"><button type="button" data-t="work-light" aria-pressed="true">work-light</button><button type="button" data-t="as-built" aria-pressed="false">as-built</button><button type="button" data-t="crew" aria-pressed="false">crew</button><button type="button" data-t="lit-fiber" aria-pressed="false">lit-fiber</button></div>
+<script>document.querySelector('.hx-bar').addEventListener('click',function(e){var t=e.target.closest('button');if(!t)return;document.documentElement.setAttribute('data-theme',t.dataset.t);this.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',String(b===t))});});</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!-- @dsCard group="Forms" height=720 subtitle="Label above, hint, control, error below; every state" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Field</title>
+<style>
+  .pv { display: grid; gap: var(--space-6) var(--space-8); padding: var(--space-6); grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); align-items: start; }
+</style>
+</head>
+<body>
+<div class="pv">
+  <div class="ii-field">
+    <label class="ii-field__label" for="f-name">Name</label>
+    <input class="ii-input" id="f-name" autocomplete="name" value="Jordan Alvarez">
+  </div>
+  <div class="ii-field">
+    <label class="ii-field__label" for="f-company">Company <span class="ii-field__opt">(optional)</span></label>
+    <input class="ii-input" id="f-company" placeholder="Company name">
+  </div>
+  <div class="ii-field is-invalid">
+    <label class="ii-field__label" for="f-email">Email</label>
+    <input class="ii-input" id="f-email" type="email" value="jordan@" aria-invalid="true" aria-describedby="f-email-error">
+    <p class="ii-field__error" id="f-email-error"><svg class="ii-icon" data-ii-icon="alert-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /> <path d="M12 8v4" /> <path d="M12 16h.01" /></svg><span><span class="ii-visually-hidden">Error: </span>Enter an email address like name@company.com</span></p>
+  </div>
+  <div class="ii-field">
+    <label class="ii-field__label" for="f-timeline">Timeline</label>
+    <p class="ii-field__hint" id="f-timeline-hint">When the work needs to start</p>
+    <div class="ii-select-wrap">
+      <select class="ii-select" id="f-timeline" aria-describedby="f-timeline-hint"><option>Within 3 months</option><option>3 to 6 months</option></select>
+      <svg class="ii-icon" data-ii-icon="chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 9l6 6l6 -6" /></svg>
+    </div>
+  </div>
+  <div class="ii-field">
+    <label class="ii-field__label" for="f-details">Project details</label>
+    <textarea class="ii-textarea" id="f-details">Roughly 1,200 feet of underground conduit, two road crossings.</textarea>
+  </div>
+  <fieldset class="ii-fieldset">
+    <legend class="ii-fieldset__legend">Services needed</legend>
+    <div class="ii-choices">
+      <label class="ii-choice"><input type="checkbox" checked>Boring</label>
+      <label class="ii-choice"><input type="checkbox">Concrete and asphalt restoration</label>
+    </div>
+  </fieldset>
+  <div class="ii-field">
+    <label class="ii-field__label" for="f-coi">Certificate of insurance <span class="ii-field__opt">(optional)</span></label>
+    <p class="ii-field__hint" id="f-coi-hint">PDF or image, 10 MB max</p>
+    <input class="ii-file" id="f-coi" type="file" aria-describedby="f-coi-hint">
+  </div>
+  <fieldset class="ii-fieldset">
+    <legend class="ii-fieldset__legend">Preferred contact</legend>
+    <div class="ii-choices">
+      <label class="ii-choice"><input type="radio" name="pv-contact" checked>Phone</label>
+      <label class="ii-choice"><input type="radio" name="pv-contact">Email</label>
+    </div>
+  </fieldset>
+</div>
+</body>
+</html>

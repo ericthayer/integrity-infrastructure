@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en" data-theme="work-light">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cover (harness)</title>
+<link rel="stylesheet" href="../dist/integrity.css">
+<script src="../dist/vendor/gsap.min.js"></script>
+<script src="../dist/vendor/ScrollTrigger.min.js"></script>
+<script src="../dist/integrity.js"></script>
+<style>
+  html, body { margin: 0; height: 100%; }
+  body { background: var(--surface); color: var(--text); font-family: var(--font-sans); overflow: hidden; }
+  .cover { position: relative; width: 960px; height: 320px; overflow: hidden; }
+  .band { position: absolute; top: 0; left: 0; width: 960px; height: 120px; }
+  .band svg { display: block; width: 960px; height: 120px; }
+  .brand { fill: var(--brand-orange); }
+  .deep { fill: var(--surface-inverse); }
+  .flame { fill: var(--flame-yellow); }
+  .cut { fill: var(--surface); }
+  .words { position: absolute; left: var(--space-6); right: var(--space-6); bottom: var(--space-6); }
+  .name { margin: 0; font-size: 64px; line-height: 0.95; font-weight: var(--display-weight); letter-spacing: -0.02em; text-transform: none; color: var(--text); }
+  .tag { margin: var(--space-2) 0 0 2px; font-size: 14px; line-height: 20px; color: var(--text-muted); }
+</style>
+<style>.hx-bar{position:fixed;right:8px;bottom:8px;z-index:9999;display:flex;gap:4px;font:12px/1 system-ui,sans-serif}.hx-bar button{padding:6px 8px;border:1px solid #888;background:#fff;color:#111;cursor:pointer}.hx-bar button[aria-pressed="true"]{background:#111;color:#fff}</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="band" aria-hidden="true">
+    <svg viewBox="0 0 960 120" width="960" height="120">
+      <!--
+        blocks       brand-orange 336x104 (notched, the primary) + brand-orange 184x96 bleeding off the right edge; surface-inverse 208x128 bleeding off the top; flame-yellow 72x72 (the flame, small) - about 27% of 960x320
+        arrangement  top band, because the name is too wide for the 440px zone at 64px; blocks sit on the band's base line with space-4 gutters
+        pattern      stencil breaks, from "a notch cut from the wordmark's stencil breaks": surface-colored cuts, space-2 wide, bridge the orange slab and the inverse block like the wordmark's broken strokes
+        scales       sides in space-2 multiples; gutters space-4; cuts space-2; notch 16 (--notch rounded to space-4); corners radius-none
+      -->
+      <polygon class="brand" points="24,16 344,16 360,32 360,120 24,120"/>
+      <rect class="cut" x="120" y="16" width="8" height="56"/>
+      <rect class="cut" x="232" y="64" width="8" height="56"/>
+      <rect class="deep" x="376" y="-8" width="208" height="128"/>
+      <rect class="cut" x="376" y="56" width="104" height="8"/>
+      <rect class="flame" x="600" y="48" width="72" height="72"/>
+      <rect class="brand" x="792" y="-8" width="184" height="104"/>
+      <rect class="cut" x="872" y="-8" width="8" height="48"/>
+    </svg>
+  </div>
+  <div class="words">
+    <p class="name">Integrity<br>Infrastructure</p>
+    <p class="tag">Build by Building People. Four concepts on one brand core.</p>
+  </div>
+</div>
+
+<div class="hx-bar" role="group" aria-label="Theme"><button type="button" data-t="work-light" aria-pressed="true">work-light</button><button type="button" data-t="as-built" aria-pressed="false">as-built</button><button type="button" data-t="crew" aria-pressed="false">crew</button><button type="button" data-t="lit-fiber" aria-pressed="false">lit-fiber</button></div>
+<script>document.querySelector('.hx-bar').addEventListener('click',function(e){var t=e.target.closest('button');if(!t)return;document.documentElement.setAttribute('data-theme',t.dataset.t);this.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',String(b===t))});});</script>
+</body>
+</html>

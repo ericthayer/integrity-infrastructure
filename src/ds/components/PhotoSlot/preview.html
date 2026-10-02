@@ -1,0 +1,19 @@
+<!-- @dsCard group="Sections" height=330 subtitle="Framed photo with the concept's grade, and the slot that stands in for a shot still needed" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>PhotoSlot</title>
+<style>
+  .pv { display: grid; gap: var(--space-4); padding: var(--space-6); grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; }
+  .pv figure { margin: 0; }
+</style>
+</head>
+<body>
+<div class="pv">
+  <figure><div class="ii-media"><img src="{{asset:Photography/splice-tray.jpg}}" alt="Spliced fibers routed through a splice tray on a workbench"></div><figcaption class="ii-caption">Fiber splicing in the van.</figcaption></figure>
+  <figure><div class="ii-media ii-media--portrait" style="--ratio: 4 / 3; --focus: 60% 45%"><img src="{{asset:Photography/conduit-reel.jpg}}" alt="A crew member walks past a reel of orange conduit"></div><figcaption class="ii-caption">Conduit staged for a bore.</figcaption></figure>
+  <div class="ii-slot"><svg class="ii-icon" data-ii-icon="camera"></svg><p class="ii-slot__label">Photo needed</p><p class="ii-slot__brief">Bucket truck on an aerial run, crew in frame, 3:2 landscape</p></div>
+</div>
+</body>
+</html>

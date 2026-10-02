@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en" data-theme="work-light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Integrity Infrastructure | Concept boards</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="{{root}}/dist/integrity.css">
+<script src="{{root}}/dist/integrity.js" defer></script>
+<!-- @include brandkit/board-styles.html -->
+<style>
+  body { background: var(--neutral-1000); }
+  .bk-page { display: flex; flex-direction: column; gap: 40px; max-width: 1440px; margin: 0 auto; padding: 40px 24px 96px; }
+  .bk-intro { display: flex; flex-direction: column; gap: 12px; max-width: 64ch; color: var(--neutral-50); }
+  .bk-intro h1 { font-size: clamp(28px, 3vw, 40px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.05; }
+  .bk-intro p { color: var(--neutral-300); line-height: 1.6; }
+  .bk-intro a { color: var(--brand-orange); }
+</style>
+</head>
+<body>
+<main id="main" class="bk-page">
+  <header class="bk-intro">
+    <h1>Four directions, one brand core</h1>
+    <p>Every board uses the same brand: Montserrat, brand orange #E87722, ink #171717, the flame logo and the crew&rsquo;s own photography. What changes is the expression: surface, type treatment, corners, rhythm, image grade and motion. Work Light and As-Built are the primary pair; Crew and Lit Fiber are the backups.</p>
+    <p><a href="{{root}}/concepts/work-light/index.html">Work Light home</a>, <a href="{{root}}/concepts/as-built/index.html">As-Built home</a>, <a href="{{root}}/concepts/crew/index.html">Crew home</a>, <a href="{{root}}/concepts/lit-fiber/index.html">Lit Fiber home</a></p>
+  </header>
+  <!-- @include brandkit/board-work-light.html -->
+  <!-- @include brandkit/board-as-built.html -->
+  <!-- @include brandkit/board-crew.html -->
+  <!-- @include brandkit/board-lit-fiber.html -->
+</main>
+<!-- @include concept-bar.html active="boards" -->
+<!-- @include brandkit/fit.html -->
+<script type="module">
+  import * as THREE from '{{vendor:three}}';
+  if (window.IntegrityDS) window.IntegrityDS.scene.mountAll(THREE);
+</script>
+</body>
+</html>

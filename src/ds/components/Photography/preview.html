@@ -1,0 +1,32 @@
+<!-- @dsCard group="Brand" height=720 subtitle="Six real shoot photos; the grade follows the theme; slots are the shot list" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Photography</title>
+<style>
+  .pv { display: flex; flex-direction: column; gap: var(--space-6); padding: var(--space-6); }
+  .pv__grid { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+  .pv__grid figure { margin: 0; }
+  .pv__grid .ii-caption code { font-size: 0.9em; color: var(--text); }
+</style>
+</head>
+<body>
+<div class="pv">
+  <div class="pv__grid">
+    <figure><div class="ii-media" style="--focus: 50% 32%"><img src="{{asset:Photography/night-van-crew.jpg}}" alt="A technician in a hard hat and high-visibility jacket works at the back of a lit service van at night"></div><figcaption class="ii-caption"><code>night-van-crew</code>: Work Light hero. Dark foreground carries the headline.</figcaption></figure>
+    <figure><div class="ii-media" style="--focus: 55% 40%"><img src="{{asset:Photography/night-van-splicer.jpg}}" alt="A technician in a carbon hard hat prepares fiber at a van workbench"></div><figcaption class="ii-caption"><code>night-van-splicer</code>: safety and people stories.</figcaption></figure>
+    <figure><div class="ii-media" style="--focus: 50% 80%"><img src="{{asset:Photography/fleet-mountains.jpg}}" alt="Three Integrity trucks parked in front of snow-covered mountains"></div><figcaption class="ii-caption"><code>fleet-mountains</code>: As-Built hero, proof of scale.</figcaption></figure>
+    <figure><div class="ii-media"><img src="{{asset:Photography/splice-tray.jpg}}" alt="Spliced fibers routed through a splice tray on a workbench"></div><figcaption class="ii-caption"><code>splice-tray</code>: fiber splicing service.</figcaption></figure>
+    <figure><div class="ii-media"><img src="{{asset:Photography/fiber-hands.jpg}}" alt="Hands sorting color-coded optical fibers before splicing"></div><figcaption class="ii-caption"><code>fiber-hands</code>: detail and craft.</figcaption></figure>
+    <figure><div class="ii-media" style="--focus: 60% 45%"><img src="{{asset:Photography/conduit-reel.jpg}}" alt="A crew member in a high-visibility shirt walks past a reel of orange conduit"></div><figcaption class="ii-caption"><code>conduit-reel</code>: boring and underground.</figcaption></figure>
+  </div>
+  <div class="pv__grid">
+    <div class="ii-slot"><svg class="ii-icon" data-ii-icon="camera"></svg><p class="ii-slot__label">Photo needed</p><p class="ii-slot__brief">Bucket truck on an aerial run, crew in frame, 3:2 landscape</p></div>
+    <div class="ii-slot"><svg class="ii-icon" data-ii-icon="camera"></svg><p class="ii-slot__label">Photo needed</p><p class="ii-slot__brief">Directional drill rig on site, operator visible, 3:2 landscape</p></div>
+    <div class="ii-slot"><svg class="ii-icon" data-ii-icon="camera"></svg><p class="ii-slot__label">Photo needed</p><p class="ii-slot__brief">Finished concrete or asphalt restoration beside the original surface</p></div>
+    <div class="ii-slot"><svg class="ii-icon" data-ii-icon="camera"></svg><p class="ii-slot__label">Photo needed</p><p class="ii-slot__brief">Leadership portraits, natural light, 4:5 vertical</p></div>
+  </div>
+</div>
+</body>
+</html>

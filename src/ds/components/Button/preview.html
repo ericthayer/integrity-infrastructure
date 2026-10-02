@@ -1,0 +1,38 @@
+<!-- @dsCard group="Actions" height=300 subtitle="Primary once per view; text on orange is always ink" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Button</title>
+<style>
+  .pv { display: flex; flex-direction: column; gap: var(--space-5); padding: var(--space-6); }
+  .pv__row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3) var(--space-4); }
+  .pv__photo { padding: var(--space-5); background: var(--neutral-1000); }
+</style>
+</head>
+<body>
+<div class="pv">
+  <div class="pv__row">
+    <a class="ii-btn ii-btn--primary" href="#quote">Request a quote</a>
+    <a class="ii-btn ii-btn--secondary" href="#services">Our services</a>
+    <a class="ii-btn ii-btn--ghost" href="#roles">View open roles<svg class="ii-icon ii-icon--trail" data-ii-icon="arrow-right"></svg></a>
+  </div>
+  <div class="pv__row">
+    <a class="ii-btn ii-btn--primary ii-btn--lg" href="#quote">Request a quote<svg class="ii-icon ii-icon--trail" data-ii-icon="arrow-right"></svg></a>
+    <a class="ii-btn ii-btn--primary ii-btn--sm" href="#quote">Request a quote</a>
+    <button class="ii-btn ii-btn--primary" type="button" aria-busy="true"><svg class="ii-icon ii-icon--spin" data-ii-icon="loader-2"></svg>Sending</button>
+    <button class="ii-btn ii-btn--secondary" type="button" aria-disabled="true">Start an inquiry</button>
+  </div>
+  <div class="pv__row pv__photo">
+    <a class="ii-btn ii-btn--primary" href="#quote">Request a quote</a>
+    <a class="ii-btn ii-btn--on-photo" href="tel:+15035025339"><svg class="ii-icon" data-ii-icon="phone"></svg>Call (503) 502-5339</a>
+  </div>
+  <div class="pv__row" data-for-theme="lit-fiber" hidden>
+    <a class="ii-btn ii-btn--primary ii-btn--lg ii-btn--orb" href="#quote" data-ii-magnetic>Request a quote<svg class="ii-icon ii-icon--trail" data-ii-icon="arrow-up-right"></svg></a>
+    <a class="ii-btn ii-btn--secondary ii-btn--lg" href="#services" data-ii-magnetic>Our services</a>
+    <span class="ii-small ii-muted">Orb and magnetic hover (Lit Fiber)</span>
+  </div>
+</div>
+<!-- @include ds/theme-follow.html -->
+</body>
+</html>

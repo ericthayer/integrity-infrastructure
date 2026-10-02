@@ -1,0 +1,100 @@
+<!-- @dsCard group="Forms" height=980 subtitle="Trades, crew size, service area, COI and EMR; demo mode, nothing is sent" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SubcontractorForm</title>
+<style>.pv { max-width: 760px; padding: var(--space-8) var(--space-6); }</style>
+</head>
+<body>
+<div class="pv">
+  <form class="ii-form" action="#" method="post" enctype="multipart/form-data" data-ii-form data-ii-demo aria-label="Subcontractor inquiry">
+  <div class="ii-notice ii-notice--danger" data-ii-error-summary tabindex="-1" hidden>
+    <svg class="ii-icon" data-ii-icon="alert-triangle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 9v4" /> <path d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0" /> <path d="M12 16h.01" /></svg>
+    <div class="ii-notice__body">
+      <p class="ii-notice__title">Check the highlighted fields</p>
+      <ul data-ii-error-list></ul>
+    </div>
+  </div>
+  <div class="ii-form__row ii-form__row--2">
+    <div class="ii-field">
+      <label class="ii-field__label" for="sp-company">Company name</label>
+      <input class="ii-input" id="sp-company" name="company" autocomplete="organization" required>
+    </div>
+    <div class="ii-field">
+      <label class="ii-field__label" for="sp-contact">Contact name</label>
+      <input class="ii-input" id="sp-contact" name="contact" autocomplete="name" required>
+    </div>
+  </div>
+  <div class="ii-form__row ii-form__row--2">
+    <div class="ii-field">
+      <label class="ii-field__label" for="sp-email">Email</label>
+      <input class="ii-input" id="sp-email" name="email" type="email" autocomplete="email" required>
+    </div>
+    <div class="ii-field">
+      <label class="ii-field__label" for="sp-phone">Phone</label>
+      <input class="ii-input" id="sp-phone" name="phone" type="tel" autocomplete="tel" pattern="[\d\s\(\)\+\.\-]{10,}" required>
+    </div>
+  </div>
+  <fieldset class="ii-fieldset" data-ii-required data-ii-error="Choose at least one trade">
+    <legend class="ii-fieldset__legend">Trades you perform</legend>
+    <div class="ii-choices ii-choices--2">
+      <label class="ii-choice"><input type="checkbox" id="sp-trade-1" name="trades" value="Fiber splicing">Fiber splicing</label>
+      <label class="ii-choice"><input type="checkbox" id="sp-trade-2" name="trades" value="Directional boring">Directional boring</label>
+      <label class="ii-choice"><input type="checkbox" id="sp-trade-3" name="trades" value="Aerial construction">Aerial construction</label>
+      <label class="ii-choice"><input type="checkbox" id="sp-trade-4" name="trades" value="ISP and premises installation">ISP and premises installation</label>
+      <label class="ii-choice"><input type="checkbox" id="sp-trade-5" name="trades" value="Concrete and asphalt restoration">Concrete and asphalt restoration</label>
+      <label class="ii-choice"><input type="checkbox" id="sp-trade-6" name="trades" value="Other">Other</label>
+    </div>
+  </fieldset>
+  <div class="ii-form__row ii-form__row--2">
+    <div class="ii-field">
+      <label class="ii-field__label" for="sp-crew">Crew size</label>
+      <div class="ii-select-wrap">
+        <select class="ii-select" id="sp-crew" name="crew_size" required>
+          <option value="">Choose a range</option>
+          <option>1 to 5 people</option>
+          <option>6 to 15 people</option>
+          <option>16 to 30 people</option>
+          <option>More than 30 people</option>
+        </select>
+        <svg class="ii-icon" data-ii-icon="chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 9l6 6l6 -6" /></svg>
+      </div>
+    </div>
+    <div class="ii-field">
+      <label class="ii-field__label" for="sp-area">Service area</label>
+      <p class="ii-field__hint" id="sp-area-hint">States and metro areas you cover</p>
+      <input class="ii-input" id="sp-area" name="service_area" aria-describedby="sp-area-hint" required>
+    </div>
+  </div>
+  <div class="ii-form__row ii-form__row--2">
+    <div class="ii-field">
+      <label class="ii-field__label" for="sp-coi">Certificate of insurance <span class="ii-field__opt">(optional)</span></label>
+      <p class="ii-field__hint" id="sp-coi-hint" data-ii-file-names="PDF or image, 10 MB max">PDF or image, 10 MB max</p>
+      <input class="ii-file" id="sp-coi" name="coi" type="file" accept=".pdf,image/*" aria-describedby="sp-coi-hint">
+    </div>
+    <div class="ii-field">
+      <label class="ii-field__label" for="sp-emr">EMR <span class="ii-field__opt">(optional)</span></label>
+      <p class="ii-field__hint" id="sp-emr-hint">Your current experience modification rate</p>
+      <input class="ii-input" id="sp-emr" name="emr" inputmode="decimal" aria-describedby="sp-emr-hint">
+    </div>
+  </div>
+  <div class="ii-field">
+    <label class="ii-field__label" for="sp-message">Anything else <span class="ii-field__opt">(optional)</span></label>
+    <textarea class="ii-textarea" id="sp-message" name="message"></textarea>
+  </div>
+  <div class="ii-form__foot">
+    <button class="ii-btn ii-btn--primary ii-btn--lg" type="submit">Start an inquiry<svg class="ii-icon ii-icon--trail" data-ii-icon="arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12l14 0" /> <path d="M13 18l6 -6" /> <path d="M13 6l6 6" /></svg></button>
+  </div>
+</form>
+<div class="ii-notice ii-notice--success" data-ii-success tabindex="-1" hidden>
+  <svg class="ii-icon" data-ii-icon="circle-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /> <path d="M9 12l2 2l4 -4" /></svg>
+  <div class="ii-notice__body">
+    <p class="ii-notice__title">Thanks, we have your details</p>
+    <p>Our operations team reviews every inquiry and will reach out when there is a fit.</p>
+  </div>
+</div>
+
+</div>
+</body>
+</html>
