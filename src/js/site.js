@@ -354,7 +354,7 @@ function motion(root) {
       var next = cards[i + 1];
       if (!next) return;
       g.to(card, {
-        scale: 0.94, filter: 'brightness(0.42)', ease: 'none',
+        scale: 0.965, ease: 'none',
         scrollTrigger: { trigger: next, start: 'top bottom', end: 'top top+=' + (140 + i * 16), scrub: true, invalidateOnRefresh: true },
       });
     });
