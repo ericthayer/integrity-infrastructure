@@ -2572,7 +2572,7 @@ a:hover > .ii-media > img,
   gap: var(--space-4);
   min-height: min(56vh, 440px);
   padding: calc(var(--shell-inset, 0px) + var(--space-8));
-  background: var(--surface);
+  background: var(--surface-raised);
   border: var(--card-border);
   border-top: var(--card-border);
   border-radius: var(--radius-card);
