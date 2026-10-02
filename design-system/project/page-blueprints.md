@@ -1,6 +1,6 @@
 # Page blueprints
 
-Seven pages, built from the components in this system. Each blueprint lists who the page is for, the sections in order (component names in parentheses), the one primary action, and the content the client still has to supply. Home is built in all three concepts; the other six follow the favored concept.
+Seven pages, built from the components in this system. Each blueprint lists who the page is for, the sections in order (component names in parentheses), the one primary action, and the content the client still has to supply. Home is built in all four concepts; the other six follow the favored concept.
 
 Site-wide: SiteHeader and SiteFooter on every page; one label per intent ("Request a quote", "Call (503) 502-5339", "View open roles", "Start an inquiry"); stable anchor IDs for deep links; 301 redirects from the live URLs (below).
 
@@ -57,7 +57,7 @@ Site-wide: SiteHeader and SiteFooter on every page; one label per intent ("Reque
 ## Redirects from the live site
 
 | Live URL | New URL |
-|---|---|
+| --- | --- |
 | `/` | `/` |
 | `/index.php/get-a-quote/` | `/contact/#quote` |
 | Careers link to `integrity-infrastructure.careerplug.com` | `/careers/` |
