@@ -1,0 +1,135 @@
+/* ------------------------------------------------------------ page header: lit (website inner pages)
+   The inner-page counterpart of the scene hero: clears the fixed island, sits on an
+   orange glow veil and ends on a lit hairline, the fiber the Home scene draws.
+   Markup: header.ii-page-header.ii-page-header--lit > .ii-container.ii-page-header__inner
+   with breadcrumb, eyebrow (optional), h1.ii-display.ii-display--lg (an <em> marks the
+   300-weight orange words), p.ii-lead, optional .ii-hero__actions and dl.ii-page-header__meta.
+   Add .ii-page-header--media and a .ii-page-header__media column for a photo. */
+.ii-page-header--lit {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-block: calc(56px + var(--space-4) * 2 + var(--space-16)) var(--space-16);
+  border-bottom: 0;
+}
+.ii-page-header--lit::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(52% 70% at 82% 0%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 72%),
+    radial-gradient(30% 50% at 6% 100%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 70%);
+  pointer-events: none;
+}
+/* The lit fiber: a hairline that carries light toward the right edge. */
+.ii-page-header--lit::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    var(--glass-line, var(--border)) 0%,
+    color-mix(in srgb, var(--accent) 70%, transparent) 62%,
+    var(--glass-line, var(--border)) 100%
+  );
+  pointer-events: none;
+}
+.ii-page-header--lit .ii-page-header__inner {
+  gap: var(--space-6);
+  max-width: none;
+}
+.ii-page-header--lit .ii-page-header__copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  max-width: 52rem;
+}
+.ii-page-header--lit .ii-display {
+  font-size: min(var(--fs-display-lg), 12vw);
+}
+.ii-page-header--lit .ii-display em,
+.ii-section-head .ii-h2 em {
+  font-style: normal;
+  font-weight: 300;
+  color: var(--accent-text);
+}
+.ii-page-header--lit .ii-lead {
+  max-width: 40rem;
+  color: var(--text-muted);
+}
+.ii-page-header--lit .ii-breadcrumb ol {
+  font-family: var(--label-family);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--label-tracking);
+  text-transform: var(--label-transform);
+}
+
+/* Load-in, matching the hero: CSS only; base.css collapses it under reduced motion. */
+.ii-page-header--lit .ii-page-header__copy > * {
+  animation: ii-rise var(--motion-duration) var(--motion-ease) both;
+}
+.ii-page-header--lit .ii-page-header__copy > :nth-child(2) {
+  animation-delay: 80ms;
+}
+.ii-page-header--lit .ii-page-header__copy > :nth-child(3) {
+  animation-delay: 160ms;
+}
+.ii-page-header--lit .ii-page-header__copy > :nth-child(n + 4) {
+  animation-delay: 240ms;
+}
+
+/* Key facts under the lead: label over value, hairline separated. */
+.ii-page-header__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6) var(--space-10);
+  margin: var(--space-4) 0 0;
+  padding-top: var(--space-6);
+  border-top: var(--rule);
+}
+.ii-page-header__meta > div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+.ii-page-header__meta dt {
+  font-family: var(--label-family);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--label-tracking);
+  text-transform: var(--label-transform);
+  color: var(--text-muted);
+}
+.ii-page-header__meta dd {
+  margin: 0;
+  font-weight: 500;
+}
+
+/* With a photo: a wide crop under the copy on small screens (never hidden, so the
+   prioritized image is never a wasted download), framed media right on wide screens. */
+.ii-page-header--media .ii-page-header__media {
+  margin: var(--space-4) 0 0;
+  padding: var(--shell-inset, 0px);
+  background: var(--card-bg);
+  border: var(--card-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--card-shadow);
+}
+.ii-page-header--media .ii-page-header__media .ii-media {
+  --ratio: 16 / 9;
+}
+@media (min-width: 1024px) {
+  .ii-page-header--media .ii-page-header__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    align-items: end;
+    gap: var(--space-16);
+  }
+  .ii-page-header--media .ii-page-header__media {
+    margin: 0;
+  }
+  .ii-page-header--media .ii-page-header__media .ii-media {
+    --ratio: 4 / 5;
+  }
+}

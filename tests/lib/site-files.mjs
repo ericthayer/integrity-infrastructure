@@ -7,7 +7,9 @@ import { transform } from 'lightningcss';
 
 export const ROOT = fileURLToPath(new URL('../../', import.meta.url));
 export const DIST = join(ROOT, 'dist');
-export const PAGES = ['index.html', 'concepts/index.html', 'concepts/work-light/index.html',
+export const SITE_PAGES = ['index.html', 'about/index.html', 'services/index.html', 'safety/index.html',
+  'careers/index.html', 'subcontractors/index.html', 'contact/index.html'];
+export const PAGES = [...SITE_PAGES, 'concepts/index.html', 'concepts/work-light/index.html',
   'concepts/as-built/index.html', 'concepts/crew/index.html', 'concepts/lit-fiber/index.html', 'brandkit/index.html'];
 export const sha256 = content => createHash('sha256').update(content).digest('hex');
 

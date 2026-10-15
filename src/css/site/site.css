@@ -1,0 +1,137 @@
+/* Website layer. Rules the seven website pages share on top of the component library;
+   loaded only by src/website.ts, so concept pages and boards never see them. Semantic
+   and Lit Fiber expression tokens only. */
+
+/* ------------------------------------------------------------ page transitions
+   Cross-document view transitions: the island header keeps its place while pages
+   swap. Browsers without support navigate normally; reduced motion opts out. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+}
+
+/* Anchored sections clear the fixed island header, so focus and targets are never
+   hidden under it (WCAG 2.4.11). */
+html {
+  scroll-padding-top: calc(56px + var(--space-4) * 3);
+}
+
+/* ------------------------------------------------------------ responsive photos
+   <picture> inside .ii-media lays out and grades exactly like the bare <img>. */
+.ii-media > picture {
+  display: contents;
+}
+.ii-media > picture > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--focus, 50% 50%);
+  filter: var(--media-filter);
+  transition:
+    filter var(--motion-duration) var(--motion-ease),
+    transform var(--motion-duration) var(--motion-ease);
+}
+a:hover > .ii-media > picture > img,
+.ii-media--interactive:hover > picture > img {
+  filter: var(--media-filter-hover);
+  transform: scale(1.02);
+}
+
+/* ------------------------------------------------------------ footer additions */
+.ii-footer .ii-social {
+  margin-top: var(--space-5);
+}
+
+/* ------------------------------------------------------------ section rhythm helpers */
+/* Two-column intro + content (FAQ-style) for inner pages. */
+.ii-two-col {
+  display: grid;
+  gap: var(--space-10);
+}
+@media (min-width: 1024px) {
+  .ii-two-col {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: var(--space-16);
+    align-items: start;
+  }
+  .ii-two-col > .ii-section-head {
+    position: sticky;
+    top: calc(56px + var(--space-4) * 3);
+    margin-bottom: 0;
+  }
+}
+
+/* Anchor chips: an in-page index of sections (Services). */
+.ii-anchors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ii-anchors a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: 0 var(--space-4);
+  font-size: var(--fs-body-sm);
+  font-weight: 500;
+  color: var(--text);
+  text-decoration: none;
+  border: 1px solid var(--glass-line-strong, var(--border-strong));
+  border-radius: var(--radius-pill);
+  background: var(--glass-fill, transparent);
+  transition:
+    border-color 200ms var(--motion-ease),
+    background-color 200ms var(--motion-ease);
+}
+.ii-anchors a:hover {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+.ii-anchors .ii-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  color: var(--accent-text);
+}
+
+/* ------------------------------------------------------------ office card */
+.ii-offices {
+  display: grid;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 768px) {
+  .ii-offices {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.ii-office {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: calc(var(--shell-inset, 0px) + var(--space-8));
+  background: var(--card-bg);
+  border: var(--card-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--card-shadow);
+}
+.ii-office__label {
+  font-family: var(--label-family);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--label-tracking);
+  text-transform: var(--label-transform);
+  color: var(--text-muted);
+}
+.ii-office address {
+  font-style: normal;
+  line-height: 1.6;
+}
+.ii-office .ii-arrow-link {
+  margin-top: auto;
+}

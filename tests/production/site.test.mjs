@@ -6,7 +6,6 @@ import { ROOT, DIST, PAGES, filesUnder, attributes, tags, srcsetUrls, cssUrls,
   htmlUrls, localFile, normalizeAssetRefs, sha256, fileMap } from '../lib/site-files.mjs';
 
 const read = file => readFileSync(file, 'utf8');
-const appPages = PAGES.slice(1);
 
 function assertPreserved(actual, expected, message) {
   assert.equal(typeof actual, 'string', `${message}: output section is missing`);
@@ -18,22 +17,26 @@ function assertPreserved(actual, expected, message) {
     + `Output: ${JSON.stringify(actual.slice(Math.max(0, offset - 40), offset + 160))}`);
 }
 
-test('all seven production HTML entries exist with compiled hashed modules on app pages', () => {
+test('every production HTML entry exists with one compiled hashed module', () => {
   for (const entry of PAGES) {
     const html = read(join(DIST, entry));
     assert.match(html, /<!doctype html>/i, `${entry}: missing HTML document`);
-    if (entry === 'index.html') continue;
     const modules = tags(html).filter(tag => tag.name === 'script' && tag.attrs.type === 'module' && tag.attrs.src);
-    assert.equal(modules.length, 1, `${entry}: expected one compiled app entry`);
-    assert.match(modules[0].attrs.src, /^\/assets\/[^/]+-[\w-]+\.js$/, `${entry}: entry must be hashed`);
-    localFile(modules[0].attrs.src, join(DIST, entry), DIST);
+    // One app entry (main.ts for concepts and boards, website.ts for the website); Vite may also
+    // reference the runtime chunk the two entries share. Every module must be a hashed local file.
+    const entries = modules.filter(tag => /^\/assets\/(?:main|website)-[\w-]+\.js$/.test(tag.attrs.src));
+    assert.equal(entries.length, 1, `${entry}: expected one compiled app entry`);
+    for (const tag of modules) {
+      assert.match(tag.attrs.src, /^\/assets\/[^/]+-[\w-]+\.js$/, `${entry}: modules must be hashed`);
+      localFile(tag.attrs.src, join(DIST, entry), DIST);
+    }
     const stylesheets = tags(html).filter(tag => tag.name === 'link' && tag.attrs.rel === 'stylesheet');
     assert.ok(stylesheets.length > 0, `${entry}: compiled app CSS must be linked`);
     for (const tag of stylesheets) {
       assert.match(tag.attrs.href, /^\/assets\/[^/]+-[\w-]+\.css$/, `${entry}: CSS must be hashed`);
       localFile(tag.attrs.href, join(DIST, entry), DIST);
     }
-    assert.doesNotMatch(html, /(?:\/src\/main\.ts|(?:\.\.\/|\/|["'])dist\/integrity\.(?:css|js)|\{\{[^}]*\}\}|<!--\s*@include\b)/i,
+    assert.doesNotMatch(html, /(?:\/src\/(?:main|website)\.ts|(?:\.\.\/|\/|["'])dist\/integrity\.(?:css|js)|\{\{[^}]*\}\}|<!--\s*@include\b)/i,
       `${entry}: obsolete runtime path or unresolved template`);
   }
 });
@@ -59,7 +62,7 @@ test('every local HTML resource, inline background and emitted CSS URL resolves 
   assert.ok(cssResources > 0, 'Must check self-hosted font URLs in the emitted CSS');
 });
 
-for (const entry of appPages) {
+for (const entry of PAGES) {
   test(`${entry} preserves authored content, inline styles and SVG except asset references`, () => {
     const sourceRaw = read(join(ROOT, entry));
     const outputRaw = read(join(DIST, entry));
@@ -72,7 +75,7 @@ for (const entry of appPages) {
     const head = html => /<head\b[^>]*>([\s\S]*?)<\/head>/i.exec(html)?.[1]
       .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, tag => {
         const attrs = attributes(/^<script\b[^>]*>/i.exec(tag)[0]);
-        return attrs.type === 'module' && (attrs.src === '/src/main.ts' || /^\/assets\/[^/]+-[\w-]+\.js$/.test(attrs.src ?? '')) ? '' : tag;
+        return attrs.type === 'module' && (['/src/main.ts', '/src/website.ts'].includes(attrs.src) || /^\/assets\/[^/]+-[\w-]+\.js$/.test(attrs.src ?? '')) ? '' : tag;
       })
       .replace(/<link\b(?:"[^"]*"|'[^']*'|[^'">])*>/gi, tag => {
         const attrs = attributes(tag);
@@ -85,14 +88,13 @@ for (const entry of appPages) {
   });
 }
 
-test('root redirects immediately to the concepts hub and retains an accessible fallback link', () => {
+test('root is the website Home and the concept hub stays reachable at /concepts/', () => {
   const html = read(join(DIST, 'index.html'));
   const elements = tags(html);
-  const refresh = elements.find(tag => tag.name === 'meta' && tag.attrs['http-equiv']?.toLowerCase() === 'refresh');
-  assert.ok(refresh, 'Root must provide a meta redirect');
-  assert.match(refresh.attrs.content, /^0\s*;\s*url=\/concepts\/$/i);
-  assert.ok(elements.some(tag => tag.name === 'main'), 'Root must retain a main landmark');
-  assert.match(html, /<a\b[^>]*href="\/concepts\/"[^>]*>[^<]*\S[^<]*<\/a>/i, 'Redirect must have a descriptive fallback');
+  assert.ok(!elements.some(tag => tag.name === 'meta' && tag.attrs['http-equiv']?.toLowerCase() === 'refresh'),
+    'Home must not redirect');
+  assert.ok(elements.some(tag => tag.name === 'main'), 'Home must have a main landmark');
+  assert.equal(elements.filter(tag => tag.name === 'h1').length, 1, 'Home must have one h1');
   localFile('/concepts/index.html', join(DIST, 'index.html'), DIST);
 });
 

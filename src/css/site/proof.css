@@ -1,0 +1,73 @@
+/* ------------------------------------------------------------ testimonial set (third-party proof)
+   Reviews from named outside sources carry the integrity pillar, so the source is
+   always visible. Markup: ul.ii-quotes > li.ii-quotes__item.ii-shell > figure.ii-quote
+   (the existing Testimonial). A review the client still has to supply is
+   li.ii-quotes__item.ii-quotes__item--pending with an ii-slot-style brief. */
+.ii-quotes {
+  display: grid;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 1024px) {
+  .ii-quotes {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    grid-auto-rows: minmax(0, auto);
+  }
+  .ii-quotes__item:first-child {
+    grid-row: span 2;
+  }
+}
+.ii-quotes__item {
+  display: flex;
+  padding: calc(var(--shell-inset, 0px) + var(--space-8));
+  background: var(--card-bg);
+  border: var(--card-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--card-shadow);
+}
+.ii-quotes__item .ii-quote {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-6);
+  margin: 0;
+  max-width: none;
+}
+.ii-quotes__item:not(:first-child) .ii-quote__text {
+  font-size: var(--fs-heading-sm);
+}
+.ii-quotes__item--pending {
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-3);
+  color: var(--text-muted);
+  background: transparent;
+  border-style: dashed;
+  border-color: var(--field-border);
+  box-shadow: none;
+}
+.ii-quotes__item--pending .ii-icon {
+  width: 1.75rem;
+  height: 1.75rem;
+  color: var(--accent-text);
+}
+.ii-quotes__label {
+  font-family: var(--label-family);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--label-tracking);
+  text-transform: var(--label-transform);
+  color: var(--text);
+}
+/* Source line: the reviewer and where the review lives, e.g. "Google review". */
+.ii-quote__source::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: var(--space-2);
+  vertical-align: middle;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+}

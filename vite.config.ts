@@ -5,7 +5,10 @@ import { defineConfig, type Plugin } from 'vite';
 import { prepareData, TOKEN_FILE } from './tools/lib/build-data.mjs';
 
 const root = import.meta.dirname;
-const pages = ['index.html', 'concepts/index.html', 'concepts/work-light/index.html', 'concepts/as-built/index.html',
+// The website (Home at the root plus six inner pages), then the concept hub, concepts and boards.
+const sitePages = ['index.html', 'about/index.html', 'services/index.html', 'safety/index.html',
+  'careers/index.html', 'subcontractors/index.html', 'contact/index.html'];
+const pages = [...sitePages, 'concepts/index.html', 'concepts/work-light/index.html', 'concepts/as-built/index.html',
   'concepts/crew/index.html', 'concepts/lit-fiber/index.html', 'brandkit/index.html'];
 
 function projectData(): Plugin {
