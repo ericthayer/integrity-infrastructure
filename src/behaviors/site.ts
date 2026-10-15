@@ -666,7 +666,9 @@ export function mountScene(el: HTMLElement, module: unknown, opts: FiberSceneOpt
   resizeObserver?.observe(el);
   resize();
 
-  let running = false, wanted = true, last = 0;
+  // A user pause (WCAG 2.2.2) is data-ii-scene-paused on the host; it outranks the
+  // visibility and intersection restarts below.
+  let running = false, wanted = true, paused = el.hasAttribute('data-ii-scene-paused'), last = 0;
   let frameId: number | null = null;
   const frame = (now: number): void => {
     if (!running || disposed) return;
@@ -679,9 +681,14 @@ export function mountScene(el: HTMLElement, module: unknown, opts: FiberSceneOpt
     renderer.render(scene, camera);
     frameId = requestAnimationFrame(frame);
   };
-  const start = (): void => { if (running || still || disposed || !wanted || doc.hidden) return; running = true; last = performance.now(); frameId = requestAnimationFrame(frame); };
+  const start = (): void => { if (running || still || disposed || !wanted || paused || doc.hidden) return; running = true; last = performance.now(); frameId = requestAnimationFrame(frame); };
   const stop = (): void => { running = false; if (frameId !== null) cancelAnimationFrame(frameId); frameId = null; };
   const onVisibility = (): void => { doc.hidden ? stop() : start(); };
+  const pauseObserver = 'MutationObserver' in window ? new MutationObserver(() => {
+    paused = el.hasAttribute('data-ii-scene-paused');
+    paused ? stop() : start();
+  }) : null;
+  pauseObserver?.observe(el, { attributes: true, attributeFilter: ['data-ii-scene-paused'] });
   let intersectionObserver: IntersectionObserver | null = null;
   if (still) { placePulses(0); pose(); renderer.render(scene, camera); }
   else {
@@ -704,6 +711,7 @@ export function mountScene(el: HTMLElement, module: unknown, opts: FiberSceneOpt
       disposed = true;
       stop();
       resizeObserver?.disconnect();
+      pauseObserver?.disconnect();
       intersectionObserver?.disconnect();
       doc.removeEventListener('visibilitychange', onVisibility);
       window.removeEventListener('pointermove', onMove);

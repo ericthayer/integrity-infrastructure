@@ -141,3 +141,61 @@ test('prefill selects a topic and checks a keyed service from the query string',
   assert.equal(prefill(root, '?topic=unknown'), 0, 'Unknown values are ignored');
   assert.equal(select.value, 'safety');
 });
+
+async function loadBehavior(file) {
+  const bundle = await build({
+    entryPoints: [fileURLToPath(new URL(`../src/behaviors/${file}`, import.meta.url))],
+    bundle: true, write: false, format: 'esm', platform: 'neutral',
+  });
+  return import(`data:text/javascript;base64,${Buffer.from(bundle.outputFiles[0].text).toString('base64')}`);
+}
+
+test('topic fields are required only for the topics that need them', async () => {
+  const { topicFields } = await loadBehavior('topic-fields.ts');
+  const listeners = [];
+  const topic = { value: 'quote', addEventListener: (type, fn) => listeners.push(fn) };
+  const note = { hidden: true };
+  let changes = 0;
+  const location = { id: 'quote-location', required: true, getAttribute: () => 'quote', dispatchEvent: () => changes++ };
+  const form = {
+    dataset: {},
+    querySelector: selector => selector === 'select[name="topic"]' ? topic : selector.includes('quote-location') ? note : null,
+    querySelectorAll: () => [location],
+  };
+  assert.equal(topicFields({ querySelectorAll: () => [form] }), 1);
+  assert.equal(location.required, true, 'A quote needs the location');
+  assert.equal(changes, 0);
+  topic.value = 'careers';
+  listeners.forEach(fn => fn());
+  assert.equal(location.required, false, 'A careers question does not');
+  assert.equal(note.hidden, false, 'The label says (optional)');
+  assert.equal(changes, 1, 'The runtime is told so it can clear a stale error');
+  assert.equal(topicFields({ querySelectorAll: () => [form] }), 0, 'Forms are wired once');
+});
+
+test('the scene toggle pauses the scene it controls and reports its state', async () => {
+  const { sceneToggle } = await loadBehavior('scene-toggle.ts');
+  const attrs = new Set();
+  const host = { hasAttribute: name => attrs.has(name), toggleAttribute: name => attrs.has(name) ? attrs.delete(name) : attrs.add(name) };
+  const state = {};
+  let click;
+  const button = {
+    dataset: {},
+    getAttribute: name => name === 'aria-controls' ? 'hero-scene' : null,
+    setAttribute: (name, value) => { state[name] = value; },
+    addEventListener: (type, fn) => { click = fn; },
+  };
+  globalThis.document = { getElementById: id => id === 'hero-scene' ? host : null };
+  try {
+    assert.equal(sceneToggle({ querySelectorAll: () => [button] }), 1);
+    assert.equal(state['aria-pressed'], 'false');
+    click();
+    assert.ok(attrs.has('data-ii-scene-paused'));
+    assert.equal(state['aria-pressed'], 'true');
+    click();
+    assert.ok(!attrs.has('data-ii-scene-paused'));
+    assert.equal(state['aria-pressed'], 'false');
+  } finally {
+    delete globalThis.document;
+  }
+});

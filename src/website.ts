@@ -20,9 +20,13 @@ import './css/site/pages/contact.css';
 import { IntegrityDS } from './behaviors/site';
 import { loadEnhancements } from './behaviors/enhancements';
 import { prefill } from './behaviors/prefill';
+import { sceneToggle } from './behaviors/scene-toggle';
+import { topicFields } from './behaviors/topic-fields';
 
 function boot(): void {
   prefill();
+  topicFields();
+  sceneToggle();
   void loadEnhancements(document, window, IntegrityDS);
 }
 

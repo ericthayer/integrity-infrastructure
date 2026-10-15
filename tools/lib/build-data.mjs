@@ -15,7 +15,7 @@ export const ICON_NAMES = [
   // Website v1.
   'receipt', 'ruler-measure', 'building', 'map-pins', 'helmet', 'hand-stop', 'file-certificate', 'file-check',
   'list-check', 'checklist', 'file-search', 'quote', 'home', 'home-off', 'traffic-cone', 'world', 'medal',
-  'user-shield', 'id-badge-2', 'user-plus', 'star', 'message-circle', 'hammer',
+  'user-shield', 'id-badge-2', 'user-plus', 'star', 'message-circle', 'hammer', 'player-pause', 'player-play',
 ];
 
 export function loadIcons() {

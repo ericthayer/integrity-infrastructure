@@ -138,3 +138,49 @@ a:hover > .ii-media > picture > img,
 .ii-office .ii-arrow-link {
   margin-top: auto;
 }
+
+/* ------------------------------------------------------------ scene pause control (Home hero)
+   The strand scene loops while in view, so it gets a pause (WCAG 2.2.2). The name stays
+   constant; aria-pressed carries the state and swaps the icon. Offered only while a
+   canvas is mounted and motion is allowed. */
+.ii-scene-toggle {
+  position: absolute;
+  right: var(--page-gutter);
+  bottom: var(--space-5);
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: 0 var(--space-4);
+  font: inherit;
+  font-size: var(--fs-body-sm);
+  color: var(--text-muted);
+  background: var(--glass-fill, transparent);
+  border: 1px solid var(--glass-line-strong, var(--border-strong));
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition:
+    color 200ms var(--motion-ease),
+    border-color 200ms var(--motion-ease);
+}
+.ii-scene-toggle:hover {
+  color: var(--text);
+  border-color: var(--accent);
+}
+.ii-scene-toggle .ii-icon {
+  width: 1rem;
+  height: 1rem;
+}
+.ii-scene-toggle[aria-pressed="false"] [data-ii-icon="player-play"],
+.ii-scene-toggle[aria-pressed="true"] [data-ii-icon="player-pause"] {
+  display: none;
+}
+.ii-hero--scene:not(:has(canvas)) .ii-scene-toggle {
+  display: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ii-scene-toggle {
+    display: none;
+  }
+}

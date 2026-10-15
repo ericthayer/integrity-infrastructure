@@ -1,1 +1,138 @@
 /* contact page: layout glue only. Prefer existing components; classes are prefixed ii-contact-. */
+
+/* ------------------------------------------------------------ contact methods: call, email, emergency
+   Sits right under the page header, so it takes a shorter top space; the quote
+   section below supplies the gap. */
+.ii-contact-methods-section {
+  padding-block: var(--space-12) 0;
+}
+.ii-contact-methods {
+  display: grid;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 768px) {
+  .ii-contact-methods {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .ii-contact-method--notice {
+    grid-column: 1 / -1;
+  }
+}
+@media (min-width: 1024px) {
+  .ii-contact-methods {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .ii-contact-method--notice {
+    grid-column: auto;
+  }
+}
+.ii-contact-method {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: calc(var(--shell-inset, 0px) + var(--space-6));
+  background: var(--card-bg);
+  border: var(--card-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--card-shadow);
+}
+.ii-contact-method__icon {
+  width: 1.75rem;
+  height: 1.75rem;
+  color: var(--accent-text);
+}
+.ii-contact-method .ii-small {
+  margin-top: auto;
+}
+/* The card is a third of the row: the number steps down from the figure size. */
+.ii-contact-method .ii-call__number {
+  font-size: var(--fs-heading-lg);
+}
+/* The emergency line is a Notice, not a card: it keeps its own surface and edge. */
+.ii-contact-method--notice {
+  padding: 0;
+  background: none;
+  border: 0;
+  box-shadow: none;
+}
+.ii-contact-method--notice .ii-notice {
+  width: 100%;
+  height: 100%;
+  padding: calc(var(--shell-inset, 0px) + var(--space-6));
+  border-radius: var(--radius-card);
+}
+.ii-contact-email {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  max-width: 100%;
+  font-size: var(--fs-heading-sm);
+  font-weight: 600;
+  color: var(--accent-text);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+.ii-contact-email:hover {
+  color: var(--accent-text-hover);
+  text-decoration: underline;
+}
+
+/* ------------------------------------------------------------ quote: what happens next + form shell */
+.ii-contact-next {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+  padding-top: var(--space-6);
+  border-top: var(--rule);
+}
+.ii-contact-next__list {
+  display: grid;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: ii-contact-next;
+}
+.ii-contact-next__list li {
+  display: flex;
+  gap: var(--space-4);
+  color: var(--text-muted);
+  counter-increment: ii-contact-next;
+}
+.ii-contact-next__list li::before {
+  content: counter(ii-contact-next, decimal-leading-zero);
+  flex: none;
+  min-width: 2rem;
+  padding-top: 0.35em;
+  font-family: var(--label-family);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--label-tracking);
+  color: var(--accent-text);
+}
+.ii-contact-elsewhere {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+.ii-contact-form-shell {
+  padding: calc(var(--shell-inset, 0px) + var(--space-5));
+  background: var(--card-bg);
+  border: var(--card-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--card-shadow);
+}
+@media (min-width: 640px) {
+  .ii-contact-form-shell {
+    padding: calc(var(--shell-inset, 0px) + var(--space-10));
+  }
+}
+
+/* ------------------------------------------------------------ FAQ: answers with two paragraphs */
+.ii-contact-faq-answer {
+  --stack-gap: var(--space-3);
+}

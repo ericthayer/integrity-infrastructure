@@ -16,7 +16,7 @@ export type IconName =
   | 'briefcase' | 'school' | 'trending-up' | 'heart-handshake' | 'steering-wheel' | 'truck' | 'tools' | 'license' | 'award' | 'camera'
   | 'receipt' | 'ruler-measure' | 'building' | 'map-pins' | 'helmet' | 'hand-stop' | 'file-certificate' | 'file-check'
   | 'list-check' | 'checklist' | 'file-search' | 'quote' | 'home' | 'home-off' | 'traffic-cone' | 'world' | 'medal'
-  | 'user-shield' | 'id-badge-2' | 'user-plus' | 'star' | 'message-circle' | 'hammer';
+  | 'user-shield' | 'id-badge-2' | 'user-plus' | 'star' | 'message-circle' | 'hammer' | 'player-pause' | 'player-play';
 
 /** Inline icon: `<svg class="ii-icon" data-ii-icon="phone"></svg>`, expanded in DS exports at build time or by IntegrityDS.hydrateIcons() in app pages. */
 export interface IconProps { name: IconName; /** Only for meaningful icons; decorative icons get aria-hidden. */ label?: string; size?: 'md' | 'lg' | 'xl' }
