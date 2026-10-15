@@ -8,6 +8,7 @@ import './css/components.css';
 import './css/site/site.css';
 import './css/site/page-header.css';
 import './css/site/proof.css';
+import './css/site/coverage.css';
 import './css/site/pages/home.css';
 import './css/site/pages/about.css';
 import './css/site/pages/services.css';

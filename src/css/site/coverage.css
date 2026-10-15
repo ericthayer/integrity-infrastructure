@@ -1,0 +1,299 @@
+/* CoverageMap (ii-coverage). A U.S. tile-grid cartogram: one equal tile per state plus
+   DC on an 11 x 8 grid, placed by data-state. data-status (office, licensed, expansion)
+   is drawn with fill, glyph and line style, never color alone. The grid is aria-hidden;
+   the key is the text equivalent and doubles as the legend. One glass shell around two
+   cores (map, key) and a caption; layout follows the figure's width. No JavaScript. */
+
+/* ------------------------------------------------------------ panel: shell, cores, caption */
+.ii-coverage {
+  container: ii-coverage / inline-size;
+  display: grid;
+  grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr);
+  gap: var(--shell-inset, 8px);
+  padding: var(--shell-inset, 8px);
+  background: var(--card-bg);
+  border: var(--card-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--card-shadow);
+}
+.ii-coverage > * {
+  grid-column: 1 / -1;
+  min-width: 0;
+}
+.ii-usmap,
+.ii-coverage__key {
+  --coverage-core: var(--shell-core, var(--surface-raised));
+  border-radius: calc(var(--radius-card) - var(--shell-inset, 8px));
+  box-shadow: var(--shell-highlight, none);
+}
+.ii-coverage__caption {
+  padding: var(--space-2) var(--space-4) var(--space-1);
+  font-size: var(--fs-body-sm);
+  color: var(--text-muted);
+}
+
+/* ------------------------------------------------------------ map: the tile grid
+   --usmap-gap sets the gap and the faint registration dots at its crossings. */
+.ii-usmap {
+  --usmap-gap: clamp(2px, 0.7cqi, 6px);
+  --usmap-dot: calc(100% - var(--usmap-gap) / 2);
+  container: ii-usmap / inline-size;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: repeat(11, minmax(0, 1fr));
+  align-content: center;
+  gap: var(--usmap-gap);
+  padding: var(--space-3);
+  padding: clamp(var(--space-3), 4cqi, var(--space-8));
+  list-style: none;
+  background-image:
+    radial-gradient(circle at var(--usmap-dot) var(--usmap-dot), var(--glass-line-strong, var(--border-strong)) 1px, transparent 1.5px),
+    linear-gradient(var(--coverage-core), var(--coverage-core));
+  background-size: calc((100% + var(--usmap-gap)) / 11) calc((100% + var(--usmap-gap)) / 8), auto;
+  background-origin: content-box, padding-box;
+  background-clip: content-box, padding-box;
+}
+
+/* Tile and legend swatch share one look, so the key reproduces the map exactly. */
+.ii-usmap__tile,
+.ii-coverage__swatch {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  color: var(--text-muted);
+  background: var(--glass-fill, var(--surface-raised));
+  border: 1px solid var(--glass-line, var(--border));
+  border-radius: 22%;
+}
+.ii-usmap__tile {
+  font-family: var(--label-family);
+  font-size: 0.5625rem;
+  font-size: clamp(0.5rem, 1.9cqi, 0.8125rem);
+  font-weight: var(--label-weight);
+  line-height: 1;
+  letter-spacing: 0.04em;
+  transition: opacity var(--motion-duration) var(--motion-ease);
+}
+
+/* ------------------------------------------------------------ statuses: fill + glyph + line
+   Office: solid orange light, ink text (on-accent, 6:1), a dot, a soft pulsing glow. */
+:is(.ii-usmap__tile, .ii-coverage__swatch)[data-status="office"] {
+  color: var(--on-accent);
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 6px 24px -6px color-mix(in srgb, var(--accent) 60%, transparent);
+}
+:is(.ii-usmap__tile, .ii-coverage__swatch)[data-status="office"]::after {
+  content: "";
+  position: absolute;
+  inset: 10% 10% auto auto;
+  width: max(3px, 11%);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: currentColor;
+}
+/* The glow sits behind every tile (z-index -1 inside the grid's isolated layer). */
+:is(.ii-usmap__tile, .ii-coverage__swatch)[data-status="office"]::before {
+  content: "";
+  position: absolute;
+  inset: -60%;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 58%, transparent), transparent);
+  animation: ii-usmap-pulse 3.6s ease-in-out infinite alternate;
+}
+@keyframes ii-usmap-pulse {
+  from { opacity: 0.4; transform: scale(0.82); }
+  to { opacity: 1; transform: scale(1.08); }
+}
+
+/* Licensed: orange-tinted glass, an orange outline and a filled top-right corner. */
+:is(.ii-usmap__tile, .ii-coverage__swatch)[data-status="licensed"] {
+  color: var(--text);
+  background: linear-gradient(225deg, var(--accent) 0 16%, transparent 16.5%), color-mix(in srgb, var(--accent) 12%, transparent);
+  border-color: var(--accent);
+}
+
+/* Expansion: a dashed outline and muted text on an empty tile: planned, not yet lit. */
+:is(.ii-usmap__tile, .ii-coverage__swatch)[data-status="expansion"] {
+  color: var(--text-muted);
+  background: transparent;
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--accent) 80%, transparent);
+}
+
+/* Hovering a key group dims the other tiles (licensed includes the office states). */
+.ii-coverage:has(.ii-coverage__group[data-status="office"]:hover) .ii-usmap__tile:not([data-status="office"]),
+.ii-coverage:has(.ii-coverage__group[data-status="licensed"]:hover) .ii-usmap__tile:not([data-status="licensed"], [data-status="office"]),
+.ii-coverage:has(.ii-coverage__group[data-status="expansion"]:hover) .ii-usmap__tile:not([data-status="expansion"]) {
+  opacity: 0.28;
+}
+
+/* ------------------------------------------------------------ tile positions (row / column, 1-based) */
+.ii-usmap__tile[data-state="AK"] { grid-area: 1 / 1; }
+.ii-usmap__tile[data-state="ME"] { grid-area: 1 / 11; }
+.ii-usmap__tile[data-state="VT"] { grid-area: 2 / 10; }
+.ii-usmap__tile[data-state="NH"] { grid-area: 2 / 11; }
+.ii-usmap__tile[data-state="WA"] { grid-area: 3 / 1; }
+.ii-usmap__tile[data-state="ID"] { grid-area: 3 / 2; }
+.ii-usmap__tile[data-state="MT"] { grid-area: 3 / 3; }
+.ii-usmap__tile[data-state="ND"] { grid-area: 3 / 4; }
+.ii-usmap__tile[data-state="MN"] { grid-area: 3 / 5; }
+.ii-usmap__tile[data-state="IL"] { grid-area: 3 / 6; }
+.ii-usmap__tile[data-state="WI"] { grid-area: 3 / 7; }
+.ii-usmap__tile[data-state="MI"] { grid-area: 3 / 8; }
+.ii-usmap__tile[data-state="NY"] { grid-area: 3 / 9; }
+.ii-usmap__tile[data-state="RI"] { grid-area: 3 / 10; }
+.ii-usmap__tile[data-state="MA"] { grid-area: 3 / 11; }
+.ii-usmap__tile[data-state="OR"] { grid-area: 4 / 1; }
+.ii-usmap__tile[data-state="NV"] { grid-area: 4 / 2; }
+.ii-usmap__tile[data-state="WY"] { grid-area: 4 / 3; }
+.ii-usmap__tile[data-state="SD"] { grid-area: 4 / 4; }
+.ii-usmap__tile[data-state="IA"] { grid-area: 4 / 5; }
+.ii-usmap__tile[data-state="IN"] { grid-area: 4 / 6; }
+.ii-usmap__tile[data-state="OH"] { grid-area: 4 / 7; }
+.ii-usmap__tile[data-state="PA"] { grid-area: 4 / 8; }
+.ii-usmap__tile[data-state="NJ"] { grid-area: 4 / 9; }
+.ii-usmap__tile[data-state="CT"] { grid-area: 4 / 10; }
+.ii-usmap__tile[data-state="CA"] { grid-area: 5 / 1; }
+.ii-usmap__tile[data-state="UT"] { grid-area: 5 / 2; }
+.ii-usmap__tile[data-state="CO"] { grid-area: 5 / 3; }
+.ii-usmap__tile[data-state="NE"] { grid-area: 5 / 4; }
+.ii-usmap__tile[data-state="MO"] { grid-area: 5 / 5; }
+.ii-usmap__tile[data-state="KY"] { grid-area: 5 / 6; }
+.ii-usmap__tile[data-state="WV"] { grid-area: 5 / 7; }
+.ii-usmap__tile[data-state="VA"] { grid-area: 5 / 8; }
+.ii-usmap__tile[data-state="MD"] { grid-area: 5 / 9; }
+.ii-usmap__tile[data-state="DE"] { grid-area: 5 / 10; }
+.ii-usmap__tile[data-state="AZ"] { grid-area: 6 / 2; }
+.ii-usmap__tile[data-state="NM"] { grid-area: 6 / 3; }
+.ii-usmap__tile[data-state="KS"] { grid-area: 6 / 4; }
+.ii-usmap__tile[data-state="AR"] { grid-area: 6 / 5; }
+.ii-usmap__tile[data-state="TN"] { grid-area: 6 / 6; }
+.ii-usmap__tile[data-state="NC"] { grid-area: 6 / 7; }
+.ii-usmap__tile[data-state="SC"] { grid-area: 6 / 8; }
+.ii-usmap__tile[data-state="DC"] { grid-area: 6 / 9; }
+.ii-usmap__tile[data-state="OK"] { grid-area: 7 / 4; }
+.ii-usmap__tile[data-state="LA"] { grid-area: 7 / 5; }
+.ii-usmap__tile[data-state="MS"] { grid-area: 7 / 6; }
+.ii-usmap__tile[data-state="AL"] { grid-area: 7 / 7; }
+.ii-usmap__tile[data-state="GA"] { grid-area: 7 / 8; }
+.ii-usmap__tile[data-state="HI"] { grid-area: 8 / 1; }
+.ii-usmap__tile[data-state="TX"] { grid-area: 8 / 4; }
+.ii-usmap__tile[data-state="FL"] { grid-area: 8 / 9; }
+
+/* ------------------------------------------------------------ key: legend + text equivalent
+   Office rows carry the city; plain state names wrap as chips, so long lists stay compact. */
+.ii-coverage__key {
+  isolation: isolate;
+  display: grid;
+  padding: var(--space-6) var(--space-5);
+  background: var(--coverage-core);
+}
+.ii-coverage__list {
+  display: grid;
+  gap: var(--space-5);
+}
+.ii-coverage__group {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: start;
+  gap: var(--space-3) var(--space-2);
+}
+.ii-coverage__group + .ii-coverage__group {
+  padding-top: var(--space-5);
+  border-top: var(--rule);
+}
+.ii-coverage__list dt {
+  display: flex;
+  flex: 1 0 100%;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--label-family);
+  font-size: var(--fs-label-sm);
+  font-weight: var(--label-weight);
+  letter-spacing: var(--label-tracking);
+  text-transform: var(--label-transform);
+  color: var(--text-muted);
+}
+.ii-coverage__swatch {
+  flex: none;
+  width: 1.375rem;
+}
+.ii-coverage__item {
+  display: flex;
+  flex: 1 0 100%;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0 var(--space-4);
+}
+.ii-coverage__name {
+  font-size: var(--fs-heading-sm);
+  font-weight: var(--heading-weight);
+  letter-spacing: var(--heading-tracking);
+  line-height: 1.35;
+}
+.ii-coverage__meta {
+  font-size: var(--fs-body-sm);
+  color: var(--text-muted);
+}
+.ii-coverage__item:not(:has(.ii-coverage__meta)) {
+  flex: 0 1 auto;
+}
+.ii-coverage__name:only-child {
+  padding: 2px 12px;
+  font-size: var(--fs-body-sm);
+  font-weight: 600;
+  line-height: 1.6;
+  letter-spacing: 0;
+  border: var(--rule-strong);
+  border-radius: var(--radius-tag);
+}
+
+/* ------------------------------------------------------------ container widths */
+/* Labels hide on very small grids; the key carries the information. */
+@container ii-usmap (width < 17.5rem) {
+  .ii-usmap__tile {
+    font-size: 0;
+  }
+}
+/* Stacked, with room: the three key groups sit side by side under the map. */
+@container ii-coverage (34rem <= width < 48rem) {
+  .ii-coverage__list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-6);
+  }
+  .ii-coverage__group + .ii-coverage__group {
+    padding: 0 0 0 var(--space-6);
+    border-top: 0;
+    border-left: var(--rule);
+  }
+}
+/* Wide: map left (about 64%), key right in three equal bands. */
+@container ii-coverage (width >= 48rem) {
+  .ii-usmap {
+    grid-area: 1 / 1;
+  }
+  .ii-coverage__key {
+    grid-area: 1 / 2;
+    padding: var(--space-8);
+  }
+  .ii-coverage__list {
+    grid-auto-rows: 1fr;
+  }
+}
+/* Fallback without container queries: switch on the viewport instead. */
+@supports not (container-type: inline-size) {
+  @media (min-width: 1024px) {
+    .ii-usmap { grid-area: 1 / 1; }
+    .ii-coverage__key { grid-area: 1 / 2; }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :is(.ii-usmap__tile, .ii-coverage__swatch)[data-status="office"]::before {
+    animation: none;
+  }
+}
