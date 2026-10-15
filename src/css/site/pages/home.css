@@ -1,1 +1,47 @@
 /* home page: layout glue only. Prefer existing components; classes are prefixed ii-home-. */
+
+/* ------------------------------------------------------------ hero
+   The lead wraps without a one-word last line. */
+.ii-home-lead {
+  text-wrap: pretty;
+}
+
+/* ------------------------------------------------------------ photo crops */
+.ii-home-focus-conduit {
+  --focus: 60% 45%;
+}
+
+/* ------------------------------------------------------------ safety teaser
+   Copy first in source (heading leads on phones), plate on the right from 1024px;
+   two plate columns beside the copy (the component default is three). */
+.ii-home-safety {
+  --safety-cols: 2;
+}
+
+/* ------------------------------------------------------------ section head with a trailing link
+   Footprint: the head on the left, its arrow link on the right, on the lead's last baseline. */
+.ii-home-head {
+  display: grid;
+  gap: var(--space-4);
+  margin-bottom: var(--space-12);
+}
+.ii-home-head > .ii-section-head {
+  margin-bottom: 0;
+}
+.ii-home-head > .ii-arrow-link {
+  justify-self: start;
+}
+@media (min-width: 768px) {
+  .ii-home-head {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: last baseline;
+    gap: var(--space-8);
+  }
+}
+
+/* ------------------------------------------------------------ values rail
+   Below 1024px the rail is a native sideways scroller, so it takes keyboard focus
+   (tabindex="0"); the ring sits inside, since the section clips sideways overflow. */
+.ii-home-rail:focus-visible {
+  outline-offset: -3px;
+}
