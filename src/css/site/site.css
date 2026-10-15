@@ -49,6 +49,10 @@ a:hover > .ii-media > picture > img,
   display: grid;
   gap: var(--space-10);
 }
+/* The grid gap spaces the head from the content, so the head drops its own margin. */
+.ii-two-col > .ii-section-head {
+  margin-bottom: 0;
+}
 @media (min-width: 1024px) {
   .ii-two-col {
     grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
@@ -58,7 +62,6 @@ a:hover > .ii-media > picture > img,
   .ii-two-col > .ii-section-head {
     position: sticky;
     top: calc(56px + var(--space-4) * 3);
-    margin-bottom: 0;
   }
 }
 

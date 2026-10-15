@@ -101,7 +101,8 @@
   z-index: -1;
   border-radius: 50%;
   background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 58%, transparent), transparent);
-  animation: ii-usmap-pulse 3.6s ease-in-out infinite alternate;
+  /* Three breaths on load, then it rests lit: under 5 seconds of motion (WCAG 2.2.2). */
+  animation: ii-usmap-pulse 1.6s ease-in-out 3 alternate both;
 }
 @keyframes ii-usmap-pulse {
   from { opacity: 0.4; transform: scale(0.82); }

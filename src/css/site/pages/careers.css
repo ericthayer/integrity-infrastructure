@@ -1,1 +1,230 @@
 /* careers page: layout glue only. Prefer existing components; classes are prefixed ii-careers-. */
+
+/* ------------------------------------------------------------ page header photo
+   Keeps the crew member's face in frame for the 16:9 (phone) and 4:5 (desktop) crops. */
+.ii-careers-hero-media {
+  --focus: 54% 34%;
+}
+/* The 4:5 desktop crop keeps the full photo height, whose lower third is the dark
+   van floor: zoom from the top so the crew member fills the frame. */
+@media (min-width: 1024px) {
+  .ii-careers-hero-media > picture > img {
+    transform: scale(1.3);
+    transform-origin: 54% 0;
+  }
+}
+
+/* Two-column sections: the head sits close to its content on phones (the shared
+   ii-two-col keeps the section-head bottom margin until 1024px). */
+.ii-careers-two-col {
+  gap: var(--space-8);
+}
+.ii-careers-two-col > .ii-section-head {
+  margin-bottom: 0;
+}
+
+/* ------------------------------------------------------------ why Integrity
+   Phones read the copy first and get the photo after the benefits, so two photos
+   never stack back to back under the page header. Wide screens put it on the left. */
+.ii-careers-why .ii-split__media {
+  order: 2;
+  padding: var(--shell-inset, 0px);
+  background: var(--card-bg);
+  border: var(--card-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--card-shadow);
+}
+.ii-careers-why-media {
+  --ratio: 16 / 9;
+  --focus: 46% 50%;
+}
+.ii-careers-why .ii-section-head {
+  margin-bottom: var(--space-4);
+}
+.ii-careers-benefits {
+  gap: var(--space-8) var(--space-6);
+}
+.ii-careers-benefit-copy {
+  --stack-gap: var(--space-2);
+}
+.ii-careers-ways {
+  margin-top: var(--space-2);
+}
+/* Training and safety pair up; the value tags and the pending pay line take full rows. */
+@media (min-width: 768px) {
+  .ii-careers-benefits > :nth-child(n + 3) {
+    grid-column: 1 / -1;
+  }
+}
+@media (min-width: 1024px) {
+  .ii-careers-why .ii-split__media {
+    order: 0;
+  }
+  .ii-careers-why-media {
+    --ratio: 4 / 5;
+  }
+}
+
+/* ------------------------------------------------------------ roles we hire
+   Phones: compact rows (icon left) so seven trades scan in one thumb scroll.
+   640px and up: glass cards, two then four across. */
+.ii-careers-roles {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ii-careers-role {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-content: start;
+  gap: var(--space-1) var(--space-4);
+  padding: calc(var(--shell-inset, 0px) + var(--space-3)) calc(var(--shell-inset, 0px) + var(--space-4));
+  background: var(--card-bg);
+  border: var(--card-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--card-shadow);
+}
+.ii-careers-role > .ii-icon {
+  grid-row: 1 / span 3;
+  box-sizing: border-box;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 10px;
+  color: var(--accent-text);
+  border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+.ii-careers-role > :not(.ii-icon) {
+  grid-column: 2;
+}
+.ii-careers-role > p {
+  font-size: var(--fs-body-sm);
+  line-height: 1.57;
+}
+.ii-careers-role--open {
+  background: transparent;
+  border-style: dashed;
+  border-color: var(--field-border);
+  box-shadow: none;
+}
+.ii-careers-role .ii-arrow-link {
+  justify-self: start;
+}
+@media (min-width: 640px) {
+  .ii-careers-roles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4);
+  }
+  .ii-careers-role {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-3);
+    padding: calc(var(--shell-inset, 0px) + var(--space-6));
+  }
+  .ii-careers-role > .ii-icon {
+    grid-row: auto;
+    margin-bottom: var(--space-3);
+  }
+  .ii-careers-role > :not(.ii-icon) {
+    grid-column: auto;
+  }
+  .ii-careers-role .ii-arrow-link {
+    margin-top: auto;
+  }
+}
+@media (min-width: 1200px) {
+  .ii-careers-roles {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* ------------------------------------------------------------ open roles board
+   The JobList sits in a glass panel; the Paylocity link and the sample note close it. */
+.ii-careers-board {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding: var(--shell-inset, 0px);
+  background: var(--card-bg);
+  border: var(--card-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--card-shadow);
+}
+.ii-careers-board .ii-jobs__list {
+  border-top: 0;
+}
+.ii-careers-board .ii-job {
+  border-radius: var(--radius-lg);
+}
+.ii-careers-board .ii-jobs > .ii-notice {
+  margin: var(--space-2);
+}
+.ii-careers-skeleton {
+  --stack-gap: var(--space-3);
+}
+.ii-careers-board__foot {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding: 0 var(--space-4) var(--space-4);
+}
+.ii-careers-board__foot .ii-btn {
+  --btn-pad: var(--space-5);
+  width: 100%;
+  white-space: normal;
+  text-align: center;
+}
+.ii-careers-note {
+  margin: 0;
+}
+@media (min-width: 640px) {
+  .ii-careers-board {
+    padding: calc(var(--shell-inset, 0px) + var(--space-5));
+  }
+  .ii-careers-board__foot .ii-btn {
+    width: auto;
+  }
+}
+
+/* ------------------------------------------------------------ hiring steps
+   The timeline runs down the page on phones and across it on wide screens, on a
+   hairline that carries the orange light from the first step. */
+@media (min-width: 1024px) {
+  .ii-careers-steps {
+    position: relative;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: var(--space-8);
+    border-left: 0;
+    border-top: var(--rule-strong);
+  }
+  .ii-careers-steps::before {
+    content: "";
+    position: absolute;
+    inset: -1px 0 auto;
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent), color-mix(in srgb, var(--accent) 0%, transparent) 80%);
+    pointer-events: none;
+  }
+  .ii-careers-steps .ii-timeline__item {
+    align-content: start;
+    padding: var(--space-8) 0 0;
+  }
+  .ii-careers-steps .ii-timeline__item::before {
+    left: 0;
+    top: -6px;
+  }
+}
+
+/* ------------------------------------------------------------ crew voice
+   One pending slot fills the content column instead of the two-up proof grid. */
+.ii-careers-voice .ii-quotes__item--pending {
+  min-height: 15rem;
+}
+@media (min-width: 1024px) {
+  .ii-careers-voice {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

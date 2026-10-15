@@ -1,0 +1,65 @@
+<!-- RouteDiagram (ii-route): where Integrity builds, as one fiber route, and where the work stops.
+     Styles: src/css/site/route.css (import it from src/website.ts). No JavaScript needed;
+     data-ii-reveal (CSS scroll reveal) is an optional hook. Services section 2, directly under
+     the page header; may be reused on Home. Paste inside the section's ii-container after its
+     ii-section-head: the section supplies the h2, stage names are h3.
+
+     Contract:
+       - .ii-route > ol.ii-route__track[role="list"] > li.ii-route__stage, in route order.
+       - Exactly four in-scope stages come first. Each holds one .ii-route__cell.ii-shell with an
+         aria-hidden .ii-route__index numeral ("01"), an aria-hidden icon (.ii-route__icon), an
+         h3.ii-route__name and a one-line p.ii-route__desc. The lit fiber and its pulse are placed
+         on grid lines 1 to 5, so they always span these four.
+       - The last item, li.ii-route__stage.ii-route__stage--out, opens with the boundary
+         p.ii-route__boundary ("Our work ends here"), then a cell of the same shape whose h3
+         also holds the visible span.ii-route__tag ("Not our scope"), so the heading reads
+         "In-home installation: Not our scope". Keep both texts: they carry the boundary
+         without color and without seeing the line.
+       - The fiber, nodes, pulse and boundary rule are CSS pseudo-elements; add nothing.
+     Copy: sentence case, no dashes, no figures. Where the build stops at the home (for example,
+     an exterior terminal) is a client input (spec 2.7); adjust stages 4 and 5 when confirmed. -->
+<div class="ii-route">
+  <ol class="ii-route__track" role="list" aria-label="Fiber route, from the long-haul backbone to the home" data-ii-reveal="stagger">
+    <li class="ii-route__stage">
+      <div class="ii-route__cell ii-shell">
+        <span class="ii-route__index" aria-hidden="true">01</span>
+        <svg class="ii-icon ii-route__icon" data-ii-icon="route" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /> <path d="M19 7a2 2 0 1 0 0 -4a2 2 0 0 0 0 4" /> <path d="M11 19h5.5a3.5 3.5 0 0 0 0 -7h-8a3.5 3.5 0 0 1 0 -7h4.5" /></svg>
+        <h3 class="ii-route__name">Long-haul backbone</h3>
+        <p class="ii-route__desc">Fiber routes between cities and regions, built underground and aerial.</p>
+      </div>
+    </li>
+    <li class="ii-route__stage">
+      <div class="ii-route__cell ii-shell">
+        <span class="ii-route__index" aria-hidden="true">02</span>
+        <svg class="ii-icon ii-route__icon" data-ii-icon="network" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 9a6 6 0 1 0 12 0a6 6 0 0 0 -12 0" /> <path d="M12 3c1.333 .333 2 2.333 2 6s-.667 5.667 -2 6" /> <path d="M12 3c-1.333 .333 -2 2.333 -2 6s.667 5.667 2 6" /> <path d="M6 9h12" /> <path d="M3 20h7" /> <path d="M14 20h7" /> <path d="M10 20a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /> <path d="M12 15v3" /></svg>
+        <h3 class="ii-route__name">Middle mile</h3>
+        <p class="ii-route__desc">Routes that carry the backbone into towns and service areas.</p>
+      </div>
+    </li>
+    <li class="ii-route__stage">
+      <div class="ii-route__cell ii-shell">
+        <span class="ii-route__index" aria-hidden="true">03</span>
+        <svg class="ii-icon ii-route__icon" data-ii-icon="map-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 18.5l-3 -1.5l-6 3v-13l6 -3l6 3l6 -3v7.5" /> <path d="M9 4v13" /> <path d="M15 7v5.5" /> <path d="M21.121 20.121a3 3 0 1 0 -4.242 0c.418 .419 1.125 1.045 2.121 1.879c1.051 -.89 1.759 -1.516 2.121 -1.879" /> <path d="M19 18v.01" /></svg>
+        <h3 class="ii-route__name">Neighborhood distribution</h3>
+        <p class="ii-route__desc">Distribution fiber along streets, poles and easements.</p>
+      </div>
+    </li>
+    <li class="ii-route__stage">
+      <div class="ii-route__cell ii-shell">
+        <span class="ii-route__index" aria-hidden="true">04</span>
+        <svg class="ii-icon ii-route__icon" data-ii-icon="map-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /> <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0" /></svg>
+        <h3 class="ii-route__name">To the home</h3>
+        <p class="ii-route__desc">Fiber brought to residential locations, ready for the provider to connect.</p>
+      </div>
+    </li>
+    <li class="ii-route__stage ii-route__stage--out">
+      <p class="ii-route__boundary">Our work ends here</p>
+      <div class="ii-route__cell ii-shell">
+        <span class="ii-route__index" aria-hidden="true">05</span>
+        <svg class="ii-icon ii-route__icon" data-ii-icon="home-signal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 22v-2" /> <path d="M18 22v-4" /> <path d="M21 22v-6" /> <path d="M19 12.494v-.494h2l-9 -9l-9 9h2v7a2 2 0 0 0 2 2h4" /> <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v.5" /></svg>
+        <h3 class="ii-route__name">In-home installation<span class="ii-visually-hidden">:</span> <span class="ii-route__tag">Not our scope</span></h3>
+        <p class="ii-route__desc">Inside the home stays with the internet provider. We do not install service indoors.</p>
+      </div>
+    </li>
+  </ol>
+</div>

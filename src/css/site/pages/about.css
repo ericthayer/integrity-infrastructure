@@ -1,1 +1,173 @@
 /* about page: layout glue only. Prefer existing components; classes are prefixed ii-about-. */
+
+/* ------------------------------------------------------------ photo crops */
+.ii-about-hero-media {
+  --focus: 62% 38%;
+}
+.ii-about-mission-media {
+  --focus: 52% 50%;
+}
+.ii-about-paths-media {
+  --focus: 50% 28%;
+}
+
+/* ------------------------------------------------------------ company at a glance */
+.ii-about-facts .ii-plate__cell {
+  gap: var(--space-3);
+  padding: var(--space-6);
+}
+.ii-about-facts .ii-plate__value {
+  text-wrap: balance;
+}
+.ii-about-facts__link {
+  margin: auto 0 calc(var(--space-3) * -1);
+}
+.ii-about-facts__link .ii-arrow-link {
+  font-size: var(--fs-body-sm);
+  font-weight: 600;
+}
+
+/* ------------------------------------------------------------ history
+   The timeline runs across on wide screens: one lit hairline, four nodes,
+   the last one (today) glowing. Stacked and vertical below 1024px. */
+.ii-about-history .ii-timeline__year {
+  justify-self: start;
+  font-size: var(--fs-heading-sm);
+}
+.ii-about-history .ii-timeline__item:last-child::before {
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--accent) 22%, transparent),
+    0 0 18px color-mix(in srgb, var(--accent) 70%, transparent);
+}
+@media (min-width: 1024px) {
+  .ii-about-history .ii-timeline {
+    position: relative;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-10);
+    padding-top: var(--space-10);
+    border-left: 0;
+  }
+  .ii-about-history .ii-timeline::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      var(--glass-line-strong) 0%,
+      var(--glass-line-strong) 48%,
+      color-mix(in srgb, var(--accent) 70%, transparent) 80%,
+      var(--glass-line-strong) 100%
+    );
+  }
+  .ii-about-history .ii-timeline__item {
+    align-content: start;
+    padding: 0;
+  }
+  .ii-about-history .ii-timeline__item::before {
+    left: 0;
+    top: calc(var(--space-10) * -1 - 5px);
+  }
+}
+
+/* ------------------------------------------------------------ Ways of BEING: static glass grid
+   The inner-page counterpart of the Home values rail (no GSAP): six glass cells,
+   outline numerals from a CSS counter on an aria-hidden index (the ol carries the order). */
+.ii-about-values__grid {
+  display: grid;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: ii-about-value;
+}
+@media (min-width: 640px) {
+  .ii-about-values__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1024px) {
+  .ii-about-values__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+.ii-about-values__item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-8);
+  min-height: 15rem;
+  padding: calc(var(--shell-inset, 0px) + var(--space-8));
+  counter-increment: ii-about-value;
+  background: var(--card-bg);
+  border: var(--card-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--card-shadow);
+}
+@media (max-width: 639px) {
+  .ii-about-values__item {
+    gap: var(--space-5);
+    min-height: 0;
+    padding: calc(var(--shell-inset, 0px) + var(--space-6));
+  }
+}
+.ii-about-values__item:nth-child(even) {
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+.ii-about-values__index::before {
+  content: counter(ii-about-value, decimal-leading-zero);
+  content: counter(ii-about-value, decimal-leading-zero) / "";
+  display: block;
+  font-size: clamp(2.75rem, 2rem + 3vw, 5.5rem);
+  font-weight: 200;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+  color: transparent;
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--accent) 70%, transparent);
+  pointer-events: none;
+}
+.ii-about-values__word {
+  font-size: clamp(2rem, 1.5rem + 1.2vw, 2.75rem);
+  font-weight: var(--display-weight);
+  line-height: 1.05;
+  letter-spacing: var(--display-tracking);
+}
+.ii-about-values__word em {
+  font-style: normal;
+  font-weight: 300;
+  color: var(--accent-text);
+}
+@media (forced-colors: active) {
+  .ii-about-values__index::before {
+    -webkit-text-stroke: 1px CanvasText;
+  }
+}
+
+/* ------------------------------------------------------------ leadership: compact rows on phones
+   A small 4:5 slot beside the name and role, so four pending cards do not
+   stack into four screens of empty frames. */
+@media (max-width: 639px) {
+  .ii-about-leaders {
+    gap: var(--space-4);
+  }
+  .ii-about-leaders .ii-leader {
+    display: grid;
+    grid-template-columns: 5.5rem minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    align-content: center;
+    gap: var(--space-2) var(--space-5);
+  }
+  .ii-about-leaders .ii-slot {
+    grid-row: 1 / 3;
+    margin: 0;
+    padding: var(--space-2);
+  }
+  .ii-about-leaders .ii-slot__label,
+  .ii-about-leaders .ii-slot__brief {
+    display: none;
+  }
+  .ii-about-leaders .ii-leader__name {
+    align-self: end;
+  }
+}

@@ -1,0 +1,304 @@
+/* RouteDiagram (ii-route): four lit stages on a fiber, a boundary, then a dashed fifth
+   stage that stays with the provider. Contract: src/partials/site/route.html. Vertical
+   track first; container queries add spec rows (720px) and five across (1120px). The
+   boundary is visible text, never color alone. Tokens only. */
+
+/* ------------------------------------------------------------ route: tokens and track
+   The ol is the grid and holds the tokens; the orientation ones flip when it turns. */
+.ii-route {
+  container: ii-route / inline-size;
+}
+.ii-route__track {
+  --route-lane: 40px; /* the fiber's lane beside (wide: above) the cells */
+  --route-gap: var(--space-3);
+  --route-pad: var(--space-5); /* cell padding inside the shell inset */
+  --route-y0: calc(var(--shell-inset, 0px) + var(--route-pad) + 22px); /* icon centre */
+  --route-bh: 32px; /* boundary row on the vertical track */
+  --route-pulse: 128px; /* pulse head plus tail */
+  --route-lit: color-mix(in srgb, var(--accent) 52%, transparent);
+  --route-glow: color-mix(in srgb, var(--accent) 48%, transparent);
+  --route-dark: color-mix(in srgb, var(--text-muted) 42%, transparent);
+  --route-along: 180deg;
+  --route-across: 90deg;
+  --route-line: 50% 0 / 1px 100%;
+  --route-head-at: 50% calc(var(--route-pulse) - 12px);
+  --route-tail-at: 50% 0 / 2px calc(var(--route-pulse) - 6px);
+  --route-from: 0 calc(var(--route-y0) - var(--route-pulse));
+  --route-to: 0 calc(100% - var(--route-pulse));
+  position: relative;
+  display: grid;
+  gap: var(--route-gap);
+  overflow-y: clip; /* the pulse overshoots its run; the track trims it */
+}
+
+/* ------------------------------------------------------------ route: lit fiber and pulse
+   ::before (fiber) and ::after (pulse) sit on grid lines: they span the four lit stages
+   and end on the boundary cap. Both are 12px across and as long as the fiber, so the
+   pulse's translate of 100% is the whole run. */
+.ii-route__track::before,
+.ii-route__track::after {
+  content: "";
+  position: absolute;
+  grid-area: 1 / 1 / 5 / 2;
+  inset: 0 calc(100% - var(--route-lane) / 2 - 6px) calc(var(--route-gap) * -1 - var(--route-bh) / 2) calc(var(--route-lane) / 2 - 6px);
+}
+.ii-route__track::before {
+  background: linear-gradient(var(--route-along), transparent, var(--route-lit) var(--route-y0)) var(--route-line) no-repeat;
+}
+.ii-route__track::after {
+  background:
+    radial-gradient(closest-side, color-mix(in srgb, var(--accent) 35%, var(--text)), var(--accent) 40%, transparent) var(--route-head-at) / 12px 12px no-repeat,
+    linear-gradient(var(--route-along), transparent, var(--accent)) var(--route-tail-at) no-repeat;
+  filter: drop-shadow(0 0 8px var(--accent));
+  opacity: 0;
+}
+/* Scroll drives the pulse, so nothing moves on its own (WCAG 2.2.2); browsers without
+   scroll-driven animation, and reduced motion, keep the static lit line. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .ii-route__track {
+      view-timeline: --ii-route block;
+    }
+    .ii-route__track::after {
+      animation: ii-route-pulse linear both;
+      animation-timeline: --ii-route;
+      animation-range: entry 40% exit 10%;
+    }
+  }
+}
+/* The light leaves stage 1, travels the route and fades out at the boundary. */
+@keyframes ii-route-pulse {
+  from { opacity: 0; translate: var(--route-from); }
+  8%, 64% { opacity: 1; }
+  72%, to { opacity: 0; translate: var(--route-to); }
+}
+
+/* ------------------------------------------------------------ route: stages
+   --route-nx / --route-ny place the splice node (::before) and its drop into the cell. */
+.ii-route__stage {
+  --route-nx: calc(var(--route-lane) / 2);
+  --route-ny: var(--route-y0);
+  position: relative;
+  display: grid;
+  gap: var(--route-gap);
+  padding-left: var(--route-lane);
+}
+.ii-route__stage::before,
+.ii-route__stage::after {
+  content: "";
+  position: absolute;
+  top: var(--route-ny);
+  left: var(--route-nx);
+}
+.ii-route__stage::before {
+  width: 9px;
+  height: 9px;
+  translate: -50% -50%;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 14%, transparent), 0 0 16px var(--route-glow);
+}
+.ii-route__stage::after {
+  width: calc(var(--route-lane) - var(--route-nx));
+  height: 1px;
+  background: linear-gradient(var(--route-across), var(--route-lit), var(--glass-line-strong, var(--border-strong)));
+}
+
+/* The cell: nested glass (ii-shell draws the inset core). No pointer glow: it is not a control. */
+.ii-route__cell {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: calc(var(--shell-inset, 0px) + var(--route-pad));
+  background: var(--card-bg);
+  border: var(--card-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--card-shadow);
+}
+/* Outline numeral, as in the card stack; aria-hidden, since the ol already counts. */
+.ii-route__index {
+  position: absolute;
+  top: calc(var(--shell-inset, 0px) + var(--space-4));
+  right: calc(var(--shell-inset, 0px) + var(--space-5));
+  font-size: 2.5rem;
+  font-weight: 200;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--route-ink, color-mix(in srgb, var(--accent) 70%, transparent));
+}
+.ii-route__cell .ii-route__icon {
+  width: 44px;
+  height: 44px;
+  margin-bottom: var(--space-3);
+  padding: 11px;
+  color: var(--route-muted, var(--accent-text));
+  border: 1px var(--route-ring, solid) var(--glass-line-strong, var(--border-strong));
+  border-radius: var(--radius-pill);
+}
+.ii-route__name {
+  font-size: var(--fs-heading-md);
+  font-weight: var(--heading-weight);
+  line-height: 1.25;
+  letter-spacing: var(--heading-tracking);
+  text-wrap: balance;
+  color: var(--route-muted, var(--text));
+}
+.ii-route__desc {
+  font-size: var(--fs-body-sm);
+  line-height: 1.57;
+  color: var(--text-muted);
+}
+
+/* ------------------------------------------------------------ route: boundary and the out-of-scope stage
+   The boundary opens the last item: an end cap on the lit fiber, the label and a rule,
+   in logical sizes so writing-mode turns all three. Past it everything is dashed. */
+.ii-route__stage--out {
+  --route-ny: calc(var(--route-bh) + var(--route-gap) + var(--route-y0));
+  --route-ink: color-mix(in srgb, var(--text-muted) 64%, transparent);
+  --route-muted: var(--text-muted);
+  --route-ring: dashed;
+}
+.ii-route__stage--out::before {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--text-muted);
+}
+.ii-route__stage--out::after { /* dark fiber: an L from the cap to the hollow node */
+  top: calc(var(--route-bh) / 2);
+  height: calc(var(--route-ny) - var(--route-bh) / 2 + 1px);
+  background: none;
+  border: 1px dashed var(--route-dark);
+  border-width: 0 0 1px 1px;
+}
+.ii-route__boundary {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: var(--route-bh);
+  margin-left: calc(var(--route-lane) * -1);
+  color: var(--text);
+}
+.ii-route__boundary,
+.ii-route__tag {
+  font: var(--label-weight) var(--eyebrow-size, 0.6875rem) / 1.4 var(--label-family);
+  letter-spacing: var(--label-tracking);
+  text-transform: var(--label-transform);
+}
+.ii-route__boundary::before,
+.ii-route__boundary::after {
+  content: "";
+  flex: 1 1 var(--space-6);
+  border-block-start: 1px solid var(--text-muted);
+}
+.ii-route__boundary::before {
+  flex: none;
+  inline-size: 16px;
+  margin-inline: calc(var(--route-lane) / 2 - 8px) 0;
+  border-block-start: 2px solid var(--text);
+}
+.ii-route__stage--out .ii-route__cell {
+  background: repeating-linear-gradient(135deg, color-mix(in srgb, var(--text) 5%, transparent) 0 1px, transparent 1px 10px);
+  border: 1px dashed var(--route-dark);
+  box-shadow: none;
+}
+.ii-route__cell::after,
+.ii-route__stage--out .ii-route__cell::before {
+  content: none;
+}
+.ii-route__tag {
+  display: block;
+  width: max-content;
+  margin-top: var(--space-2);
+  padding: 4px 10px;
+  color: var(--text);
+  border: 1px dashed var(--field-border);
+  border-radius: var(--radius-tag);
+}
+
+/* ------------------------------------------------------------ route: spec rows (container 720px to 1119px)
+   Still vertical; each cell becomes one row: numeral, icon, name, description. */
+@container ii-route (720px <= width < 1120px) {
+  .ii-route__stage {
+    --route-ny: 50%;
+  }
+  .ii-route__stage--out {
+    --route-ny: calc(var(--route-bh) + var(--route-gap) + (100% - var(--route-bh) - var(--route-gap)) / 2);
+  }
+  .ii-route__cell {
+    display: grid;
+    grid-template-columns: 3rem 44px minmax(0, 12rem) minmax(0, 1fr);
+    align-items: center;
+    column-gap: var(--space-6);
+  }
+  .ii-route .ii-route__cell > * {
+    position: static;
+    margin: 0;
+  }
+}
+
+/* ------------------------------------------------------------ route: five across (container 1120px and up)
+   Four lit cells, the boundary column, the out cell. The fiber runs in a lane above the
+   cells through a node over each icon; vertical writing stands the boundary upright. */
+@container ii-route (width >= 1120px) {
+  .ii-route__track {
+    --route-b: 44px; /* boundary column */
+    --route-pad: var(--space-4);
+    --route-along: 90deg;
+    --route-across: 180deg;
+    --route-line: 0 50% / 100% 1px;
+    --route-head-at: calc(var(--route-pulse) - 12px) 50%;
+    --route-tail-at: 0 50% / calc(var(--route-pulse) - 6px) 2px;
+    --route-from: calc(var(--route-y0) - var(--route-pulse)) 0;
+    --route-to: calc(100% - var(--route-pulse)) 0;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) var(--route-b) minmax(0, 1fr);
+    overflow: visible;
+    overflow-x: clip;
+  }
+  .ii-route__track::before,
+  .ii-route__track::after {
+    grid-area: 1 / 1 / 2 / 5;
+    inset: calc(var(--route-lane) / 2 - 6px) calc(var(--route-gap) * -1 - var(--route-b) / 2) calc(100% - var(--route-lane) / 2 - 6px) 0;
+  }
+  .ii-route__stage {
+    --route-nx: var(--route-y0);
+    --route-ny: calc(var(--route-lane) / 2);
+    padding: var(--route-lane) 0 0;
+  }
+  .ii-route__stage::after {
+    width: 1px;
+    height: calc(var(--route-lane) - var(--route-ny));
+  }
+  .ii-route__cell .ii-route__icon {
+    margin-bottom: var(--space-12);
+  }
+  .ii-route__name {
+    min-height: 2.5em; /* two lines, so every description starts on one line */
+    font-size: var(--fs-heading-sm);
+  }
+  .ii-route__tag {
+    font-size: 0.625rem;
+    letter-spacing: 0.1em;
+  }
+  .ii-route__stage--out {
+    --route-nx: calc(var(--route-b) + var(--route-gap) + var(--route-y0));
+    grid-column: 5 / -1;
+    display: grid;
+    grid-template-columns: var(--route-b) minmax(0, 1fr);
+    padding: 0;
+  }
+  .ii-route__stage--out::after {
+    top: var(--route-ny);
+    left: calc(var(--route-b) / 2);
+    width: calc(var(--route-nx) - var(--route-b) / 2 + 1px);
+    border-width: 1px 1px 0 0;
+  }
+  .ii-route__stage--out .ii-route__cell {
+    margin-top: var(--route-lane);
+  }
+  .ii-route__boundary {
+    margin: 0;
+    writing-mode: vertical-rl;
+  }
+}

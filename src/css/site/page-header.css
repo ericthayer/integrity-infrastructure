@@ -60,10 +60,18 @@
   color: var(--text-muted);
 }
 .ii-page-header--lit .ii-breadcrumb ol {
+  align-items: center;
   font-family: var(--label-family);
   font-size: var(--fs-label-sm);
   letter-spacing: var(--label-tracking);
   text-transform: var(--label-transform);
+}
+/* 44px hit area on the small label links without changing the row's rhythm. */
+.ii-page-header--lit .ii-breadcrumb a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-block: -13px;
 }
 
 /* Load-in, matching the hero: CSS only; base.css collapses it under reduced motion. */
