@@ -480,9 +480,14 @@ export function sheet(root: ParentNode = doc): void {
         media.innerHTML = '';
         media.classList.toggle('is-icon', !img);
         if (img) {
-          // cloneNode's DOM signature returns Node; the source is a checked <img>.
-          const copy = img.cloneNode();
-          if (copy instanceof HTMLImageElement) { copy.removeAttribute('loading'); media.appendChild(copy); }
+          // Copy the whole <picture> when there is one, so the sheet loads the same
+          // responsive AVIF/WebP source as the tile instead of the JPEG fallback.
+          const source = img.parentElement instanceof HTMLPictureElement ? img.parentElement : img;
+          const copy = source.cloneNode(true);
+          if (copy instanceof HTMLElement) {
+            (copy instanceof HTMLImageElement ? copy : copy.querySelector('img'))?.removeAttribute('loading');
+            media.appendChild(copy);
+          }
         } else if (glyph) media.appendChild(glyph.cloneNode(true));
       }
       const action = dialog.querySelector<HTMLAnchorElement>('[data-ii-sheet-link]');

@@ -32,6 +32,9 @@ html {
     filter var(--motion-duration) var(--motion-ease),
     transform var(--motion-duration) var(--motion-ease);
 }
+.ii-sheet__media > picture {
+  display: contents;
+}
 a:hover > .ii-media > picture > img,
 .ii-media--interactive:hover > picture > img {
   filter: var(--media-filter-hover);
