@@ -3,8 +3,7 @@
    track first; container queries add spec rows (720px) and five across (1120px). The
    boundary is visible text, never color alone. Tokens only. */
 
-/* ------------------------------------------------------------ route: tokens and track
-   The ol is the grid and holds the tokens; the orientation ones flip when it turns. */
+/* ------------------------------------------------------------ route: tokens and track (the ol; orientation tokens flip) */
 .ii-route {
   container: ii-route / inline-size;
 }
@@ -32,9 +31,8 @@
 }
 
 /* ------------------------------------------------------------ route: lit fiber and pulse
-   ::before (fiber) and ::after (pulse) sit on grid lines: they span the four lit stages
-   and end on the boundary cap. Both are 12px across and as long as the fiber, so the
-   pulse's translate of 100% is the whole run. */
+   ::before (fiber) and ::after (pulse) span the four lit stages on grid lines and end on
+   the boundary cap; as long as the fiber, so the pulse's translate of 100% is the run. */
 .ii-route__track::before,
 .ii-route__track::after {
   content: "";
@@ -52,8 +50,7 @@
   filter: drop-shadow(0 0 8px var(--accent));
   opacity: 0;
 }
-/* Scroll drives the pulse, so nothing moves on its own (WCAG 2.2.2); browsers without
-   scroll-driven animation, and reduced motion, keep the static lit line. */
+/* Scroll drives the pulse, so nothing moves on its own (WCAG 2.2.2); otherwise static. */
 @media (prefers-reduced-motion: no-preference) {
   @supports (animation-timeline: view()) {
     .ii-route__track {
@@ -153,8 +150,7 @@
 }
 
 /* ------------------------------------------------------------ route: boundary and the out-of-scope stage
-   The boundary opens the last item: an end cap on the lit fiber, the label and a rule,
-   in logical sizes so writing-mode turns all three. Past it everything is dashed. */
+   End cap, label and rule in logical sizes, so writing-mode turns all three. Past it, dashed. */
 .ii-route__stage--out {
   --route-ny: calc(var(--route-bh) + var(--route-gap) + var(--route-y0));
   --route-ink: color-mix(in srgb, var(--text-muted) 64%, transparent);

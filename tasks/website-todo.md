@@ -5,11 +5,11 @@ Spec: `tasks/website-spec.md`. Authoring rules: `tasks/website-authoring.md`.
 - [x] Phase 0. Spec: objectives, decisions, page stacks, components, a11y and performance rules, open client inputs.
 - [x] Phase 1. Foundation: seven page shells at clean URLs (Home replaces the root redirect), `src/website.ts` entry, site CSS layer, URL prefill, AVIF/WebP photo variants and a 360px logo, icon helper, sample Paylocity feed, Vite inputs and test wiring, `tests/website.test.mjs`. Components built in parallel: CoverageMap and RouteDiagram.
 - [x] Phase 2. Pages built in parallel: Home; Services; About and Safety; Careers; Subcontractors and Contact. Follow-ups folded in: two-col spacing, 44px breadcrumb targets, topic-aware required fields, scene pause control (WCAG 2.2.2), scroll-driven route pulse, capped map glow, responsive photos in the service sheet, empty favicon link.
-- [ ] Phase 3. QA and independent review, then push.
+- [x] Phase 3. QA and an independent final review against the spec. Fixed from review: Topic-dependent fields after back/forward navigation, `fetchpriority` on Safety's LCP photo, the one-crew claim (now one contractor), an unsourced fifth safety practice, required documents and headquarters stated as fact, an unenforced file limit, a missing pending marker, the map how-to comment, the new-tab announcement on rendered job links. Tests now also cover markup (alt, labels, metadata) for sister-company names, the fleet photo in `srcset`, prefill link values, the no-JS required fallback and tagline placement.
 
 ## Verification (2026-10-15)
 
-- `npm run verify`: 45 unit tests, design checks (contrast matrix, copy and eyebrow rules on all website pages and site partials), production build, 38 production tests. All pass.
+- `npm run verify`: 47 unit tests, design checks (contrast matrix, copy and eyebrow rules on all website pages and site partials), production build, 38 production tests. All pass.
 - Production preview (`vite preview`), all seven pages at 390 and 1280 px:
   - axe (WCAG 2.0 to 2.2 A and AA tags): 0 violations on all 14 runs.
   - Horizontal overflow 0; no console errors; no failed requests.
@@ -23,4 +23,6 @@ Spec: `tasks/website-spec.md`. Authoring rules: `tasks/website-authoring.md`.
 - Design system: fold the website components (lit page header, coverage map, route diagram, testimonial set, offices, scene toggle, topic fields) into `src/ds/components/` previews and the Oxygen export.
 - Partials: update `src/partials/forms/*.html` (Topic select, keyed service lines, fix-it errors), `src/partials/careers/job-list.html` (no inline style, neutral empty copy, root-absolute links) and `src/partials/sections/values-rail.html` (keyboard region) to match the pages.
 - A shared `.ii-form-shell` for the Contact and Subcontractors form panels.
+- Scroll reveals (`data-ii-reveal`, shared component): a section head sitting at the bottom edge of the first screen stays partly transparent until scrolled; axe flags its contrast on an unscrolled scan. Consider starting reveals only below the first screen.
+- Before launch: drop `/concepts/`, `/brandkit/` and `/reference/` from the production deploy (they still show the Corps line and the fleet photo); remove `noindex` from the pages and `X-Robots-Tag` from `netlify.toml`.
 - Client inputs listed in the spec, section 9.

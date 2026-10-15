@@ -343,7 +343,7 @@ export function renderJobs(el: HTMLElement, data: unknown): void {
     ].join('');
     return '<li class="ii-job"><div class="ii-stack" style="--stack-gap: var(--space-2)">'
       + '<h3 class="ii-job__title"><a href="' + escapeHtml(safeUrl(j.ApplyUrl || j.DisplayUrl)) + '" target="_blank" rel="noopener">'
-      + escapeHtml(j.Title) + '<span class="ii-visually-hidden">, opens the application on Paylocity</span></a></h3>'
+      + escapeHtml(j.Title) + '<span class="ii-visually-hidden">, opens the application on Paylocity in a new tab</span></a></h3>'
       + '<p class="ii-job__meta">' + meta + '</p></div>'
       + '<span class="ii-job__apply" aria-hidden="true">View and apply' + icon('arrow-up-right') + '</span></li>';
   }).join('');

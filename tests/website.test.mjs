@@ -13,6 +13,7 @@ const urlFor = page => '/' + page.replace(/index\.html$/, '');
 const visibleText = html => html.replace(/<!--[\s\S]*?-->/g, ' ').replace(/<(script|style)[\s\S]*?<\/\1>/gi, ' ')
   .replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ');
 const block = (html, pattern) => pattern.exec(html)?.[0] ?? '';
+const withoutComments = html => html.replace(/<!--[\s\S]*?-->/g, ' ');
 const shellOf = html => [/<a class="ii-skip"[\s\S]*?<\/header>/, /<div class="ii-drawer[\s\S]*?\n<\/div>/, /<footer class="ii-footer">[\s\S]*?<\/footer>/]
   .map(pattern => block(html, pattern).replace(/ aria-current="page"/g, ''));
 
@@ -69,9 +70,9 @@ test('images carry alt text and dimensions, and only the LCP candidate is priori
       assert.ok('alt' in img.attrs, `${page}: ${img.attrs.src} needs alt`);
       assert.ok(img.attrs.width && img.attrs.height, `${page}: ${img.attrs.src} needs width and height`);
       assert.ok(!(img.attrs.loading === 'lazy' && img.attrs.fetchpriority === 'high'), `${page}: lazy LCP image ${img.attrs.src}`);
-      assert.doesNotMatch(img.attrs.src, /fleet-mountains/, `${page}: the fleet photo shows sister-company trucks`);
     }
     assert.ok(images.filter(img => img.attrs.fetchpriority === 'high').length <= 1, `${page}: at most one high-priority image`);
+    assert.doesNotMatch(withoutComments(html), /fleet-mountains/, `${page}: the fleet photo shows sister-company trucks`);
   }
 });
 
@@ -94,7 +95,8 @@ test('internal links and anchors resolve to website pages', () => {
 test('copy reflects the separation from Integrity Corps and the real service scope', () => {
   for (const [page, html] of Object.entries(pages)) {
     const text = visibleText(html);
-    assert.doesNotMatch(text, /integrity corps|integrity traffic|integrity equipment/i, `${page}: names a sister company`);
+    // Markup too, so alt text, labels and metadata are covered; comments may document the rule.
+    assert.doesNotMatch(withoutComments(html), /integrity corps|integrity traffic|integrity equipment/i, `${page}: names a sister company`);
     assert.doesNotMatch(html, /facebook\.com\/IntegrityTraffic/i, `${page}: Facebook link belongs to Integrity Traffic`);
     assert.doesNotMatch(text, /ISP installation/i, `${page}: ISP installation is retired`);
     assert.doesNotMatch(text, /[–—]/, `${page}: em or en dash`);
@@ -119,7 +121,8 @@ test('careers lists open roles from the Paylocity integration point', () => {
   assert.ok(jobs, 'Careers has a JobList');
   assert.equal(jobs.attrs['data-src'], '/data/jobs.json');
   assert.ok(existsSync(join(ROOT, 'public/data/jobs.json')), 'Sample feed ships from public/');
-  assert.match(html, /recruiting\.paylocity\.com/, 'A direct Paylocity link is always available');
+  assert.ok(tags(withoutComments(html)).some(tag => tag.name === 'a' && /^https:\/\/recruiting\.paylocity\.com\//.test(tag.attrs.href ?? '')),
+    'A direct Paylocity link is always available');
 });
 
 test('prefill selects a topic and checks a keyed service from the query string', async () => {
@@ -197,5 +200,28 @@ test('the scene toggle pauses the scene it controls and reports its state', asyn
     assert.equal(state['aria-pressed'], 'false');
   } finally {
     delete globalThis.document;
+  }
+});
+
+test('contact prefill links name real options, and topic-dependent fields fall back to required', () => {
+  const contact = tags(pages['contact/index.html']);
+  const topics = new Set(contact.filter(tag => tag.name === 'option').map(tag => tag.attrs.value));
+  const services = new Set(contact.filter(tag => tag.attrs['data-ii-prefill-from'] === 'service').map(tag => tag.attrs['data-ii-key']));
+  for (const [page, html] of Object.entries(pages)) {
+    for (const { attrs } of tags(html).filter(tag => tag.name === 'a' && /^\/contact\/\?/.test(tag.attrs.href ?? ''))) {
+      const params = new URLSearchParams(attrs.href.split('?')[1].split('#')[0]);
+      if (params.has('topic')) assert.ok(topics.has(params.get('topic')), `${page}: unknown topic in ${attrs.href}`);
+      if (params.has('service')) assert.ok(services.has(params.get('service')), `${page}: unknown service in ${attrs.href}`);
+    }
+  }
+  const dependent = contact.filter(tag => 'data-ii-required-for' in tag.attrs);
+  assert.ok(dependent.length > 0, 'Contact has topic-dependent fields');
+  for (const tag of dependent) assert.ok('required' in tag.attrs, `${tag.attrs.id}: stays required without JavaScript`);
+});
+
+test('the working tagline appears only on Careers and About', () => {
+  for (const [page, html] of Object.entries(pages)) {
+    const has = /build by building people/i.test(visibleText(html).replace(/\s+/g, ' '));
+    assert.equal(has, ['careers/index.html', 'about/index.html'].includes(page), `${page}: tagline placement`);
   }
 });

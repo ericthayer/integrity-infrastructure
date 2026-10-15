@@ -26,6 +26,8 @@ export function topicFields(root: ParentNode = document): number {
       });
     };
     topic.addEventListener('change', apply);
+    // Back/forward restores the Topic select after load without a change event.
+    form.ownerDocument?.defaultView?.addEventListener('pageshow', apply);
     apply();
     wired++;
   });
