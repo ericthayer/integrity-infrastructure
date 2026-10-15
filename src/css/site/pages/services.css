@@ -1,1 +1,254 @@
 /* services page: layout glue only. Prefer existing components; classes are prefixed ii-services-. */
+
+/* ------------------------------------------------------------ page header: service line index */
+.ii-services-index {
+  padding-top: var(--space-6);
+  border-top: var(--rule);
+}
+
+/* ------------------------------------------------------------ route
+   The route illustrates the h1, so it sits closer under the page header. The pending
+   note sits under the boundary it qualifies. */
+.ii-services-route {
+  padding-block: calc(var(--section-space) * 0.75);
+}
+.ii-services-route__note {
+  margin-top: var(--space-6);
+}
+
+/* ------------------------------------------------------------ service lines
+   Five sections in a run: half the section rhythm on each side and a lit hairline
+   between them, so they read as one set without losing their own landmarks. */
+.ii-services-line {
+  padding-block: calc(var(--section-space) * 0.5);
+}
+.ii-services-route + .ii-services-line {
+  padding-top: calc(var(--section-space) * 0.75);
+}
+.ii-services-line:has(+ .ii-services-process) {
+  padding-bottom: calc(var(--section-space) * 0.75);
+}
+.ii-services-line + .ii-services-line {
+  padding-top: 0;
+}
+.ii-services-line + .ii-services-line > .ii-container::before {
+  content: "";
+  display: block;
+  height: 1px;
+  margin-bottom: calc(var(--section-space) * 0.5);
+  background: linear-gradient(
+    90deg,
+    var(--glass-line) 0%,
+    color-mix(in srgb, var(--accent) 44%, transparent) 50%,
+    var(--glass-line) 100%
+  );
+}
+
+/* Phones read the heading first, then the photo or slot, then the spec row. From 768px
+   the split sits side by side (the shared split waits for 1024px), media in the
+   narrower column until 1024px. */
+.ii-services-line .ii-split__media {
+  order: 2;
+}
+@media (min-width: 768px) {
+  .ii-services-line .ii-split {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: var(--space-10);
+  }
+  .ii-services-line .ii-split--reverse {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  }
+  .ii-services-line .ii-split__media {
+    order: 0;
+  }
+  .ii-services-line .ii-split--reverse .ii-split__media {
+    order: 2;
+  }
+}
+@media (min-width: 1024px) {
+  .ii-services-line .ii-split,
+  .ii-services-line .ii-split--reverse {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--space-16);
+  }
+}
+
+/* Photo or slot in a glass frame, as in the page header: a wide crop while the split
+   is stacked, square in the tablet split, 4:3 from 1024px. The slot carries the
+   coverage map's registration dots, so a missing shot reads as a frame waiting for
+   its photo. */
+.ii-services-media {
+  margin: 0;
+  padding: var(--shell-inset, 0px);
+  background: var(--card-bg);
+  border: var(--card-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--card-shadow);
+}
+.ii-services-media > .ii-media,
+.ii-services-slot {
+  --ratio: 16 / 9;
+}
+@media (min-width: 768px) {
+  .ii-services-media > .ii-media,
+  .ii-services-slot {
+    --ratio: 1 / 1;
+  }
+}
+@media (min-width: 1024px) {
+  .ii-services-media > .ii-media,
+  .ii-services-slot {
+    --ratio: 4 / 3;
+  }
+}
+.ii-services-slot {
+  background:
+    radial-gradient(circle, var(--glass-line-strong, var(--border-strong)) 1px, transparent 1.5px) center / 24px 24px,
+    var(--surface-sunken);
+}
+/* The text column keeps a solid backing, so no dot ever sits under a glyph. */
+.ii-services-slot > * {
+  background: var(--surface-sunken);
+  box-shadow: 0 0 0 var(--space-2) var(--surface-sunken);
+}
+.ii-services-focus-conduit {
+  --focus: 60% 45%;
+}
+
+/* The service icon in a lit ring, as on the Careers role cards. */
+.ii-services-line__icon {
+  box-sizing: border-box;
+  width: 3rem;
+  height: 3rem;
+  padding: 12px;
+  color: var(--accent-text);
+  border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+/* Spec row: method, typical scope, equipment and the next step, full width under the
+   split. Phones get one glass panel with hairline rows; two across from 640px, four
+   from 1024px. The next step cell carries the orange light. */
+.ii-services-spec {
+  --plate-gap: 0;
+  --plate-cell-bg: transparent;
+  --plate-cell-radius: 0;
+  margin-top: var(--space-8);
+  background: var(--glass-fill);
+  border: var(--card-border);
+  border-radius: var(--radius-xl);
+}
+.ii-services-spec .ii-plate__cell {
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-5);
+}
+.ii-services-spec .ii-plate__cell + .ii-plate__cell {
+  border-top: var(--rule);
+}
+.ii-services-spec .ii-plate__value {
+  font-size: var(--fs-body);
+  text-wrap: balance;
+}
+.ii-services-spec__action {
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+.ii-services-spec__action .ii-arrow-link {
+  margin-block: calc(var(--space-2) * -1);
+}
+@media (min-width: 640px) {
+  .ii-services-spec {
+    --plate-cols: 2;
+    --plate-gap: var(--space-2);
+    --plate-cell-bg: var(--glass-fill);
+    --plate-cell-radius: var(--radius-xl);
+    margin-top: var(--space-10);
+    background: transparent;
+    border: 0;
+    border-radius: var(--radius-card);
+  }
+  .ii-services-spec .ii-plate__cell {
+    padding: var(--space-5) var(--space-6);
+  }
+  .ii-services-spec .ii-plate__cell + .ii-plate__cell {
+    border-top: 0;
+  }
+  .ii-services-spec .ii-plate__value {
+    font-size: var(--fs-heading-sm);
+  }
+  .ii-services-spec__action {
+    --plate-cell-bg: color-mix(in srgb, var(--accent) 8%, transparent);
+  }
+}
+@media (min-width: 1024px) {
+  .ii-services-spec {
+    --plate-cols: 4;
+  }
+}
+
+/* ------------------------------------------------------------ process
+   A vertical timeline beside the sticky head: step number, name and line on one row
+   from 640px. The close out node glows; the billing card carries the differentiator. */
+.ii-services-billing {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--space-1) var(--space-4);
+  margin-top: var(--space-4);
+  padding: calc(var(--shell-inset, 0px) + var(--space-5));
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  border: var(--card-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--card-shadow);
+}
+.ii-services-billing > .ii-icon {
+  grid-row: 1 / span 2;
+  box-sizing: border-box;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 10px;
+  color: var(--accent-text);
+  border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
+  border-radius: var(--radius-pill);
+}
+.ii-services-billing > :not(.ii-icon) {
+  grid-column: 2;
+}
+.ii-services-billing p,
+.ii-services-steps p {
+  text-wrap: pretty;
+}
+.ii-services-steps .ii-timeline__year {
+  font-size: var(--fs-heading-sm);
+  line-height: 1.35;
+}
+.ii-services-steps .ii-timeline__item:last-child {
+  padding-bottom: 0;
+}
+.ii-services-steps .ii-timeline__item:last-child::before {
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--accent) 22%, transparent),
+    0 0 18px color-mix(in srgb, var(--accent) 70%, transparent);
+}
+@media (min-width: 640px) {
+  .ii-services-steps .ii-timeline__item {
+    grid-template-columns: 3rem minmax(0, 1fr);
+    column-gap: var(--space-4);
+    padding-bottom: var(--space-10);
+  }
+  .ii-services-steps .ii-timeline__item > :not(.ii-timeline__year) {
+    grid-column: 2;
+  }
+  .ii-services-steps .ii-timeline__year {
+    grid-row: 1 / span 2;
+  }
+}
+
+/* ------------------------------------------------------------ coverage: confirm-coverage line */
+.ii-services-coverage-note {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1) var(--space-6);
+  margin-top: var(--space-6);
+  color: var(--text-muted);
+}
