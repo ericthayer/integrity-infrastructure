@@ -1,6 +1,8 @@
 # Oxygen handoff
 
-How this system moves into WordPress with the Oxygen builder. Everything here is written for Oxygen 6 (Variables, class-first styling, Components); notes for Oxygen Classic 4.x are at the end. Only the chosen concept ships: its theme values become the production variables.
+> **Reference for one possible builder.** Production is WordPress, but the theme or page builder is not decided: Oxygen was discussed, not chosen. The website in the repository (the seven static pages, `src/website.ts` and `src/css/site/`) is what the WordPress developer builds from. The token, class, behavior, form, Paylocity, font and image guidance below applies to any theme or builder; only the Oxygen panel names are specific.
+
+How this system moves into WordPress with the Oxygen builder. Everything here is written for Oxygen 6 (Variables, class-first styling, Components); notes for Oxygen Classic 4.x are at the end. Only Lit Fiber, the client's chosen concept, ships: its theme values become the production variables.
 
 ## Generate the handoff
 
@@ -14,7 +16,7 @@ The tracked root `harness/` and tracked `design-system/project/components/` gene
 
 ## 1. Fonts
 
-- Self-host Montserrat (variable, roman and italic) and, for As-Built only, Michroma. The files in `fonts/` are the Latin subset; add the Latin Extended files with a `unicode-range` if names with accents appear.
+- Self-host Montserrat (variable, roman and italic) and Michroma, which Lit Fiber uses for its instrument labels and eyebrow pills. The files in `fonts/` are the Latin subset; add the Latin Extended files with a `unicode-range` if names with accents appear.
 - Do not load Google Fonts from the page. Declare the faces in a global stylesheet with `font-display: swap` and preload the roman Montserrat file on every page.
 
 ## 2. Variables
@@ -26,7 +28,7 @@ Create one Oxygen Variables collection per token family and keep the token names
 | Brand colors | Color | `brand-orange`, `ink`, `flame-yellow`, the `orange-*` and `neutral-*` steps |
 | Semantic colors | Color | `surface*`, `text*`, `accent*`, `on-accent`, `border*`, `field-border`, `focus-ring*`, `danger`, `success` with the chosen concept's values |
 | Spacing | Unit | `space-1` to `space-32` |
-| Radius | Unit | `radius-none`, `radius-xs`, `radius-md`, `radius-lg`, `radius-pill` |
+| Radius | Unit | `radius-none`, `radius-xs`, `radius-md`, `radius-lg`, `radius-xl`, `radius-2xl`, `radius-pill` |
 | Layout | Unit | `container-max`, `container-text`, `gutter`, `gutter-mobile`, `header-height`, `header-height-mobile` |
 | Fonts | Font Family | `font-sans`, `font-wide` |
 
@@ -34,7 +36,7 @@ Create one Oxygen Variables collection per token family and keep the token names
 
 ## 3. Global stylesheet
 
-Paste `components/bundle.css` from the exported artifact into one global stylesheet, in order: base, the chosen concept's expression block (drop the other three), components. Supply variables through Oxygen as described above, or prepend the generated `exports/tokens.css` with font URLs adapted to their WordPress location. Alternatively, enqueue `exports/integrity.css` with its sibling `fonts/` directory for a complete static stylesheet. The component CSS is flat with `ii-` prefixed classes, no nesting and no `@layer`, so Oxygen's own un-layered CSS cannot silently out-rank it. Remove the unused concept's selectors to keep the file small.
+Paste `components/bundle.css` from the exported artifact into one global stylesheet, in order: base, the Lit Fiber expression block (drop the other three), components, then the website's site layer from `src/css/site/` (CoverageMap, RouteDiagram, the Lit Fiber page header, the testimonial set, offices), which the export does not include. Supply variables through Oxygen as described above, or prepend the generated `exports/tokens.css` with font URLs adapted to their WordPress location. Alternatively, enqueue `exports/integrity.css` with its sibling `fonts/` directory for a complete static stylesheet. The component CSS is flat with `ii-` prefixed classes, no nesting and no `@layer`, so Oxygen's own un-layered CSS cannot silently out-rank it. Remove the unused concept's selectors to keep the file small.
 
 ## 4. Classes
 
@@ -45,7 +47,7 @@ Oxygen 6 is class-first: register the `ii-` classes as global classes and apply 
 Build one Oxygen Component per system component, with properties for the content slots listed in each component's guideline (the `<Comp>Props` interfaces in `components/index.d.ts` list them):
 
 - SiteHeader and SiteFooter as header and footer templates.
-- Hero with a "variant" property (cinematic, split, editorial) mapped to the modifier class; only the chosen concept's variant needs building.
+- Hero: only Lit Fiber's `ii-hero--scene` needs building. The cinematic, split and editorial variants belong to the archived concepts.
 - ServiceIndex bound to a Services custom post type (name, icon, description, scope list, photo, anchor) so the Home list and the Services page share one source.
 - FAQ bound to a repeater or an FAQ post type; output native `<details>` elements.
 - SpecPlate, SafetyRecord, Timeline and LeaderCard bound to ACF or Meta Box fields, so pending values become real ones without touching layout.
@@ -54,11 +56,11 @@ Build one Oxygen Component per system component, with properties for the content
 
 Enqueue the exported artifact's `components/bundle.js` (or the identical `exports/integrity.js`) once, in the footer. It is a classic IIFE compiled from `src/behaviors/site.ts`, dependency-free and self-initializing (`window.IntegrityDS`), with the `@ds-bundle` namespace marker preserved. Optional motion libraries are type-only imports and are not bundled. Every behavior hooks onto `data-ii-*` attributes: `data-ii-header` (stuck state), `data-ii-nav-toggle` and `data-ii-drawer` (mobile drawer), `data-ii-marquee`, `data-ii-form`, `data-ii-jobs`. Scroll reveals are CSS only (`data-ii-reveal`). Nothing listens to scroll events.
 
-**Lit Fiber only.** Enqueue GSAP core and ScrollTrigger from `exports/vendor/` (self-hosted, 3.13 or later, free for commercial use) before the bundle on every page, and import three.js from `exports/vendor/three.module.js` with its sibling `three.core.js` on the Home template only, followed by `IntegrityDS.scene.mountAll(THREE)`. The artifact previews instead use the pinned CDN's `three.module.min.js` and sibling `three.core.min.js`. Add `@view-transition { navigation: auto; }` to the global stylesheet so the island header holds its place between pages. The ServiceSheet is a native `<dialog>` in a code block after the ServiceIndex. Test the Home page on a mid-range phone before launch: the scene is the heaviest thing on the site.
+**Lit Fiber.** Enqueue GSAP core and ScrollTrigger from `exports/vendor/` (self-hosted, 3.13 or later, free for commercial use) before the bundle on the Home template only (inner pages load no GSAP and no three.js; they use CSS reveals, glass shells, the pointer glow and view transitions), and import three.js from `exports/vendor/three.module.js` with its sibling `three.core.js` on the Home template only, followed by `IntegrityDS.scene.mountAll(THREE)`. The artifact previews instead use the pinned CDN's `three.module.min.js` and sibling `three.core.min.js`. Add `@view-transition { navigation: auto; }` to the global stylesheet so the island header holds its place between pages. The ServiceSheet is a native `<dialog>` in a code block after the ServiceIndex. Test the Home page on a mid-range phone before launch: the scene is the heaviest thing on the site.
 
 ## 7. Forms
 
-The three forms (quote, subcontractor inquiry, contact topics) are specified in QuoteForm and SubcontractorForm. Build them in the chosen form plugin (Gravity Forms, Fluent Forms or WPForms) and map its markup to the system classes: field wrapper `ii-field`, label `ii-field__label`, hint `ii-field__hint`, control `ii-input` / `ii-select` / `ii-textarea`, error `ii-field__error`, the summary `ii-notice ii-notice--danger`. Keep labels above fields, errors below, and route each topic to its inbox. Remove `data-ii-demo` so submissions actually send.
+The two forms (the Contact quote form, whose Topic select covers quotes, safety documents, subcontracting, careers and general questions, and the subcontractor inquiry) are specified in QuoteForm and SubcontractorForm. Build them in the chosen form plugin (Gravity Forms, Fluent Forms or WPForms) and map its markup to the system classes: field wrapper `ii-field`, label `ii-field__label`, hint `ii-field__hint`, control `ii-input` / `ii-select` / `ii-textarea`, error `ii-field__error`, the summary `ii-notice ii-notice--danger`. Keep labels above fields, errors below, the `?topic=` and `?service=` prefill, and route each topic to its inbox. Design-system previews and concept pages run in demo mode (`data-ii-demo`, nothing is sent); the review website submits through Netlify Forms (`data-ii-netlify`), which works only on the Netlify review deploy. In WordPress, replace both with the form plugin's own submission.
 
 ## 8. Careers and Paylocity
 

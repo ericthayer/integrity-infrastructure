@@ -9,8 +9,8 @@ Three next steps for three audiences: hire us, join the crew, partner with us. O
 ## Consumer provides
 Title, one sentence and link per path; a photo for the feature path.
 
-## Oxygen
-A Component with three slots.
+## WordPress
+A reusable block with three slots, whatever the theme or builder.
 
 ## Avoid
 Three equal cards, and paths that duplicate the header nav without adding context.

@@ -20,7 +20,7 @@ The label (verb first, one line, one label per intent), the href or button type,
 ## Concepts
 Work Light: uppercase, sharp, with the notch cut into the fill's top-right corner (drawn on `::before` so the focus ring is never clipped). As-Built: 2px, sentence case. Crew: pill. Text on orange is always ink.
 
-## Oxygen
+## WordPress
 Button or link element with the classes; no per-element styling.
 
 ## Avoid

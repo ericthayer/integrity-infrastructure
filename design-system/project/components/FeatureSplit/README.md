@@ -10,8 +10,8 @@ A photo and copy side by side for a single idea: why Integrity, safety, joining 
 ## Consumer provides
 Heading, lead, a photo (or PhotoSlot), and a list or link.
 
-## Oxygen
-A two-column Component with a reverse toggle.
+## WordPress
+A two-column reusable block with a reverse toggle.
 
 ## Avoid
 A third consecutive split, and small text over the photo.

@@ -11,8 +11,8 @@ A service's detail as a native dialog: a bento tile morphs into this sheet throu
 ## Consumer provides
 The dialog id and the quote link; content comes from the tiles, so the sheet never drifts from the ServiceIndex.
 
-## Oxygen
-A code block with the dialog markup after the ServiceIndex, and the host attribute on the ServiceIndex wrapper. The bundle does the rest.
+## WordPress
+The dialog markup in a code or HTML block after the ServiceIndex, and the host attribute on the ServiceIndex wrapper. The bundle does the rest.
 
 ## Avoid
 Content in the sheet that is not on the Services page, a second sheet per page, and forms inside the sheet (send people to Contact).

@@ -6,10 +6,23 @@
       <ul data-ii-error-list></ul>
     </div>
   </div>
+  <div class="ii-field">
+    <label class="ii-field__label" for="{{p|q}}-topic">Topic</label>
+    <div class="ii-select-wrap">
+      <select class="ii-select" id="{{p|q}}-topic" name="topic" data-ii-prefill-from="topic" required>
+        <option value="quote" selected>Request a quote</option>
+        <option value="safety">Safety documents</option>
+        <option value="subcontracting">Subcontracting</option>
+        <option value="careers">Careers</option>
+        <option value="general">General question</option>
+      </select>
+      <svg class="ii-icon" data-ii-icon="chevron-down"></svg>
+    </div>
+  </div>
   <div class="ii-form__row ii-form__row--2">
     <div class="ii-field">
       <label class="ii-field__label" for="{{p|q}}-name">Name</label>
-      <input class="ii-input" id="{{p|q}}-name" name="name" autocomplete="name" required>
+      <input class="ii-input" id="{{p|q}}-name" name="name" autocomplete="name" data-ii-error="Enter your name" required>
     </div>
     <div class="ii-field">
       <label class="ii-field__label" for="{{p|q}}-company">Company <span class="ii-field__opt">(optional)</span></label>
@@ -19,34 +32,34 @@
   <div class="ii-form__row ii-form__row--2">
     <div class="ii-field">
       <label class="ii-field__label" for="{{p|q}}-email">Email</label>
-      <input class="ii-input" id="{{p|q}}-email" name="email" type="email" autocomplete="email" required>
+      <input class="ii-input" id="{{p|q}}-email" name="email" type="email" autocomplete="email" data-ii-error="Enter an email address like name@company.com" required>
     </div>
     <div class="ii-field">
       <label class="ii-field__label" for="{{p|q}}-phone">Phone</label>
-      <input class="ii-input" id="{{p|q}}-phone" name="phone" type="tel" autocomplete="tel" pattern="[\d\s\(\)\+\.\-]{10,}" required>
+      <input class="ii-input" id="{{p|q}}-phone" name="phone" type="tel" autocomplete="tel" pattern="[\d\s\(\)\+\.\-]{10,}" data-ii-error="Enter a phone number like (503) 502-5339" required>
     </div>
   </div>
-  <fieldset class="ii-fieldset" data-ii-required data-ii-error="Choose at least one service">
-    <legend class="ii-fieldset__legend">Services needed</legend>
+  <fieldset class="ii-fieldset">
+    <legend class="ii-fieldset__legend">Services needed <span class="ii-field__opt">(optional)</span></legend>
     <div class="ii-choices ii-choices--2">
-      <label class="ii-choice"><input type="checkbox" id="{{p|q}}-svc-1" name="services" value="Fiber splicing">Fiber splicing</label>
-      <label class="ii-choice"><input type="checkbox" id="{{p|q}}-svc-2" name="services" value="Boring">Boring</label>
-      <label class="ii-choice"><input type="checkbox" id="{{p|q}}-svc-3" name="services" value="Aerial installations">Aerial installations</label>
-      <label class="ii-choice"><input type="checkbox" id="{{p|q}}-svc-4" name="services" value="ISP installation">ISP installation</label>
-      <label class="ii-choice"><input type="checkbox" id="{{p|q}}-svc-5" name="services" value="Concrete and asphalt restoration">Concrete and asphalt restoration</label>
+      <label class="ii-choice"><input type="checkbox" id="{{p|q}}-svc-1" name="services" value="Long-haul fiber construction" data-ii-prefill-from="service" data-ii-key="long-haul">Long-haul fiber construction</label>
+      <label class="ii-choice"><input type="checkbox" id="{{p|q}}-svc-2" name="services" value="Fiber splicing" data-ii-prefill-from="service" data-ii-key="fiber-splicing">Fiber splicing</label>
+      <label class="ii-choice"><input type="checkbox" id="{{p|q}}-svc-3" name="services" value="Boring" data-ii-prefill-from="service" data-ii-key="boring">Boring</label>
+      <label class="ii-choice"><input type="checkbox" id="{{p|q}}-svc-4" name="services" value="Aerial installations" data-ii-prefill-from="service" data-ii-key="aerial-installation">Aerial installations</label>
+      <label class="ii-choice"><input type="checkbox" id="{{p|q}}-svc-5" name="services" value="Concrete and asphalt restoration" data-ii-prefill-from="service" data-ii-key="restoration">Concrete and asphalt restoration</label>
     </div>
   </fieldset>
   <div class="ii-form__row ii-form__row--2">
     <div class="ii-field">
-      <label class="ii-field__label" for="{{p|q}}-location">Project location</label>
-      <p class="ii-field__hint" id="{{p|q}}-location-hint">City and state, or the nearest cross streets</p>
-      <input class="ii-input" id="{{p|q}}-location" name="location" aria-describedby="{{p|q}}-location-hint" required>
+      <label class="ii-field__label" for="{{p|q}}-location">Project location <span class="ii-field__opt" data-ii-optional-note hidden>(optional)</span></label>
+      <p class="ii-field__hint" id="{{p|q}}-location-hint">City and state, or cross streets</p>
+      <input class="ii-input" id="{{p|q}}-location" name="location" aria-describedby="{{p|q}}-location-hint" data-ii-error="Enter the project location, like Sherwood, OR" data-ii-required-for="quote" required>
     </div>
     <div class="ii-field">
-      <label class="ii-field__label" for="{{p|q}}-timeline">Timeline</label>
+      <label class="ii-field__label" for="{{p|q}}-timeline">Timeline <span class="ii-field__opt" data-ii-optional-note hidden>(optional)</span></label>
       <p class="ii-field__hint" id="{{p|q}}-timeline-hint">When the work needs to start</p>
       <div class="ii-select-wrap">
-        <select class="ii-select" id="{{p|q}}-timeline" name="timeline" aria-describedby="{{p|q}}-timeline-hint" required>
+        <select class="ii-select" id="{{p|q}}-timeline" name="timeline" aria-describedby="{{p|q}}-timeline-hint" data-ii-error="Choose when the work needs to start" data-ii-required-for="quote" required>
           <option value="">Choose a timeline</option>
           <option>As soon as possible</option>
           <option>Within 3 months</option>
@@ -60,7 +73,7 @@
   <div class="ii-field">
     <label class="ii-field__label" for="{{p|q}}-details">Project details</label>
     <p class="ii-field__hint" id="{{p|q}}-details-hint">Scope, footage, site conditions and anything else we should know</p>
-    <textarea class="ii-textarea" id="{{p|q}}-details" name="details" aria-describedby="{{p|q}}-details-hint" minlength="20" required></textarea>
+    <textarea class="ii-textarea" id="{{p|q}}-details" name="details" aria-describedby="{{p|q}}-details-hint" minlength="20" data-ii-error="Describe the work in at least 20 characters" required></textarea>
   </div>
   <div class="ii-form__foot">
     <button class="ii-btn ii-btn--primary ii-btn--lg" type="submit"><svg class="ii-icon ii-icon--spin" data-ii-icon="loader-2"></svg>Request a quote<svg class="ii-icon ii-icon--trail" data-ii-icon="arrow-right"></svg></button>

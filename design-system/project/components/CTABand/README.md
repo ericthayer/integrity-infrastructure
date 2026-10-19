@@ -9,8 +9,8 @@ The closing band on every page: a short invitation, the primary quote button and
 ## Consumer provides
 Heading, sentence, quote link, phone.
 
-## Oxygen
-A reusable Component placed above the footer.
+## WordPress
+A reusable block placed above the footer.
 
 ## Avoid
 A second primary action, and "Get a quote" wording (the label is Request a quote).
