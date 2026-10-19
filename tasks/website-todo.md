@@ -32,9 +32,11 @@ Decisions: production is WordPress, built by another developer team; the theme o
 
 - [x] Vector reversed logo (no Corps line) on every page's shell; drawer puts the call link above the quote button.
 - [x] `HANDOFF.md`: builder-neutral developer brief (sources, behavior contracts, review-only scaffolding, content model, requirements). README and spec updated for the WordPress target.
-- [ ] Design-system cleanup: Corps line, ISP installation and tagline-as-footer removed from DS docs, component guidelines, previews and partials; form partials match the pages.
-- [ ] Favicon (cropped from the vector logo), `public/sitemap.xml`, `404.html`.
-- [ ] Design-system artifact upload (site owner, before handoff).
+- [x] Design-system cleanup: Corps line, ISP installation, the fleet photo and tagline-as-footer removed from DS docs, all 38 component guidelines ("Oxygen" sections now builder-neutral "WordPress"), previews and partials; form, footer, services, hero, FAQ, reasons and job-list partials match the pages; the DS header and footer use the vector logo.
+- [x] Favicon (cropped from the vector logo, `tools/favicon.mjs`), `public/sitemap.xml`, `404.html` (covered by `tests/not-found.test.mjs` and the production tests).
+- [ ] Design-system artifact upload (site owner, before handoff): run `npm run build:ds`, upload `exports/design-system/project/`, and upload the new `Logos/integrity-infrastructure-logo.svg` so its blob id lands in `design-system/asset-map.json` (until then `build:ds` warns and the header and footer previews show a pending image).
+
+Verification (2026-10-19): `npm run verify` passes (64 unit tests, design checks, 39 production tests); production QA on the seven pages and the 404 at 390 and 1280: 0 axe violations, no overflow, no console errors, no failed requests.
 
 ## Owned by the WordPress developers
 

@@ -23,8 +23,8 @@
 //   PLAYWRIGHT=/path/to/node_modules/playwright CHROMIUM=/opt/pw-browsers/chromium node tools/favicon.mjs
 //
 // Brand note: design-system/project/README.md asks for clear space equal to the flame's width on
-// every side. A 16 px tab icon cannot hold that and stay legible, so the mark keeps about 0.8 x
-// the flame width above and below and more at the sides. Replace this set when the client
+// every side. A 16 px tab icon cannot hold that and stay legible, so the mark keeps about a third
+// of the flame width above and below and about 1.4 x at the sides. Replace this set when the client
 // supplies a compact mark; the WordPress build sets it as the Site Icon instead.
 import { mkdirSync, readFileSync, writeFileSync, copyFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
@@ -37,6 +37,8 @@ const SURFACE = '#080807';
 // Share of the square's height the mark fills, and the corner radius as a share of the side.
 const FILL = 0.82;
 const RADIUS = 0.2;
+// Pixel grid the mark is aligned to (the browser tab size).
+const GRID = 16;
 // The first "I": its stem, and the short segment that sits inside the flame's cream core.
 const I_PATHS = ['M45.51,269.699', 'M46.491,226.354'];
 
@@ -46,7 +48,8 @@ function crop(source) {
   // Outer transforms shared by the wordmark and the flame, in document order.
   const outer = [...source.matchAll(/<g transform="([^"]+)">/g)].slice(0, 2).map(match => match[1]);
   // The flame is the only <g> without attributes (orange, yellow, then the nested cream core).
-  const flame = /\n([ \t]*)<g>\n[\s\S]*?\n\1<\/g>/.exec(source)?.[0].trim();
+  const block = /\n([ \t]*)<g>\n[\s\S]*?\n\1<\/g>/.exec(source);
+  const flame = block?.[0].trim().replace(new RegExp(`^${block[1]}`, 'gm'), '');
   const glyphs = I_PATHS.map(prefix => {
     const found = source.match(new RegExp(`<path d="${prefix.replace(/\./g, '\\.')}[^>]*/>`, 'g')) ?? [];
     if (found.length !== 1) throw new Error(`Expected one logo path starting ${prefix}, found ${found.length}`);
@@ -58,11 +61,17 @@ function crop(source) {
   return { rootStyle, outer, inner: [flame, ...glyphs].join('\n') };
 }
 
-export function markup(source, box, { fill = FILL, radius = RADIUS, rounded = true } = {}) {
+export function markup(source, { box, stem }, { fill = FILL, radius = RADIUS, rounded = true } = {}) {
   const { rootStyle, outer, inner } = crop(source);
   const side = box.height / fill;
-  const x = box.x + box.width / 2 - side / 2;
-  const y = box.y + box.height / 2 - side / 2;
+  // Center the mark, then snap it to the 16 px grid: the "I" stem (under one pixel wide there)
+  // centered on a pixel column and the mark's foot on a pixel edge, so a tab icon stays crisp.
+  const unit = side / GRID;
+  const snap = (value, offset) => Math.round((value - offset) / unit) * unit + offset;
+  const stemCenter = stem.x + stem.width / 2;
+  const x = stemCenter - snap(stemCenter - (box.x + box.width / 2 - side / 2), unit / 2);
+  const bottom = box.y + box.height;
+  const y = bottom - snap(bottom - (box.y + box.height / 2 - side / 2), 0);
   const n = value => +value.toFixed(2);
   const rx = rounded ? ` rx="${n(side * radius)}"` : '';
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${n(x)} ${n(y)} ${n(side)} ${n(side)}" style="${rootStyle}">
@@ -75,15 +84,17 @@ ${inner}
 `;
 }
 
-// Bounds of the kept paths in the logo's root user space.
+// Bounds of the kept paths, and of the "I" stem alone, in the logo's root user space.
 export async function measure(page, source) {
   const { rootStyle, outer, inner } = crop(source);
+  const stemPath = inner.split('\n').find(line => line.startsWith(`<path d="${I_PATHS[0]}`));
+  const group = (id, content) => `<g id="${id}"><g transform="${outer[0]}"><g transform="${outer[1]}">${content}</g></g></g>`;
   await page.setContent(`<svg xmlns="http://www.w3.org/2000/svg" width="2617" height="1093" viewBox="0 0 2617 1093" style="${rootStyle}">
-    <g id="mark"><g transform="${outer[0]}"><g transform="${outer[1]}">${inner}</g></g></g></svg>`);
-  return page.evaluate(() => {
-    const box = document.getElementById('mark').getBBox();
-    return { x: box.x, y: box.y, width: box.width, height: box.height };
-  });
+    ${group('mark', inner)}${group('stem', stemPath)}</svg>`);
+  return page.evaluate(() => Object.fromEntries(['mark', 'stem'].map(id => {
+    const box = document.getElementById(id).getBBox();
+    return [id === 'mark' ? 'box' : id, { x: box.x, y: box.y, width: box.width, height: box.height }];
+  })));
 }
 
 export async function rasterize(page, svg, size, transparent) {
@@ -126,9 +137,9 @@ async function main() {
   const browser = await launch();
   try {
     const page = await browser.newPage();
-    const box = await measure(page, source);
-    const svg = markup(source, box);
-    const square = markup(source, box, { rounded: false });
+    const bounds = await measure(page, source);
+    const svg = markup(source, bounds);
+    const square = markup(source, bounds, { rounded: false });
     mkdirSync(OUT, { recursive: true });
     writeFileSync(join(OUT, 'favicon.svg'), svg);
     writeFileSync(join(OUT, 'favicon-32.png'), await rasterize(page, svg, 32, true));
@@ -138,7 +149,8 @@ async function main() {
     writeFileSync(join(OUT, 'favicon.ico'), ico(entries));
     copyFileSync(join(OUT, 'favicon.ico'), join(root, 'public/favicon.ico'));
     const n = value => value.toFixed(2);
-    console.log(`mark bounds x ${n(box.x)} y ${n(box.y)} w ${n(box.width)} h ${n(box.height)} (logo user units)`);
+    const { box, stem } = bounds;
+    console.log(`mark bounds x ${n(box.x)} y ${n(box.y)} w ${n(box.width)} h ${n(box.height)}, stem x ${n(stem.x)} w ${n(stem.width)} (logo user units)`);
     console.log('wrote src/img/favicon/{favicon.svg,favicon-32.png,apple-touch-icon.png,favicon.ico} and public/favicon.ico');
   } finally {
     await browser.close();

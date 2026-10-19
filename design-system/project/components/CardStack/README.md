@@ -10,8 +10,8 @@ Reasons or steps as glass cards that stick and pile up as the page scrolls; each
 ## Consumer provides
 Three to five cards, one idea each, at most 44 characters of title.
 
-## Oxygen
-A repeater of cards with the classes; the bundle handles the rest. Enqueue GSAP and ScrollTrigger before the bundle.
+## WordPress
+A repeater of cards with the classes; the bundle handles the rest. Enqueue GSAP and ScrollTrigger before the bundle on the Home template only; inner pages load no GSAP.
 
 ## Avoid
 More than five cards (the pile gets taller than the viewport), links inside the cards (they scroll under the next card), and using the stack twice on a page.

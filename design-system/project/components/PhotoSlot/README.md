@@ -9,7 +9,7 @@ A framed photo (`ii-media`) with the concept's grade, and the slot (`ii-slot`) t
 ## Consumer provides
 The photo or, until it exists, the brief.
 
-## Oxygen
+## WordPress
 Image element in a div with `ii-media`; slots never ship to production.
 
 ## Avoid
