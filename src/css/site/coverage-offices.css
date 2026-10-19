@@ -1,0 +1,125 @@
+/* CoverageMap offices (ii-coverage, continued from coverage.css). Each office row in the key
+   is a native <details> (one open at a time via name) holding the address and a map link;
+   the Offices group ends with the company phone and email. Office tiles hold an in-page
+   link (ii-usmap__pin) to their row: without JS the browser opens the row on arrival.
+   coverage-offices.ts links tiles and rows both ways (data-ii-active, data-ii-open). */
+
+/* ------------------------------------------------------------ office tiles: pins */
+.ii-usmap__pin {
+  position: absolute;
+  inset: -1px;
+  display: grid;
+  place-items: center;
+  border-radius: inherit;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.ii-usmap__tile:has(> .ii-usmap__pin) {
+  transition: opacity var(--motion-duration) var(--motion-ease), transform var(--motion-duration) var(--motion-ease);
+}
+.ii-usmap__tile:has(> .ii-usmap__pin:hover, > [data-ii-active]) {
+  transform: scale(1.06);
+}
+/* The tile whose row is open carries a ring in the text color (the focus ring is yellow). */
+.ii-usmap__pin[data-ii-open] {
+  outline: 2px solid var(--text);
+  outline-offset: 3px;
+}
+
+/* A tile or row in focus dims every other tile, like hovering a key group. */
+.ii-coverage[data-ii-office-active] .ii-usmap__tile:not(:has(> [data-ii-active])) {
+  opacity: 0.28;
+}
+
+/* ------------------------------------------------------------ office rows: disclosure
+   The summary keeps the original row (state left, city right) and adds a chevron. It is
+   a 44px target; negative margins keep the original row rhythm. */
+.ii-coverage__office {
+  flex: 1 0 100%;
+}
+.ii-coverage__summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0 var(--space-4);
+  min-height: 44px;
+  margin-block: -6px;
+  list-style: none;
+  cursor: pointer;
+}
+.ii-coverage__summary::-webkit-details-marker {
+  display: none;
+}
+.ii-coverage__summary:hover .ii-coverage__name,
+.ii-coverage__office[data-ii-active] .ii-coverage__name {
+  color: var(--accent-text);
+}
+.ii-coverage__summary .ii-coverage__meta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+.ii-coverage__chevron {
+  width: 1em;
+  height: 1em;
+  stroke-width: 2;
+  transition: transform var(--motion-duration) var(--motion-ease);
+}
+.ii-coverage__office[open] .ii-coverage__chevron {
+  transform: rotate(180deg);
+}
+.ii-coverage__office-body {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-1);
+  padding-top: var(--space-3);
+}
+.ii-coverage__office-body address {
+  font-size: var(--fs-body-sm);
+  font-style: normal;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+.ii-coverage__office-body .ii-arrow-link {
+  font-size: var(--fs-body-sm);
+}
+
+/* ------------------------------------------------------------ company phone and email */
+.ii-coverage__group .ii-coverage__contact {
+  flex: 1 0 100%;
+  justify-content: flex-start;
+  gap: 0 var(--space-5);
+}
+.ii-coverage__contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  max-width: 100%;
+  font-size: var(--fs-body-sm);
+  font-weight: 600;
+  color: var(--text);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+.ii-coverage__contact-link .ii-icon {
+  flex: none;
+  color: var(--accent-text);
+  stroke-width: 2;
+}
+.ii-coverage__contact-link:hover {
+  color: var(--accent-text-hover);
+  text-decoration: underline;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ii-usmap__tile:has(> .ii-usmap__pin:hover, > [data-ii-active]) {
+    transform: none;
+  }
+  .ii-coverage__chevron {
+    transition: none;
+  }
+}

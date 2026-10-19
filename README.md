@@ -73,7 +73,7 @@ For a manual upload to the existing site's Deploys dropzone, run `npm ci` and `n
 | `src/partials/` | Header, footer, section, form and brand-board partials for DS previews only; not automatically included in app HTML |
 | `src/ds/components/<Comp>/preview.html` | Design System previews (built under `exports/design-system/project/components/`) |
 | `src/main.ts` | Concept and board entry with imported CSS and optional motion/scene modules |
-| `src/website.ts` | Website entry: the same runtime plus the site layer and the website behaviors (`prefill`, `topic-fields`, `scene-toggle`, `reveal-seen`, `netlify-forms`) |
+| `src/website.ts` | Website entry: the same runtime plus the site layer and the website behaviors (`prefill`, `topic-fields`, `scene-toggle`, `reveal-seen`, `netlify-forms`, `coverage-offices`) |
 | `src/generated/` | Ignored token CSS and icon data generated during typecheck/build |
 | `src/img/`, `src/fonts/`, `src/data/` | Web photos and logo variants, self-hosted Montserrat and Michroma, sample job feed |
 | `tools/build.mjs` | Builds the separate design-system export in `exports/`; does not generate app pages |
