@@ -32,10 +32,17 @@
       "name": "Logos",
       "tile": "l",
       "order": [
+        "integrity-infrastructure-logo.svg",
         "integrity-infrastructure-logo.png",
         "integrity-infrastructure-logo-reversed.png"
       ],
       "files": {
+        "integrity-infrastructure-logo.svg": {
+          "name": "integrity-infrastructure-logo.svg",
+          "blob": "c75b14f64772f839a6ed42883e6075eb",
+          "size": 34305,
+          "type": "image/svg+xml"
+        },
         "integrity-infrastructure-logo.png": {
           "name": "integrity-infrastructure-logo.png",
           "blob": "c9aa06eae15686223d26bbe8de31d587",
@@ -150,9 +157,9 @@
     "sections": []
   },
   "lastChange": {
-    "by": "Claude",
-    "at": "2026-09-30T05:55:27Z",
+    "by": "Eric",
+    "at": "2026-10-19T15:10:00Z",
     "via": "Claude Code",
-    "note": "Fourth concept, Lit Fiber: theme, glass expression layer, motion (GSAP libraries, three.js scene, tile-to-sheet view transition) and six new cards."
+    "note": "Vector reversed logo (no Integrity Corps line) uploaded; component guidelines, previews and bundles refreshed from the website handoff cleanup."
   }
 }
