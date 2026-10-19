@@ -1592,8 +1592,7 @@ a:hover > .ii-media > img,
 }
 .ii-cta-band__actions {
   display: flex;
-  flex-direction: column-reverse;
-  align-items: flex-end;
+  flex-direction: column;
   gap: var(--space-10) var(--space-10);
 }
 @media (min-width: 1024px) {
@@ -1601,6 +1600,7 @@ a:hover > .ii-media > img,
     grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
   }
   .ii-cta-band__actions {
+    align-items: flex-end;
     justify-content: flex-end;
   }
 }
