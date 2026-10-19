@@ -7,7 +7,11 @@
    a stroke-dashoffset transition from just past 1 to 0. That is a paint-only property (no
    layout); it is the one exception to the transform-and-opacity motion rule, because a
    draw-on is the effect. The gap of 2 keeps the next dash off the path while armed.
-   Stroke widths are in viewBox units, set per size so the line renders near 1px. */
+   Stroke widths are in viewBox units. Each drawing is scaled past its box so it reads as
+   the card's focal point and bleeds off the edges; the card clips it. */
+.ii-shell:has(> .ii-line-art) {
+  overflow: clip;
+}
 .ii-line-art {
   --ii-draw-duration: 1600ms;
   --ii-draw-step: 140ms;
@@ -17,7 +21,7 @@
   z-index: -1;
   overflow: visible;
   fill: none;
-  stroke: color-mix(in srgb, var(--accent) 30%, transparent);
+  stroke: color-mix(in srgb, var(--accent-line) 25%, transparent);
   stroke-linecap: round;
   stroke-linejoin: round;
   pointer-events: none;
@@ -42,39 +46,39 @@
 .ii-line-art > path:nth-child(n + 8) { --ii-draw-order: 7; }
 
 /* Reasons stack card: on phones, right under the icon ring (its size repeats the
-   .ii-reasons--stack icon clamp), in the open band above the copy; beside the copy,
-   bottom right, from 768px. */
+   .ii-reasons--stack icon clamp), in the open band above the copy; from 768px, in the
+   right half beside the copy, running off the right edge. */
 .ii-line-art--reason {
   top: calc(var(--shell-inset, 0px) + var(--space-8) + clamp(4.5rem, 1rem + 7dvw, 7rem) + var(--space-4));
   right: calc(var(--shell-inset, 0px) + var(--space-6));
   width: min(62%, 420px);
   aspect-ratio: 560 / 240;
   stroke-width: 2.75;
+  transform: scale(1.15);
 }
 @media (min-width: 768px) {
   .ii-line-art--reason {
-    top: auto;
-    right: calc(var(--shell-inset, 0px) + var(--space-8));
-    bottom: calc(var(--shell-inset, 0px) + var(--space-8));
+    top: 35%;
+    right: auto;
+    left: 52%;
     width: min(48%, 560px);
     stroke-width: 2;
   }
 }
 @media (min-width: 1024px) {
   .ii-line-art--reason {
-    right: calc(var(--shell-inset, 0px) + var(--space-12));
-    bottom: calc(var(--shell-inset, 0px) + var(--space-12));
     stroke-width: 1.4;
   }
 }
 
-/* Values rail cell: fills the open middle of the square, between the index and the word. */
+/* Values rail cell: fills the top of the square above the word, bleeding off both sides. */
 .ii-line-art--rail {
-  top: 18%;
+  top: 11%;
   right: calc(var(--shell-inset, 0px) + var(--space-6));
   width: 72%;
   aspect-ratio: 320 / 200;
   stroke-width: 1.5;
+  transform: scale(1.5);
 }
 
 @media (prefers-reduced-motion: reduce) {
