@@ -1592,8 +1592,8 @@ a:hover > .ii-media > img,
 }
 .ii-cta-band__actions {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+  flex-direction: column-reverse;
+  align-items: flex-end;
   gap: var(--space-10) var(--space-10);
 }
 @media (min-width: 1024px) {
