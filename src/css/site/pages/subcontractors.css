@@ -10,7 +10,7 @@
 .ii-subcontractors-trades {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-2);
+  gap: var(--space-3);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -27,6 +27,7 @@
   background: var(--glass-fill, var(--card-bg));
   border: 1px solid var(--glass-line-strong, var(--border-strong));
   border-radius: var(--radius-pill);
+  flex: 1 1 16rem;
 }
 .ii-subcontractors-trade .ii-icon {
   width: 1.125rem;
@@ -42,6 +43,8 @@
     min-height: 56px;
     padding: var(--space-2) var(--space-6) var(--space-2) var(--space-5);
     font-size: var(--fs-body);
+    justify-content: center;
+    white-space: nowrap;
   }
   .ii-subcontractors-trade .ii-icon {
     width: 1.375rem;
@@ -159,8 +162,7 @@
 }
 .ii-subcontractors-contact__actions {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+  flex-direction: column;
   gap: var(--space-4) var(--space-10);
 }
 .ii-subcontractors-email {

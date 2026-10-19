@@ -89,9 +89,9 @@
 .ii-careers-role > .ii-icon {
   grid-row: 1 / span 3;
   box-sizing: border-box;
-  width: 2.75rem;
-  height: 2.75rem;
-  padding: 10px;
+  width: 3.75rem;
+  height: 3.75rem;
+  padding: 12px;
   color: var(--accent-text);
   border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
   border-radius: var(--radius-pill);
