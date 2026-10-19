@@ -18,11 +18,18 @@ Spec: `tasks/website-spec.md`. Authoring rules: `tasks/website-authoring.md`.
 - Keyboard: skip link lands on `main`; the drawer takes focus, traps Tab, closes on Escape and returns focus to its toggle; no focused element in `main` is hidden under the island header.
 - Behaviors in a real browser: `/contact/?topic=safety&service=boring#quote` preselects Safety documents and Boring; empty submits show and focus the error summary; demo submits show the success notice; the service sheet opens per tile and closes on Escape; the hero scene pauses and resumes; the job list renders the sample feed and its empty and error states.
 
+## Review prep (2026-10-19)
+
+- Review deploy hides `/concepts/*` and `/brandkit/*` with 404 rules in `netlify.toml` (they still carry the Corps lockup line and the fleet photo); `/reference/` stays. Check on the deploy preview that `/concepts/lit-fiber/` returns the 404 page: not testable locally. A custom `404.html` does not exist yet, so Netlify's default 404 shows.
+- Contact and Subcontractor forms submit through Netlify Forms. Needs a deploy to register the forms, then an email notification per form in the Netlify UI. Not verifiable until deployed.
+- Elements visible at load skip the scroll reveal (`reveal-seen.ts`): unscrolled axe at default motion is clean on all seven pages at 390 and 1280.
+- Client note: `tasks/client-review-note.md`.
+- `npm run verify`: 58 unit tests and 38 production tests pass; production QA clean on 14 runs.
+
 ## Follow-ups outside v1
 
 - Design system: fold the website components (lit page header, coverage map, route diagram, testimonial set, offices, scene toggle, topic fields) into `src/ds/components/` previews and the Oxygen export.
 - Partials: update `src/partials/forms/*.html` (Topic select, keyed service lines, fix-it errors), `src/partials/careers/job-list.html` (no inline style, neutral empty copy, root-absolute links) and `src/partials/sections/values-rail.html` (keyboard region) to match the pages.
 - A shared `.ii-form-shell` for the Contact and Subcontractors form panels.
-- Scroll reveals (`data-ii-reveal`, shared component): a section head sitting at the bottom edge of the first screen stays partly transparent until scrolled; axe flags its contrast on an unscrolled scan. Consider starting reveals only below the first screen.
 - Before launch: drop `/concepts/`, `/brandkit/` and `/reference/` from the production deploy (they still show the Corps line and the fleet photo); remove `noindex` from the pages and `X-Robots-Tag` from `netlify.toml`.
 - Client inputs listed in the spec, section 9.
