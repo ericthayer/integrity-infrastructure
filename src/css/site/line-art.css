@@ -9,8 +9,10 @@
    draw-on is the effect. The gap of 2 keeps the next dash off the path while armed.
    Stroke widths are in viewBox units, set per size so the line renders near 1px. */
 .ii-line-art {
-  --ii-draw-duration: 1800ms;
+  --ii-draw-duration: 1600ms;
   --ii-draw-step: 140ms;
+  /* Even in-out pace: a pen stroke, not the concept's fast-out reveal ease. */
+  --ii-draw-ease: cubic-bezier(0.65, 0, 0.35, 1);
   position: absolute;
   z-index: -1;
   overflow: visible;
@@ -22,7 +24,7 @@
 }
 .ii-line-art[data-ii-draw] > path {
   stroke-dasharray: 1 2;
-  transition: stroke-dashoffset var(--ii-draw-duration) var(--motion-ease)
+  transition: stroke-dashoffset var(--ii-draw-duration) var(--ii-draw-ease)
     calc(var(--ii-draw-delay, 0ms) + var(--ii-draw-order, 0) * var(--ii-draw-step));
 }
 .ii-line-art[data-ii-draw="armed"] > path {
