@@ -272,7 +272,7 @@
     border-left: var(--rule);
   }
 }
-/* Wide: map left (about 64%), key right in three equal bands. */
+/* Wide: map left (about 64%), key right in three bands. */
 @container ii-coverage (width >= 48rem) {
   .ii-usmap {
     grid-area: 1 / 1;
@@ -281,8 +281,10 @@
     grid-area: 1 / 2;
     padding: var(--space-8);
   }
+  /* Bands size to their content and share the leftover height, so the Offices band (rows,
+     phone and email) never stretches the figure past the map. */
   .ii-coverage__list {
-    grid-auto-rows: 1fr;
+    grid-auto-rows: auto;
   }
 }
 /* Fallback without container queries: switch on the viewport instead. */

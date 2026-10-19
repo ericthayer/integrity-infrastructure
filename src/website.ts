@@ -9,6 +9,7 @@ import './css/site/site.css';
 import './css/site/page-header.css';
 import './css/site/proof.css';
 import './css/site/coverage.css';
+import './css/site/coverage-offices.css';
 import './css/site/route.css';
 import './css/site/line-art.css';
 import './css/site/pages/home.css';
@@ -19,6 +20,7 @@ import './css/site/pages/careers.css';
 import './css/site/pages/subcontractors.css';
 import './css/site/pages/contact.css';
 import { IntegrityDS } from './behaviors/site';
+import { coverageOffices } from './behaviors/coverage-offices';
 import { loadEnhancements } from './behaviors/enhancements';
 import { lineArt } from './behaviors/line-art';
 import { netlifyForms } from './behaviors/netlify-forms';
@@ -34,6 +36,7 @@ function boot(): void {
   netlifyForms();
   sceneToggle();
   lineArt();
+  coverageOffices();
   void loadEnhancements(document, window, IntegrityDS);
 }
 
