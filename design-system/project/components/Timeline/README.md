@@ -9,8 +9,8 @@ Milestones in order, for company history on About (and as a step list for proces
 ## Consumer provides
 Year, title and one sentence per milestone.
 
-## Oxygen
-Repeater field bound to the Component.
+## WordPress
+A repeater field bound to a reusable block.
 
 ## Avoid
 Invented dates or events, and generic "Step 1" labels when used as a process (the step name is the label).

@@ -8,8 +8,8 @@ A small metadata label: location, trade, job type. One accent tag per view at mo
 ## Consumer provides
 The label and, optionally, an icon.
 
-## Oxygen
-Text element with the class.
+## WordPress
+A text element with the class.
 
 ## Avoid
 Tags overlaid on photos, decorative status dots, and more than one accent tag in view.

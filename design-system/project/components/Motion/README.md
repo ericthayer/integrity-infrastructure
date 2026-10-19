@@ -19,8 +19,8 @@ The Lit Fiber choreography: GSAP 3 hooks that read `data-ii-*` attributes, and a
 ## Consumer provides
 The attributes above on the elements they describe.
 
-## Oxygen
-Enqueue GSAP core and ScrollTrigger, then the bundle, on every Lit Fiber page. Nothing else changes: the hooks are attributes on ordinary elements.
+## WordPress
+Enqueue GSAP core and ScrollTrigger, then the bundle, on the Home template only. Inner pages use no `data-ii-words`, `data-ii-magnetic`, `data-ii-stack`, `data-ii-rail` or `data-ii-scene`, and load no GSAP; `data-ii-reveal`, `data-ii-glow` and view transitions need no library. The hooks are attributes on ordinary elements.
 
 ## Avoid
 Smooth-scroll libraries that take over the wheel, motion on inner-page text, parallax on photographs, and any hook on an element that also carries `data-ii-reveal`.

@@ -26,10 +26,26 @@ Spec: `tasks/website-spec.md`. Authoring rules: `tasks/website-authoring.md`.
 - Client note: `tasks/client-review-note.md`.
 - `npm run verify`: 58 unit tests and 38 production tests pass; production QA clean on 14 runs.
 
-## Follow-ups outside v1
+## Phase 4: handoff prep (2026-10-19)
 
-- Design system: fold the website components (lit page header, coverage map, route diagram, testimonial set, offices, scene toggle, topic fields) into `src/ds/components/` previews and the Oxygen export.
-- Partials: update `src/partials/forms/*.html` (Topic select, keyed service lines, fix-it errors), `src/partials/careers/job-list.html` (no inline style, neutral empty copy, root-absolute links) and `src/partials/sections/values-rail.html` (keyboard region) to match the pages.
+Decisions: production is WordPress, built by another developer team; the theme or builder is not decided and Oxygen is not assumed. The static HTML/CSS/TS is the handoff. Paylocity production wiring, photography and deployment configuration belong to the developers; `netlify.toml` stays as review scaffolding.
+
+- [x] Vector reversed logo (no Corps line) on every page's shell; drawer puts the call link above the quote button.
+- [x] `HANDOFF.md`: builder-neutral developer brief (sources, behavior contracts, review-only scaffolding, content model, requirements). README and spec updated for the WordPress target.
+- [x] Design-system cleanup: Corps line, ISP installation, the fleet photo and tagline-as-footer removed from DS docs, all 38 component guidelines ("Oxygen" sections now builder-neutral "WordPress"), previews and partials; form, footer, services, hero, FAQ, reasons and job-list partials match the pages; the DS header and footer use the vector logo.
+- [x] Favicon (cropped from the vector logo, `tools/favicon.mjs`), `public/sitemap.xml`, `404.html` (covered by `tests/not-found.test.mjs` and the production tests).
+- [ ] Design-system artifact upload (site owner, before handoff): run `npm run build:ds`, upload `exports/design-system/project/`, and upload the new `Logos/integrity-infrastructure-logo.svg` so its blob id lands in `design-system/asset-map.json` (until then `build:ds` warns and the header and footer previews show a pending image).
+
+Verification (2026-10-19): `npm run verify` passes (64 unit tests, design checks, 39 production tests); production QA on the seven pages and the 404 at 390 and 1280: 0 axe violations, no overflow, no console errors, no failed requests.
+
+## Owned by the WordPress developers
+
+- Theme or builder, hosting, deployment and indexing config (remove `noindex` and the review `netlify.toml` rules; the concept prototypes, brand boards and `/reference/` are not part of the site).
+- Form plugin and per-Topic routing; Paylocity integration; WordPress sitemap, Site Icon and 404 template; 301 redirects from the live site.
+- Photography from the client during the WordPress build; content entry for every `ii-pending` value.
+
+## Follow-ups (optional)
+
+- Fold the website components (lit page header, coverage map, route diagram, testimonial set, offices, scene toggle, topic fields, reveal-seen) into `src/ds/components/` previews and the design-system export, if the developers want classic bundles that include the website layer.
 - A shared `.ii-form-shell` for the Contact and Subcontractors form panels.
-- Before launch: drop `/concepts/`, `/brandkit/` and `/reference/` from the production deploy (they still show the Corps line and the fleet photo); remove `noindex` from the pages and `X-Robots-Tag` from `netlify.toml`.
 - Client inputs listed in the spec, section 9.

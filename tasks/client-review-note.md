@@ -24,16 +24,16 @@ This is a first pass of the new Integrity Infrastructure website in the Lit Fibe
 - Job listings. The three roles on Careers are samples, labeled "(sample)". They are not real openings.
 - Empty fields. Anything we do not know yet reads "Client to provide". We never guess. There are 71 of these marks across the site. Section 4 lists them by item and page.
 - Forms. The Contact and Subcontractors forms are set up to send submissions to the review site. Confirm with us before relying on them. Where submissions are delivered is not set yet.
-- The logo lockup. See decision 1.
-- Other pages on the review site. It also holds earlier design concepts, brand boards and a copy of the old site. They are not part of this review.
+- The logo. See decision 1.
+- The copy of the old site on the review site. It is there for comparison only and is not part of this review.
 
 ## 3. Decisions we need from you
 
-1. **Logo lockup.** The current logo has a third line: "an integrity corps company". It contradicts the message that Integrity Infrastructure is independent. As you directed, we kept the current logo unchanged. We recommend a lockup without that line. The line also shows, small, on the shirt of the crew member beside the conduit reel. That photo is used on Home, Services and Subcontractors. We suggest replacing it when new crew photos arrive.
+1. **Logo.** The site now uses a light-on-dark vector version of the logo without the third line, "an integrity corps company", so the logo supports the message that Integrity Infrastructure is independent. Please approve this version. The line still shows, small, on the shirt of the crew member beside the conduit reel. That photo is used on Home, Services and Subcontractors. We suggest replacing it when new crew photos arrive.
 2. **Tagline wording.** "Build by building people" is the headline on Careers and the mission title on About. It is working copy until Bradley confirms it with Jeff. We recommend keeping it on those two pages only, not on Home or in the footer.
 3. **Where our work stops at the home.** Services says we build to the home, never inside it, and shows in-home installation as not our scope. We need the exact point, for example an exterior terminal. We recommend one specific point, stated in plain words, so crews, partners and providers read the boundary the same way. The same answer appears in the FAQs on Home, Services and Contact.
 4. **Hiring steps on Careers.** The page shows five steps: apply on Paylocity, phone screen, meet the crew lead, offer, safety orientation. We drafted them and marked them for your confirmation. We recommend replacing them with your real steps. If a step is not fixed, show fewer steps rather than promise one.
-5. **The old site during review.** A copy of the old site is on the review site for side-by-side comparison. We recommend keeping it there during review only. We remove it, with the other review-only pages, before launch. Those pages still show the Integrity Corps line and a photo with sister-company trucks.
+5. **The old site during review.** A copy of the old site is on the review site for side-by-side comparison. We recommend keeping it there during review only; it is removed before launch. The earlier design concepts and brand boards are no longer shown on the review site.
 6. **Safety numbers on the site.** Safety and Home are set to show EMR, TRIR and DART with their reporting year. Today the Safety page says the figures are shared in the safety packet until they are verified. You asked for safety evidence to be prominent, so we recommend publishing them once verified, with the year. Tell us if you prefer the packet only.
 
 ## 4. What we need from you, in priority order
@@ -76,8 +76,8 @@ Marks by page: Home 10, About 17, Services 9, Safety 13, Careers 8, Subcontracto
 |---|---|---|---|
 | Photos: aerial bucket truck, drill rig, finished restoration, training | Replaces the photo boxes and repeated images | Services (3 boxes: drill rig, bucket truck, restoration). Training: no box yet | Client |
 | Leadership portraits (4:5, natural light, on site or in the yard) | Puts faces on the team | About (4 boxes) | Client |
-| Compact logo mark for the browser tab, and vector logo files | Small placements need a simple mark | All 7 pages | Client |
-| Approval of the light-on-dark logo version | The version on dark backgrounds is provisional | All 7 pages (footer) | Client |
+| Compact logo mark, and a vector full-color logo | The browser tab uses a crop of the logo until a compact mark exists | All 7 pages | Client |
+| Approval of the light-on-dark vector logo | It drops the "an integrity corps company" line | All 7 pages (header and footer) | Client |
 | Master orange value (#E87722 or #F27C25) | One brand color, used everywhere | All 7 pages | Client |
 | Social profiles: confirm the LinkedIn and Instagram links | Visitors will click these | Footer on all 7 pages | Client |
 | Where each form topic routes (which inbox) | Requests reach the right person | Contact (5 topics: quote, safety documents, subcontracting, careers, general), Subcontractors (1 form) | Client |

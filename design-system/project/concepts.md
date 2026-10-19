@@ -1,10 +1,10 @@
 # Concepts
 
-Four directions share one brand core and one component set. A concept is a color theme in `tokens.json`, one block of expression tokens in `components/bundle.css`, and a choice of section variants per page. **Work Light** and **As-Built** are the primary pair for the client presentation; **Crew** (people-first) and **Lit Fiber** (motion-led) are the backups.
+Four directions share one brand core and one component set. A concept is a color theme in `tokens.json`, one block of expression tokens in `components/bundle.css`, and a choice of section variants per page. The client chose **Lit Fiber** (motion-led), and the website is built in it. **Work Light**, **As-Built** and **Crew** are archived explorations: their themes, concept pages and boards stay in the repository for reference, and none of them ships.
 
 | | Work Light | As-Built | Crew | Lit Fiber |
 |---|---|---|---|---|
-| Role | Primary | Primary | Backup | Backup, motion-led |
+| Status | Archived exploration | Archived exploration | Archived exploration | Chosen; the website |
 | Read | Dark, cinematic, documentary | Light, engineered, precise | Light, people-first, editorial | Dark glass, the signal inside the fiber; reads like an application |
 | Serves best | Crews, bid partners; closest evolution of today's dark site | PE buyers, procurement, bid packets | Recruiting and culture; About and Careers | A modern, product-like first impression for carriers and PE buyers |
 | Dials (variance / motion / density) | 7 / 5 / 4 | 5 / 3 / 5 | 6 / 4 / 3 | 8 / 9 / 3 |
@@ -19,22 +19,24 @@ Four directions share one brand core and one component set. A concept is a color
 | Motion | 560ms, expo-out; values ticker (pausable) | 280ms, standard; almost still | 440ms, soft-out | 700ms on `cubic-bezier(0.32, 0.72, 0, 1)`: WebGL strand scene, word masks, magnetic pills, tile-to-sheet view transition, card stack, pinned values rail, blur reveals |
 | Header | Bar, overlay on the hero | Bar | Bar | Island: a floating glass pill; the menu is a full-screen veil |
 | Focus ring | `flame-yellow` | `ink` | `ink` | `flame-yellow` |
-| Logo | Reversed (provisional) | Full color | Full color | Reversed (provisional) |
+| Logo | Reversed PNG | Full-color PNG | Full-color PNG | Vector reversed lockup (`integrity-infrastructure-logo.svg`), without the old third line |
 
 ## Section choices on Home
 
+The first three columns describe the archived concept pages as they were presented. Their copy predates the client's direction (the As-Built fleet photo and the Crew tagline hero are no longer used); the Lit Fiber column matches the website.
+
 | Section | Work Light | As-Built | Crew | Lit Fiber |
 |---|---|---|---|---|
-| Hero | `ii-hero--cinematic`, full-bleed night van photo, overlay header | `ii-hero--split`, fleet photo over a SpecPlate title block | `ii-hero--editorial`, "Build by building people." over two photos | `ii-hero--scene`, "Built to carry the signal." over the FiberScene, island header |
+| Hero | `ii-hero--cinematic`, full-bleed night van photo, overlay header | `ii-hero--split`, fleet photo over a SpecPlate title block | `ii-hero--editorial`, headline over two photos (the concept page used the tagline, now reserved for Careers and About) | `ii-hero--scene`, "Built to carry the signal." over the FiberScene, island header |
 | Services | `ii-services--index`, a typographic list | `ii-services--plates`, 2 + 3 spec plates with scope lists | `ii-services--cards`, 2 photo cards + 3 tinted tiles | `ii-services--bento`, one photo tile + four glass tiles; each opens its ServiceSheet |
 | Proof | FeatureSplit with fleet photo + four reasons | Reasons grid on a sunken band | FeatureSplit "A company where people thrive" | CardStack: the four reasons as sticky cards that pile up |
 | Safety | FeatureSplit with checks and a link | SafetyRecord plate (pending metrics) | (Careers-first; safety lives on its page) | SafetyRecord as glass cells beside the checks |
 | Values | `ii-values--marquee` with the mantra as the section title | `ii-values--grid` six-cell plate | `ii-values--field`, the one orange field | `ii-values--rail`, six glass cells on a pinned horizontal rail |
-| Then | AudiencePaths, Testimonial, FAQ, CTABand, SiteFooter | same | same | same, in glass shells |
+| Then | AudiencePaths, Testimonial, FAQ, CTABand, SiteFooter | same | same | Footprint (CoverageMap), AudiencePaths, testimonial set, FAQ, CTABand, SiteFooter, in glass shells |
 
 ## Motion stack (Lit Fiber)
 
-- **Libraries**: GSAP 3 core and ScrollTrigger (free for commercial use since 3.13), loaded before the bundle; three.js as an ES module on the Home page only. All three ship pinned and self-hosted in the build (`dist/vendor/`); the design system loads GSAP as runtime libraries and three.js from cdnjs.
+- **Libraries**: GSAP 3 core and ScrollTrigger (free for commercial use since 3.13), loaded before the bundle; three.js as an ES module on the Home page only. On the website, inner pages load neither GSAP nor three.js; they use CSS reveals, glass shells, the pointer glow and cross-document view transitions. All three ship pinned and self-hosted in the build (`dist/vendor/`); the design system loads GSAP as runtime libraries and three.js from cdnjs.
 - **Hooks** are attributes read by `components/bundle.js`: `data-ii-scene` (IntegrityDS.scene), `data-ii-words`, `data-ii-magnetic`, `data-ii-stack`, `data-ii-rail` (IntegrityDS.motion), `data-ii-glow` (IntegrityDS.glow) and `data-ii-sheet-host` (IntegrityDS.sheet, native `<dialog>` plus `document.startViewTransition`, no library).
 - **Fallbacks**: without JavaScript, GSAP, WebGL or view transitions every section is complete: the hero shows its CSS glow, the stack still stacks (sticky), the rail scrolls natively with scroll-snap, the sheet opens without the morph or the tile links to the Services page.
 - **Reduced motion** turns off the scene loop (one still frame), the choreography, the reveals and the morph.

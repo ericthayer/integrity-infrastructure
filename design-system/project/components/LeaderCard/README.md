@@ -8,8 +8,8 @@ Leadership portraits with name and title for the About page, in a responsive gri
 ## Consumer provides
 Names, titles, portraits and short bios, approved by each person.
 
-## Oxygen
-A Team post type or repeater.
+## WordPress
+A Team post type or a repeater field.
 
 ## Avoid
 Placeholder names, stock portraits, and avatar icons.

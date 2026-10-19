@@ -9,7 +9,7 @@ The phone number as a primary action: a small label over the number, set in tabu
 ## Consumer provides
 The label, the formatted number and the `tel:` href.
 
-## Oxygen
+## WordPress
 Link element with the classes; bind the number to a site option so it changes in one place.
 
 ## Avoid
