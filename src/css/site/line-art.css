@@ -1,0 +1,83 @@
+/* LineArt (ii-line-art): decorative trade linework behind a card's content, drawn on as the
+   card scrolls into view. Markup and motifs: src/partials/site/line-art.html. Behavior:
+   src/behaviors/line-art.ts (data-ii-line-art). The art ships drawn; only the behavior arms
+   it (data-ii-draw="armed"), so it is complete without JavaScript and under reduced motion.
+
+   Every stroke is a <path pathLength="1">, so a dash of 1 is the whole path and the draw is
+   a stroke-dashoffset transition from just past 1 to 0. That is a paint-only property (no
+   layout); it is the one exception to the transform-and-opacity motion rule, because a
+   draw-on is the effect. The gap of 2 keeps the next dash off the path while armed.
+   Stroke widths are in viewBox units, set per size so the line renders near 1px. */
+.ii-line-art {
+  --ii-draw-duration: 1800ms;
+  --ii-draw-step: 140ms;
+  position: absolute;
+  z-index: -1;
+  overflow: visible;
+  fill: none;
+  stroke: color-mix(in srgb, var(--accent) 30%, transparent);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+.ii-line-art[data-ii-draw] > path {
+  stroke-dasharray: 1 2;
+  transition: stroke-dashoffset var(--ii-draw-duration) var(--motion-ease)
+    calc(var(--ii-draw-delay, 0ms) + var(--ii-draw-order, 0) * var(--ii-draw-step));
+}
+.ii-line-art[data-ii-draw="armed"] > path {
+  stroke-dashoffset: 1.01;
+}
+.ii-line-art[data-ii-draw="drawn"] > path {
+  stroke-dashoffset: 0;
+}
+.ii-line-art > path:nth-child(2) { --ii-draw-order: 1; }
+.ii-line-art > path:nth-child(3) { --ii-draw-order: 2; }
+.ii-line-art > path:nth-child(4) { --ii-draw-order: 3; }
+.ii-line-art > path:nth-child(5) { --ii-draw-order: 4; }
+.ii-line-art > path:nth-child(6) { --ii-draw-order: 5; }
+.ii-line-art > path:nth-child(7) { --ii-draw-order: 6; }
+.ii-line-art > path:nth-child(n + 8) { --ii-draw-order: 7; }
+
+/* Reasons stack card: on phones, right under the icon ring (its size repeats the
+   .ii-reasons--stack icon clamp), in the open band above the copy; beside the copy,
+   bottom right, from 768px. */
+.ii-line-art--reason {
+  top: calc(var(--shell-inset, 0px) + var(--space-8) + clamp(4.5rem, 1rem + 7dvw, 7rem) + var(--space-4));
+  right: calc(var(--shell-inset, 0px) + var(--space-6));
+  width: min(62%, 420px);
+  aspect-ratio: 560 / 240;
+  stroke-width: 2.75;
+}
+@media (min-width: 768px) {
+  .ii-line-art--reason {
+    top: auto;
+    right: calc(var(--shell-inset, 0px) + var(--space-8));
+    bottom: calc(var(--shell-inset, 0px) + var(--space-8));
+    width: min(48%, 560px);
+    stroke-width: 2;
+  }
+}
+@media (min-width: 1024px) {
+  .ii-line-art--reason {
+    right: calc(var(--shell-inset, 0px) + var(--space-12));
+    bottom: calc(var(--shell-inset, 0px) + var(--space-12));
+    stroke-width: 1.4;
+  }
+}
+
+/* Values rail cell: fills the open middle of the square, between the index and the word. */
+.ii-line-art--rail {
+  top: 18%;
+  right: calc(var(--shell-inset, 0px) + var(--space-6));
+  width: 72%;
+  aspect-ratio: 320 / 200;
+  stroke-width: 1.5;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ii-line-art[data-ii-draw] > path {
+    stroke-dashoffset: 0;
+    transition: none;
+  }
+}

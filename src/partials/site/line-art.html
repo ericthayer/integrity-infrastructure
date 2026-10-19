@@ -1,0 +1,25 @@
+<!-- LineArt (ii-line-art): faint trade linework behind a glass card's content, drawn on the
+     first time the card scrolls into view. Styles: src/css/site/line-art.css. Behavior:
+     src/behaviors/line-art.ts, wired in src/website.ts (data-ii-line-art). Home only for now:
+     the reasons CardStack (--reason) and the Ways of BEING rail (--rail).
+
+     Contract:
+       - The last child of an .ii-shell card (.ii-reason, .ii-rail__item), so it sits behind
+         the copy: svg.ii-line-art.ii-line-art--<card>[data-ii-line-art][aria-hidden="true"]
+         [focusable="false"]. Decorative only; it never carries meaning.
+       - Strokes only, and only <path pathLength="1">: the draw-on is a dash offset over a
+         path length of 1. No fill, no stroke or color attributes; line-art.css sets them.
+       - Paths draw in source order, 140ms apart, up to eight steps; write them in the order
+         the drawing should build (ground first, then structure, then detail).
+       - viewBox 0 0 560 240 for --reason, 0 0 320 200 for --rail.
+       - One motif per card, drawn from the trade: as-built sheets, bore profiles, aerial
+         plant, splice trays, fan-outs, work zones. No people, logos, numbers or text.
+     Ships drawn: without JavaScript and under reduced motion it is a static drawing.
+
+     Example (reasons card, "Quality execution": a directional bore under a road): -->
+<li class="ii-reason ii-shell">
+  <svg class="ii-icon" data-ii-icon="ruler-measure" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"></svg>
+  <h3 class="ii-h5">Quality execution</h3>
+  <p class="ii-muted">Built to spec the first time, and every site restored when the work is done.</p>
+  <svg class="ii-line-art ii-line-art--reason" data-ii-line-art viewBox="0 0 560 240" aria-hidden="true" focusable="false"><path pathLength="1" d="M0 88 H192 M368 88 H560" /> <path pathLength="1" d="M192 88 V78 H368 V88 Z" /> <path pathLength="1" d="M212 78 l-10 10 M240 78 l-10 10 M268 78 l-10 10 M296 78 l-10 10 M324 78 l-10 10 M352 78 l-10 10" /> <path pathLength="1" d="M40 88 v28 h44 v-28 M476 88 v28 h44 v-28" /> <path pathLength="1" d="M62 104 C132 214 428 214 498 104" /> <path pathLength="1" d="M72 100 C142 198 418 198 488 100" /> <path pathLength="1" d="M280 96 V180 M272 96 h16 M272 180 h16" /></svg>
+</li>
