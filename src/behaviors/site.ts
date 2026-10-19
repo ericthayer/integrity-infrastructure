@@ -343,7 +343,7 @@ export function renderJobs(el: HTMLElement, data: unknown): void {
     ].join('');
     return '<li class="ii-job"><div class="ii-stack" style="--stack-gap: var(--space-2)">'
       + '<h3 class="ii-job__title"><a href="' + escapeHtml(safeUrl(j.ApplyUrl || j.DisplayUrl)) + '" target="_blank" rel="noopener">'
-      + escapeHtml(j.Title) + '<span class="ii-visually-hidden">, opens the application on Paylocity</span></a></h3>'
+      + escapeHtml(j.Title) + '<span class="ii-visually-hidden">, opens the application on Paylocity in a new tab</span></a></h3>'
       + '<p class="ii-job__meta">' + meta + '</p></div>'
       + '<span class="ii-job__apply" aria-hidden="true">View and apply' + icon('arrow-up-right') + '</span></li>';
   }).join('');
@@ -480,9 +480,14 @@ export function sheet(root: ParentNode = doc): void {
         media.innerHTML = '';
         media.classList.toggle('is-icon', !img);
         if (img) {
-          // cloneNode's DOM signature returns Node; the source is a checked <img>.
-          const copy = img.cloneNode();
-          if (copy instanceof HTMLImageElement) { copy.removeAttribute('loading'); media.appendChild(copy); }
+          // Copy the whole <picture> when there is one, so the sheet loads the same
+          // responsive AVIF/WebP source as the tile instead of the JPEG fallback.
+          const source = img.parentElement instanceof HTMLPictureElement ? img.parentElement : img;
+          const copy = source.cloneNode(true);
+          if (copy instanceof HTMLElement) {
+            (copy instanceof HTMLImageElement ? copy : copy.querySelector('img'))?.removeAttribute('loading');
+            media.appendChild(copy);
+          }
         } else if (glyph) media.appendChild(glyph.cloneNode(true));
       }
       const action = dialog.querySelector<HTMLAnchorElement>('[data-ii-sheet-link]');
@@ -666,7 +671,9 @@ export function mountScene(el: HTMLElement, module: unknown, opts: FiberSceneOpt
   resizeObserver?.observe(el);
   resize();
 
-  let running = false, wanted = true, last = 0;
+  // A user pause (WCAG 2.2.2) is data-ii-scene-paused on the host; it outranks the
+  // visibility and intersection restarts below.
+  let running = false, wanted = true, paused = el.hasAttribute('data-ii-scene-paused'), last = 0;
   let frameId: number | null = null;
   const frame = (now: number): void => {
     if (!running || disposed) return;
@@ -679,9 +686,14 @@ export function mountScene(el: HTMLElement, module: unknown, opts: FiberSceneOpt
     renderer.render(scene, camera);
     frameId = requestAnimationFrame(frame);
   };
-  const start = (): void => { if (running || still || disposed || !wanted || doc.hidden) return; running = true; last = performance.now(); frameId = requestAnimationFrame(frame); };
+  const start = (): void => { if (running || still || disposed || !wanted || paused || doc.hidden) return; running = true; last = performance.now(); frameId = requestAnimationFrame(frame); };
   const stop = (): void => { running = false; if (frameId !== null) cancelAnimationFrame(frameId); frameId = null; };
   const onVisibility = (): void => { doc.hidden ? stop() : start(); };
+  const pauseObserver = 'MutationObserver' in window ? new MutationObserver(() => {
+    paused = el.hasAttribute('data-ii-scene-paused');
+    paused ? stop() : start();
+  }) : null;
+  pauseObserver?.observe(el, { attributes: true, attributeFilter: ['data-ii-scene-paused'] });
   let intersectionObserver: IntersectionObserver | null = null;
   if (still) { placePulses(0); pose(); renderer.render(scene, camera); }
   else {
@@ -704,6 +716,7 @@ export function mountScene(el: HTMLElement, module: unknown, opts: FiberSceneOpt
       disposed = true;
       stop();
       resizeObserver?.disconnect();
+      pauseObserver?.disconnect();
       intersectionObserver?.disconnect();
       doc.removeEventListener('visibilitychange', onVisibility);
       window.removeEventListener('pointermove', onMove);

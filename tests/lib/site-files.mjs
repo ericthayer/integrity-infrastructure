@@ -7,7 +7,11 @@ import { transform } from 'lightningcss';
 
 export const ROOT = fileURLToPath(new URL('../../', import.meta.url));
 export const DIST = join(ROOT, 'dist');
-export const PAGES = ['index.html', 'concepts/index.html', 'concepts/work-light/index.html',
+export const SITE_PAGES = ['index.html', 'about/index.html', 'services/index.html', 'safety/index.html',
+  'careers/index.html', 'subcontractors/index.html', 'contact/index.html'];
+// 404.html shares the website shell but has no current page, so it is in PAGES (production
+// checks) and not in SITE_PAGES (tests/website.test.mjs); tests/not-found.test.mjs covers it.
+export const PAGES = [...SITE_PAGES, '404.html', 'concepts/index.html', 'concepts/work-light/index.html',
   'concepts/as-built/index.html', 'concepts/crew/index.html', 'concepts/lit-fiber/index.html', 'brandkit/index.html'];
 export const sha256 = content => createHash('sha256').update(content).digest('hex');
 

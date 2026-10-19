@@ -12,7 +12,7 @@ The Lit Fiber hero background: glass strands carrying orange and flame-yellow li
 ## Consumer provides
 Nothing but the module import. `mount(el, THREE, { strands, pulses })` for a custom count; the handle has `start()`, `stop()` and `dispose()`.
 
-## Oxygen
+## WordPress
 Enqueue the three.js module (script module) on the Home template only, after the bundle, with a code block that calls `mountAll`. The canvas is decorative; the headline stays the LCP element.
 
 ## Avoid

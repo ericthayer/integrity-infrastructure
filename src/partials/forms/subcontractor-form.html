@@ -9,39 +9,42 @@
   <div class="ii-form__row ii-form__row--2">
     <div class="ii-field">
       <label class="ii-field__label" for="{{p|s}}-company">Company name</label>
-      <input class="ii-input" id="{{p|s}}-company" name="company" autocomplete="organization" required>
+      <input class="ii-input" id="{{p|s}}-company" name="company" autocomplete="organization" data-ii-error="Enter your company name" required>
     </div>
     <div class="ii-field">
       <label class="ii-field__label" for="{{p|s}}-contact">Contact name</label>
-      <input class="ii-input" id="{{p|s}}-contact" name="contact" autocomplete="name" required>
+      <input class="ii-input" id="{{p|s}}-contact" name="contact" autocomplete="name" data-ii-error="Enter a contact name" required>
     </div>
   </div>
   <div class="ii-form__row ii-form__row--2">
     <div class="ii-field">
       <label class="ii-field__label" for="{{p|s}}-email">Email</label>
-      <input class="ii-input" id="{{p|s}}-email" name="email" type="email" autocomplete="email" required>
+      <input class="ii-input" id="{{p|s}}-email" name="email" type="email" autocomplete="email" data-ii-error="Enter an email address like name@company.com" required>
     </div>
     <div class="ii-field">
       <label class="ii-field__label" for="{{p|s}}-phone">Phone</label>
-      <input class="ii-input" id="{{p|s}}-phone" name="phone" type="tel" autocomplete="tel" pattern="[\d\s\(\)\+\.\-]{10,}" required>
+      <input class="ii-input" id="{{p|s}}-phone" name="phone" type="tel" autocomplete="tel" pattern="[\d\s\(\)\+\.\-]{10,}" data-ii-error="Enter a phone number like (503) 502-5339" required>
     </div>
   </div>
   <fieldset class="ii-fieldset" data-ii-required data-ii-error="Choose at least one trade">
     <legend class="ii-fieldset__legend">Trades you perform</legend>
     <div class="ii-choices ii-choices--2">
-      <label class="ii-choice"><input type="checkbox" id="{{p|s}}-trade-1" name="trades" value="Fiber splicing">Fiber splicing</label>
-      <label class="ii-choice"><input type="checkbox" id="{{p|s}}-trade-2" name="trades" value="Directional boring">Directional boring</label>
-      <label class="ii-choice"><input type="checkbox" id="{{p|s}}-trade-3" name="trades" value="Aerial construction">Aerial construction</label>
-      <label class="ii-choice"><input type="checkbox" id="{{p|s}}-trade-4" name="trades" value="ISP and premises installation">ISP and premises installation</label>
-      <label class="ii-choice"><input type="checkbox" id="{{p|s}}-trade-5" name="trades" value="Concrete and asphalt restoration">Concrete and asphalt restoration</label>
-      <label class="ii-choice"><input type="checkbox" id="{{p|s}}-trade-6" name="trades" value="Other">Other</label>
+      <label class="ii-choice"><input type="checkbox" id="{{p|s}}-trade-1" name="trades" value="Boring">Boring</label>
+      <label class="ii-choice"><input type="checkbox" id="{{p|s}}-trade-2" name="trades" value="Aerial construction">Aerial construction</label>
+      <label class="ii-choice"><input type="checkbox" id="{{p|s}}-trade-3" name="trades" value="Fiber splicing">Fiber splicing</label>
+      <label class="ii-choice"><input type="checkbox" id="{{p|s}}-trade-4" name="trades" value="Concrete and asphalt restoration">Concrete and asphalt restoration</label>
+      <label class="ii-choice"><input type="checkbox" id="{{p|s}}-trade-5" name="trades" value="Traffic control">Traffic control</label>
+      <label class="ii-choice"><input type="checkbox" id="{{p|s}}-trade-6" name="trades" value="Locating">Locating</label>
+      <label class="ii-choice"><input type="checkbox" id="{{p|s}}-trade-7" name="trades" value="Hydro excavation">Hydro excavation</label>
+      <label class="ii-choice"><input type="checkbox" id="{{p|s}}-trade-8" name="trades" value="Other">Other</label>
     </div>
   </fieldset>
   <div class="ii-form__row ii-form__row--2">
     <div class="ii-field">
       <label class="ii-field__label" for="{{p|s}}-crew">Crew size</label>
+      <p class="ii-field__hint" id="{{p|s}}-crew-hint">People you can put in the field</p>
       <div class="ii-select-wrap">
-        <select class="ii-select" id="{{p|s}}-crew" name="crew_size" required>
+        <select class="ii-select" id="{{p|s}}-crew" name="crew_size" aria-describedby="{{p|s}}-crew-hint" data-ii-error="Choose a crew size range" required>
           <option value="">Choose a range</option>
           <option>1 to 5 people</option>
           <option>6 to 15 people</option>
@@ -54,33 +57,34 @@
     <div class="ii-field">
       <label class="ii-field__label" for="{{p|s}}-area">Service area</label>
       <p class="ii-field__hint" id="{{p|s}}-area-hint">States and metro areas you cover</p>
-      <input class="ii-input" id="{{p|s}}-area" name="service_area" aria-describedby="{{p|s}}-area-hint" required>
+      <input class="ii-input" id="{{p|s}}-area" name="service_area" aria-describedby="{{p|s}}-area-hint" data-ii-error="Enter the states or metro areas you cover" required>
     </div>
   </div>
   <div class="ii-form__row ii-form__row--2">
     <div class="ii-field">
       <label class="ii-field__label" for="{{p|s}}-coi">Certificate of insurance <span class="ii-field__opt">(optional)</span></label>
-      <p class="ii-field__hint" id="{{p|s}}-coi-hint" data-ii-file-names="PDF or image, 10 MB max">PDF or image, 10 MB max</p>
+      <p class="ii-field__hint" id="{{p|s}}-coi-hint" data-ii-file-names="PDF or image, up to 8 MB">PDF or image, up to 8 MB</p>
       <input class="ii-file" id="{{p|s}}-coi" name="coi" type="file" accept=".pdf,image/*" aria-describedby="{{p|s}}-coi-hint">
     </div>
     <div class="ii-field">
       <label class="ii-field__label" for="{{p|s}}-emr">EMR <span class="ii-field__opt">(optional)</span></label>
-      <p class="ii-field__hint" id="{{p|s}}-emr-hint">Your current experience modification rate</p>
+      <p class="ii-field__hint" id="{{p|s}}-emr-hint">Current experience modification rate</p>
       <input class="ii-input" id="{{p|s}}-emr" name="emr" inputmode="decimal" aria-describedby="{{p|s}}-emr-hint">
     </div>
   </div>
   <div class="ii-field">
     <label class="ii-field__label" for="{{p|s}}-message">Anything else <span class="ii-field__opt">(optional)</span></label>
-    <textarea class="ii-textarea" id="{{p|s}}-message" name="message"></textarea>
+    <p class="ii-field__hint" id="{{p|s}}-message-hint">Equipment, certifications or recent projects</p>
+    <textarea class="ii-textarea" id="{{p|s}}-message" name="message" aria-describedby="{{p|s}}-message-hint"></textarea>
   </div>
   <div class="ii-form__foot">
-    <button class="ii-btn ii-btn--primary ii-btn--lg" type="submit">Start an inquiry<svg class="ii-icon ii-icon--trail" data-ii-icon="arrow-right"></svg></button>
+    <button class="ii-btn ii-btn--primary ii-btn--lg" type="submit"><svg class="ii-icon ii-icon--spin" data-ii-icon="loader-2"></svg>Start an inquiry<svg class="ii-icon ii-icon--trail" data-ii-icon="arrow-right"></svg></button>
   </div>
 </form>
 <div class="ii-notice ii-notice--success" data-ii-success tabindex="-1" hidden>
   <svg class="ii-icon" data-ii-icon="circle-check"></svg>
   <div class="ii-notice__body">
     <p class="ii-notice__title">Thanks, we have your details</p>
-    <p>Our operations team reviews every inquiry and will reach out when there is a fit.</p>
+    <p>We will review your inquiry and follow up when there is a fit.</p>
   </div>
 </div>

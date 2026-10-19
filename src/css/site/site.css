@@ -1,0 +1,204 @@
+/* Website layer. Rules the seven website pages share on top of the component library;
+   loaded only by src/website.ts, so concept pages and boards never see them. Semantic
+   and Lit Fiber expression tokens only. */
+
+/* ------------------------------------------------------------ page transitions
+   Cross-document view transitions: the island header keeps its place while pages
+   swap. Browsers without support navigate normally; reduced motion opts out. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+}
+
+/* Anchored sections clear the fixed island header, so focus and targets are never
+   hidden under it (WCAG 2.4.11). */
+html {
+  scroll-padding-top: calc(56px + var(--space-4) * 3);
+}
+
+/* ------------------------------------------------------------ responsive photos
+   <picture> inside .ii-media lays out and grades exactly like the bare <img>. */
+.ii-media > picture {
+  display: contents;
+}
+.ii-media > picture > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--focus, 50% 50%);
+  filter: var(--media-filter);
+  transition:
+    filter var(--motion-duration) var(--motion-ease),
+    transform var(--motion-duration) var(--motion-ease);
+}
+.ii-sheet__media > picture {
+  display: contents;
+}
+a:hover > .ii-media > picture > img,
+.ii-media--interactive:hover > picture > img {
+  filter: var(--media-filter-hover);
+  transform: scale(1.02);
+}
+
+/* ------------------------------------------------------------ footer additions */
+.ii-footer .ii-social {
+  margin-top: var(--space-5);
+}
+
+/* ------------------------------------------------------------ section rhythm helpers */
+/* Two-column intro + content (FAQ-style) for inner pages. */
+.ii-two-col {
+  display: grid;
+  gap: var(--space-10);
+}
+/* The grid gap spaces the head from the content, so the head drops its own margin. */
+.ii-two-col > .ii-section-head {
+  margin-bottom: 0;
+}
+@media (min-width: 1024px) {
+  .ii-two-col {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: var(--space-16);
+    align-items: start;
+  }
+  .ii-two-col > .ii-section-head {
+    position: sticky;
+    top: calc(56px + var(--space-4) * 3);
+  }
+}
+
+/* Anchor chips: an in-page index of sections (Services). */
+.ii-anchors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ii-anchors a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: 0 var(--space-4);
+  font-size: var(--fs-body-sm);
+  font-weight: 500;
+  color: var(--text);
+  text-decoration: none;
+  border: 1px solid var(--glass-line-strong, var(--border-strong));
+  border-radius: var(--radius-pill);
+  background: var(--glass-fill, transparent);
+  transition:
+    border-color 200ms var(--motion-ease),
+    background-color 200ms var(--motion-ease);
+}
+.ii-anchors a:hover {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+.ii-anchors .ii-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  color: var(--accent-text);
+}
+
+/* ------------------------------------------------------------ office card */
+.ii-offices {
+  display: grid;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 768px) {
+  .ii-offices {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.ii-office {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: calc(var(--shell-inset, 0px) + var(--space-8));
+  background: var(--card-bg);
+  border: var(--card-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--card-shadow);
+}
+.ii-office__label {
+  font-family: var(--label-family);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--label-tracking);
+  text-transform: var(--label-transform);
+  color: var(--text-muted);
+}
+.ii-office address {
+  font-style: normal;
+  line-height: 1.6;
+}
+.ii-office .ii-arrow-link {
+  margin-top: auto;
+}
+
+/* ------------------------------------------------------------ scene pause control (Home hero)
+   The strand scene loops while in view, so it gets a pause (WCAG 2.2.2). The name stays
+   constant; aria-pressed carries the state and swaps the icon. Offered only while a
+   canvas is mounted and motion is allowed. */
+.ii-scene-toggle {
+  position: absolute;
+  right: var(--page-gutter);
+  bottom: var(--space-5);
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: 0 var(--space-4);
+  font: inherit;
+  font-size: var(--fs-body-sm);
+  color: var(--text-muted);
+  background: var(--glass-fill, transparent);
+  border: 1px solid var(--glass-line-strong, var(--border-strong));
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition:
+    color 200ms var(--motion-ease),
+    border-color 200ms var(--motion-ease);
+}
+.ii-scene-toggle:hover {
+  color: var(--text);
+  border-color: var(--accent);
+}
+.ii-scene-toggle .ii-icon {
+  width: 1rem;
+  height: 1rem;
+}
+.ii-scene-toggle[aria-pressed="false"] [data-ii-icon="player-play"],
+.ii-scene-toggle[aria-pressed="true"] [data-ii-icon="player-pause"] {
+  display: none;
+}
+.ii-hero--scene:not(:has(canvas)) .ii-scene-toggle {
+  display: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ii-scene-toggle {
+    display: none;
+  }
+}
+
+/* ------------------------------------------------------------ first-screen reveals
+   behaviors/reveal-seen.ts marks every [data-ii-reveal] element that is on screen at load.
+   Without this, an element partly in the first viewport sits mid-animation (translucent,
+   shifted) until the first scroll. Specificity: the base rules in components.css are
+   [data-ii-reveal]:not([data-ii-reveal="stagger"]) (0,2,0) and [data-ii-reveal="stagger"] > *
+   (0,1,0); @media and @supports add none. These are (0,3,0) and (0,2,0), so they win
+   whatever the CSS order. */
+[data-ii-reveal][data-ii-reveal-seen]:not([data-ii-reveal="stagger"]),
+[data-ii-reveal="stagger"][data-ii-reveal-seen] > * {
+  animation: none;
+  opacity: 1;
+  transform: none;
+  filter: none;
+}

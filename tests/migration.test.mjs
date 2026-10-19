@@ -7,7 +7,8 @@ import { compileTokens, loadIcons } from '../tools/lib/build-data.mjs';
 import { ROOT, DIST, filesUnder, fileMap } from './lib/site-files.mjs';
 
 function authoredFileMap() {
-  const directories = ['concepts', 'brandkit', 'reference', 'src', 'design-system/project', 'harness', 'tools'];
+  const directories = ['about', 'services', 'safety', 'careers', 'subcontractors', 'contact', 'public',
+    'concepts', 'brandkit', 'reference', 'src', 'design-system/project', 'harness', 'tools'];
   const files = [join(ROOT, 'index.html')];
   for (const directory of directories) {
     files.push(...filesUnder(join(ROOT, directory), file => {

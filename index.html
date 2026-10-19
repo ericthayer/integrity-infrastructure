@@ -1,14 +1,501 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="refresh" content="0; url=/concepts/">
-    <title>Integrity Infrastructure | Concepts</title>
-  </head>
-  <body>
-    <main>
-      <p><a href="/concepts/">Continue to Integrity Infrastructure concepts</a>.</p>
-    </main>
-  </body>
+<html lang="en" data-theme="lit-fiber">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Integrity Infrastructure | Fiber and utility construction</title>
+<meta name="description" content="Long-haul fiber construction and the networks that reach residential locations: boring, aerial, splicing and restoration from Oregon and Colorado.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#080807">
+<!-- Favicon cropped from the logo by tools/favicon.mjs until the client supplies a compact mark. -->
+<link rel="icon" href="/src/img/favicon/favicon.ico" sizes="32x32">
+<link rel="icon" href="/src/img/favicon/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/src/img/favicon/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Integrity Infrastructure">
+<meta property="og:title" content="Integrity Infrastructure | Fiber and utility construction">
+<meta property="og:description" content="Long-haul fiber construction and the networks that reach residential locations: boring, aerial, splicing and restoration from Oregon and Colorado.">
+<link rel="preload" href="/src/fonts/montserrat-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/src/fonts/michroma-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<script type="module" src="/src/website.ts"></script>
+</head>
+<body>
+<a class="ii-skip" href="#main">Skip to content</a>
+<header class="ii-header ii-header--island" data-ii-header data-ii-header-offset="40">
+  <div class="ii-container ii-header__bar">
+    <a class="ii-header__brand" href="/" aria-current="page">
+      <img class="ii-logo ii-logo--for-dark" src="/src/img/logo/integrity-infrastructure-logo.svg" alt="Integrity Infrastructure home" width="360" height="150">
+    </a>
+    <nav class="ii-nav" aria-label="Primary">
+      <ul class="ii-nav__list" role="list">
+        <li><a class="ii-nav__link" href="/services/">Services</a></li>
+        <li><a class="ii-nav__link" href="/safety/">Safety</a></li>
+        <li><a class="ii-nav__link" href="/about/">About</a></li>
+        <li><a class="ii-nav__link" href="/careers/">Careers</a></li>
+        <li><a class="ii-nav__link" href="/subcontractors/">Subcontractors</a></li>
+        <li><a class="ii-nav__link" href="/contact/">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="ii-header__actions">
+      <a class="ii-header__phone" href="tel:+15035025339" aria-label="Call (503) 502-5339"><svg class="ii-icon" data-ii-icon="phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" /></svg><span class="ii-header__phone-number">(503) 502-5339</span></a>
+      <a class="ii-btn ii-btn--primary ii-btn--sm ii-header__cta" href="/contact/#quote">Request a quote</a>
+      <button class="ii-header__toggle" type="button" aria-expanded="false" aria-controls="ii-drawer" data-ii-nav-toggle><svg class="ii-icon" data-ii-icon="menu-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6l16 0" /> <path d="M4 12l16 0" /> <path d="M4 18l16 0" /></svg><span class="ii-visually-hidden">Menu</span></button>
+    </div>
+  </div>
+</header>
+<div class="ii-drawer ii-drawer--veil" id="ii-drawer" role="dialog" aria-modal="true" aria-label="Menu" hidden data-ii-drawer>
+  <button class="ii-drawer__backdrop" type="button" tabindex="-1" aria-hidden="true" data-ii-drawer-close></button>
+  <div class="ii-drawer__panel">
+    <div class="ii-drawer__top">
+      <img class="ii-logo ii-logo--for-dark" src="/src/img/logo/integrity-infrastructure-logo.svg" alt="" width="360" height="150" loading="lazy" decoding="async">
+      <button class="ii-header__toggle" type="button" data-ii-drawer-close><svg class="ii-icon" data-ii-icon="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 6l-12 12" /> <path d="M6 6l12 12" /></svg><span class="ii-visually-hidden">Close menu</span></button>
+    </div>
+    <ul class="ii-drawer__list" role="list">
+      <li><a class="ii-drawer__link" href="/services/">Services<svg class="ii-icon" data-ii-icon="chevron-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 6l6 6l-6 6" /></svg></a></li>
+      <li><a class="ii-drawer__link" href="/safety/">Safety<svg class="ii-icon" data-ii-icon="chevron-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 6l6 6l-6 6" /></svg></a></li>
+      <li><a class="ii-drawer__link" href="/about/">About<svg class="ii-icon" data-ii-icon="chevron-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 6l6 6l-6 6" /></svg></a></li>
+      <li><a class="ii-drawer__link" href="/careers/">Careers<svg class="ii-icon" data-ii-icon="chevron-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 6l6 6l-6 6" /></svg></a></li>
+      <li><a class="ii-drawer__link" href="/subcontractors/">Subcontractors<svg class="ii-icon" data-ii-icon="chevron-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 6l6 6l-6 6" /></svg></a></li>
+      <li><a class="ii-drawer__link" href="/contact/">Contact<svg class="ii-icon" data-ii-icon="chevron-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 6l6 6l-6 6" /></svg></a></li>
+    </ul>
+    <div class="ii-drawer__foot">
+      <a class="ii-call" href="tel:+15035025339"><span class="ii-call__label">Call for a quote</span><span class="ii-call__number">(503) 502-5339</span></a>
+      <a class="ii-btn ii-btn--primary ii-btn--block" href="/contact/#quote">Request a quote</a>
+    </div>
+  </div>
+</div>
+
+<main id="main" tabindex="-1">
+
+  <section class="ii-hero ii-hero--scene" aria-labelledby="hero-title">
+    <div class="ii-hero__scene" id="hero-scene" data-ii-scene aria-hidden="true"></div>
+    <div class="ii-container ii-hero__inner">
+      <div class="ii-hero__content">
+        <span class="ii-eyebrow">Fiber and utility construction</span>
+        <h1 class="ii-display" id="hero-title" data-ii-words>Built to carry the signal.</h1>
+        <p class="ii-lead ii-home-lead">Long-haul fiber construction and the network that carries it to residential locations, from one accountable contractor.</p>
+        <div class="ii-hero__actions">
+          <a class="ii-btn ii-btn--primary ii-btn--lg ii-btn--orb" href="/contact/#quote" data-ii-magnetic>Request a quote<svg class="ii-icon ii-icon--trail" data-ii-icon="arrow-up-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M17 7l-10 10" /> <path d="M8 7l9 0l0 9" /></svg></a>
+          <a class="ii-btn ii-btn--secondary ii-btn--lg" href="#services" data-ii-magnetic>Our services</a>
+        </div>
+      </div>
+    </div>
+    <button class="ii-scene-toggle" type="button" aria-controls="hero-scene" aria-pressed="false" data-ii-scene-toggle><svg class="ii-icon" data-ii-icon="player-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 6a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1l0 -12" /> <path d="M14 6a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1l0 -12" /></svg><svg class="ii-icon" data-ii-icon="player-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 4v16l13 -8l-13 -8" /></svg>Pause motion</button>
+  </section>
+
+  <section class="ii-section" id="services" aria-labelledby="services-title">
+    <div class="ii-container">
+      <div class="ii-section-head" data-ii-reveal>
+        <span class="ii-eyebrow">Services</span>
+        <h2 class="ii-h2" id="services-title">The whole route, one team</h2>
+        <p class="ii-lead ii-muted">Five service lines, from the long-haul route to the final restoration. Open any line for its scope. We build to the home, never inside it.</p>
+      </div>
+      <div data-ii-glow data-ii-sheet-host="service-sheet">
+        <ol class="ii-services ii-services--bento" role="list" data-ii-reveal="stagger">
+          <li class="ii-service ii-shell">
+            <figure class="ii-service__media"><div class="ii-media ii-home-focus-conduit"><picture>
+              <source type="image/avif" srcset="/src/img/photos/conduit-reel-640.avif 640w, /src/img/photos/conduit-reel-1024.avif 1024w, /src/img/photos/conduit-reel-1600.avif 1600w" sizes="(min-width: 1440px) 760px, (min-width: 1024px) 56vw, 100vw">
+              <source type="image/webp" srcset="/src/img/photos/conduit-reel-640.webp 640w, /src/img/photos/conduit-reel-1024.webp 1024w, /src/img/photos/conduit-reel-1600.webp 1600w" sizes="(min-width: 1440px) 760px, (min-width: 1024px) 56vw, 100vw">
+              <img src="/src/img/photos/conduit-reel.jpg" alt="A crew member in a hard hat walks past a large reel of orange conduit staged beside a work truck" width="2000" height="1333" loading="lazy" decoding="async">
+            </picture></div></figure>
+            <svg class="ii-icon ii-service__icon" data-ii-icon="route" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /> <path d="M19 7a2 2 0 1 0 0 -4a2 2 0 0 0 0 4" /> <path d="M11 19h5.5a3.5 3.5 0 0 0 0 -7h-8a3.5 3.5 0 0 1 0 -7h4.5" /></svg>
+            <h3 class="ii-service__name"><a class="ii-service__link" href="/services/#long-haul">Long-haul fiber construction</a></h3>
+            <p class="ii-service__desc">Backbone and middle-mile fiber routes built underground and aerial, then carried to the residential locations they serve.</p>
+            <ul class="ii-service__scope" role="list">
+              <li><svg class="ii-icon" data-ii-icon="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12l5 5l10 -10" /></svg>Long-haul and middle-mile routes</li>
+              <li><svg class="ii-icon" data-ii-icon="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12l5 5l10 -10" /></svg>Distribution to residential locations</li>
+              <li><svg class="ii-icon" data-ii-icon="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12l5 5l10 -10" /></svg>To the home, never inside it</li>
+            </ul>
+            <svg class="ii-icon ii-service__arrow" data-ii-icon="arrow-up-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M17 7l-10 10" /> <path d="M8 7l9 0l0 9" /></svg>
+          </li>
+          <li class="ii-service ii-shell">
+            <figure class="ii-service__media"><div class="ii-media"><picture>
+              <source type="image/avif" srcset="/src/img/photos/splice-tray-640.avif 640w, /src/img/photos/splice-tray-1024.avif 1024w, /src/img/photos/splice-tray-1600.avif 1600w" sizes="(min-width: 1024px) 50vw, 100vw">
+              <source type="image/webp" srcset="/src/img/photos/splice-tray-640.webp 640w, /src/img/photos/splice-tray-1024.webp 1024w, /src/img/photos/splice-tray-1600.webp 1600w" sizes="(min-width: 1024px) 50vw, 100vw">
+              <img src="/src/img/photos/splice-tray.jpg" alt="A technician routes spliced fibers through a splice tray on a van workbench" width="2000" height="1333" loading="lazy" decoding="async">
+            </picture></div></figure>
+            <svg class="ii-icon ii-service__icon" data-ii-icon="plug-connected" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 12l5 5l-1.5 1.5a3.536 3.536 0 1 1 -5 -5l1.5 -1.5" /> <path d="M17 12l-5 -5l1.5 -1.5a3.536 3.536 0 1 1 5 5l-1.5 1.5" /> <path d="M3 21l2.5 -2.5" /> <path d="M18.5 5.5l2.5 -2.5" /> <path d="M10 11l-2 2" /> <path d="M13 14l-2 2" /></svg>
+            <h3 class="ii-service__name"><a class="ii-service__link" href="/services/#fiber-splicing">Fiber splicing</a></h3>
+            <p class="ii-service__desc">Single-mode and multi-mode splicing that minimizes signal loss and keeps networks reliable.</p>
+            <ul class="ii-service__scope" role="list">
+              <li><svg class="ii-icon" data-ii-icon="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12l5 5l10 -10" /></svg>Precision splicing for uninterrupted data transmission</li>
+              <li><svg class="ii-icon" data-ii-icon="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12l5 5l10 -10" /></svg>Experienced technicians using current splicing equipment</li>
+              <li><svg class="ii-icon" data-ii-icon="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12l5 5l10 -10" /></svg>Telecom, data center and commercial projects</li>
+            </ul>
+            <svg class="ii-icon ii-service__arrow" data-ii-icon="arrow-up-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M17 7l-10 10" /> <path d="M8 7l9 0l0 9" /></svg>
+          </li>
+          <li class="ii-service ii-shell">
+            <svg class="ii-icon ii-service__icon" data-ii-icon="backhoe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /> <path d="M11 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /> <path d="M13 19l-9 0" /> <path d="M4 15l9 0" /> <path d="M8 12v-5h2a3 3 0 0 1 3 3v5" /> <path d="M5 15v-2a1 1 0 0 1 1 -1h7" /> <path d="M21.12 9.88l-3.12 -4.88l-5 5" /> <path d="M21.12 9.88a3 3 0 0 1 -2.12 5.12a3 3 0 0 1 -2.12 -.88l4.24 -4.24" /></svg>
+            <h3 class="ii-service__name"><a class="ii-service__link" href="/services/#boring">Boring</a></h3>
+            <p class="ii-service__desc">Underground utility installation with boring methods that limit disruption and keep projects on schedule.</p>
+            <ul class="ii-service__scope" role="list">
+              <li><svg class="ii-icon" data-ii-icon="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12l5 5l10 -10" /></svg>Fiber optic, water, gas and power lines</li>
+              <li><svg class="ii-icon" data-ii-icon="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12l5 5l10 -10" /></svg>Non-invasive methods that protect the surrounding site</li>
+              <li><svg class="ii-icon" data-ii-icon="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12l5 5l10 -10" /></svg>Urban, suburban and remote projects</li>
+            </ul>
+            <svg class="ii-icon ii-service__arrow" data-ii-icon="arrow-up-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M17 7l-10 10" /> <path d="M8 7l9 0l0 9" /></svg>
+          </li>
+          <li class="ii-service ii-shell">
+            <svg class="ii-icon ii-service__icon" data-ii-icon="crane" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 21h6" /> <path d="M9 21v-18l-6 6h18" /> <path d="M9 3l10 6" /> <path d="M17 9v4a2 2 0 1 1 -2 2" /></svg>
+            <h3 class="ii-service__name"><a class="ii-service__link" href="/services/#aerial-installation">Aerial installations</a></h3>
+            <p class="ii-service__desc">Secure, compliant aerial installations that help telecom and utility companies expand coverage.</p>
+            <ul class="ii-service__scope" role="list">
+              <li><svg class="ii-icon" data-ii-icon="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12l5 5l10 -10" /></svg>Cost-effective for rural and urban areas</li>
+              <li><svg class="ii-icon" data-ii-icon="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12l5 5l10 -10" /></svg>Weather-resistant installations built for the long term</li>
+              <li><svg class="ii-icon" data-ii-icon="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12l5 5l10 -10" /></svg>Pole placement, cabling and maintenance</li>
+            </ul>
+            <svg class="ii-icon ii-service__arrow" data-ii-icon="arrow-up-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M17 7l-10 10" /> <path d="M8 7l9 0l0 9" /></svg>
+          </li>
+          <li class="ii-service ii-shell">
+            <svg class="ii-icon ii-service__icon" data-ii-icon="road" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 19l4 -14" /> <path d="M16 5l4 14" /> <path d="M12 8v-2" /> <path d="M12 13v-2" /> <path d="M12 18v-2" /></svg>
+            <h3 class="ii-service__name"><a class="ii-service__link" href="/services/#restoration">Concrete and asphalt restoration</a></h3>
+            <p class="ii-service__desc">When the underground work is done, we restore roads, driveways and sidewalks to their original condition.</p>
+            <ul class="ii-service__scope" role="list">
+              <li><svg class="ii-icon" data-ii-icon="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12l5 5l10 -10" /></svg>Roads, driveways and sidewalks</li>
+              <li><svg class="ii-icon" data-ii-icon="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12l5 5l10 -10" /></svg>Professional-grade materials and methods</li>
+              <li><svg class="ii-icon" data-ii-icon="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12l5 5l10 -10" /></svg>Compliant with local standards and regulations</li>
+            </ul>
+            <svg class="ii-icon ii-service__arrow" data-ii-icon="arrow-up-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M17 7l-10 10" /> <path d="M8 7l9 0l0 9" /></svg>
+          </li>
+        </ol>
+      </div>
+      <dialog class="ii-sheet" id="service-sheet" aria-labelledby="service-sheet-title">
+        <div class="ii-sheet__panel ii-shell">
+          <button class="ii-sheet__close" type="button" autofocus data-ii-sheet-close><svg class="ii-icon" data-ii-icon="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 6l-12 12" /> <path d="M6 6l12 12" /></svg><span class="ii-visually-hidden">Close</span></button>
+          <div class="ii-sheet__media" data-ii-sheet-media></div>
+          <div class="ii-sheet__body">
+            <span class="ii-sheet__index" data-ii-sheet-index></span>
+            <h2 class="ii-h2" id="service-sheet-title" data-ii-sheet-title>Service</h2>
+            <p class="ii-lead ii-muted" data-ii-sheet-desc></p>
+            <ul class="ii-checks" role="list" data-ii-sheet-scope></ul>
+            <div class="ii-hero__actions">
+              <a class="ii-btn ii-btn--primary ii-btn--orb" href="/contact/#quote">Request a quote<svg class="ii-icon ii-icon--trail" data-ii-icon="arrow-up-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M17 7l-10 10" /> <path d="M8 7l9 0l0 9" /></svg></a>
+              <a class="ii-arrow-link" href="/services/" data-ii-sheet-link>Our services<svg class="ii-icon" data-ii-icon="arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12l14 0" /> <path d="M13 18l6 -6" /> <path d="M13 6l6 6" /></svg></a>
+            </div>
+          </div>
+        </div>
+      </dialog>
+    </div>
+  </section>
+
+  <section class="ii-section" aria-labelledby="why-title">
+    <div class="ii-container">
+      <div class="ii-section-head" data-ii-reveal>
+        <h2 class="ii-h2" id="why-title">Why partners choose Integrity</h2>
+        <p class="ii-lead ii-muted">Four things a bid partner can count on, on every route.</p>
+      </div>
+      <ul class="ii-reasons ii-reasons--stack" role="list" data-ii-stack>
+        <li class="ii-reason ii-shell">
+          <svg class="ii-icon" data-ii-icon="receipt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16l-3 -2l-2 2l-2 -2l-2 2l-2 -2l-3 2m4 -14h6m-6 4h6m-2 4h2" /></svg>
+          <h3 class="ii-h5">Accurate billing</h3>
+          <p class="ii-muted">Invoices match the footage and units built in the field, so every line checks out against the work.</p>
+        </li>
+        <li class="ii-reason ii-shell">
+          <svg class="ii-icon" data-ii-icon="ruler-measure" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19.875 12c.621 0 1.125 .512 1.125 1.143v5.714c0 .631 -.504 1.143 -1.125 1.143h-15.875a1 1 0 0 1 -1 -1v-5.857c0 -.631 .504 -1.143 1.125 -1.143h15.75" /> <path d="M9 12v2" /> <path d="M6 12v3" /> <path d="M12 12v3" /> <path d="M18 12v3" /> <path d="M15 12v2" /> <path d="M3 3v4" /> <path d="M3 5h18" /> <path d="M21 3v4" /></svg>
+          <h3 class="ii-h5">Quality execution</h3>
+          <p class="ii-muted">Built to spec the first time, and every site restored when the work is done.</p>
+        </li>
+        <li class="ii-reason ii-shell">
+          <svg class="ii-icon" data-ii-icon="message-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 20l1.3 -3.9c-2.324 -3.437 -1.426 -7.872 2.1 -10.374c3.526 -2.501 8.59 -2.296 11.845 .48c3.255 2.777 3.695 7.266 1.029 10.501c-2.666 3.235 -7.615 4.215 -11.574 2.293l-4.7 1" /></svg>
+          <h3 class="ii-h5">Straight answers</h3>
+          <p class="ii-muted">Honest updates on schedule, scope and problems, as soon as we know them.</p>
+        </li>
+        <li class="ii-reason ii-shell">
+          <svg class="ii-icon" data-ii-icon="school" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M22 9l-10 -4l-10 4l10 4l10 -4v6" /> <path d="M6 10.6v5.4a6 3 0 0 0 12 0v-5.4" /></svg>
+          <h3 class="ii-h5">Crews that grow</h3>
+          <p class="ii-muted">Real investment in training and development, so experienced people stay and new people keep getting better.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="ii-section" aria-labelledby="safety-title">
+    <div class="ii-container ii-split">
+      <div class="ii-split__content" data-ii-reveal>
+        <h2 class="ii-h2" id="safety-title">Safety is our top priority</h2>
+        <p class="ii-lead ii-muted">Bid partners ask for the record first. Ours has its own page, with the documents behind it.</p>
+        <ul class="ii-checks" role="list">
+          <li><svg class="ii-icon" data-ii-icon="shield-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M11.46 20.846a12 12 0 0 1 -7.96 -14.846a12 12 0 0 0 8.5 -3a12 12 0 0 0 8.5 3a12 12 0 0 1 -.09 7.06" /> <path d="M15 19l2 2l4 -4" /></svg>Strict safety guidelines on every project</li>
+          <li><svg class="ii-icon" data-ii-icon="users-group" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /> <path d="M8 21v-1a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v1" /> <path d="M15 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /> <path d="M17 10h2a2 2 0 0 1 2 2v1" /> <path d="M5 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /> <path d="M3 13v-1a2 2 0 0 1 2 -2h2" /></svg>Crews protected, sites protected</li>
+          <li><svg class="ii-icon" data-ii-icon="clipboard-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" /> <path d="M9 5a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2" /> <path d="M9 14l2 2l4 -4" /></svg>Safety record and documents for bid partners</li>
+        </ul>
+        <a class="ii-arrow-link" href="/safety/">See our safety program<svg class="ii-icon" data-ii-icon="arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12l14 0" /> <path d="M13 18l6 -6" /> <path d="M13 6l6 6" /></svg></a>
+      </div>
+      <div class="ii-split__media ii-home-safety" data-ii-reveal>
+        <div class="ii-safety">
+          <dl class="ii-plate" data-ii-reveal>
+            <div class="ii-plate__cell"><dt class="ii-plate__label">EMR</dt><dd class="ii-plate__value"><span class="ii-pending">Client to provide</span></dd></div>
+            <div class="ii-plate__cell"><dt class="ii-plate__label">TRIR</dt><dd class="ii-plate__value"><span class="ii-pending">Client to provide</span></dd></div>
+            <div class="ii-plate__cell"><dt class="ii-plate__label">DART rate</dt><dd class="ii-plate__value"><span class="ii-pending">Client to provide</span></dd></div>
+            <div class="ii-plate__cell"><dt class="ii-plate__label">OSHA training</dt><dd class="ii-plate__value"><span class="ii-pending">Client to provide</span></dd></div>
+            <div class="ii-plate__cell"><dt class="ii-plate__label">Certifications</dt><dd class="ii-plate__value"><span class="ii-pending">Client to provide</span></dd></div>
+            <div class="ii-plate__cell"><dt class="ii-plate__label">Safety packet</dt><dd class="ii-plate__value"><a href="/contact/?topic=safety#quote">Request our safety packet</a></dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ii-section" id="footprint" aria-labelledby="footprint-title">
+    <div class="ii-container">
+      <div class="ii-home-head" data-ii-reveal>
+        <div class="ii-section-head">
+          <span class="ii-eyebrow">Footprint</span>
+          <h2 class="ii-h2" id="footprint-title">Where we work</h2>
+          <p class="ii-lead ii-muted">Offices in Oregon and Colorado, the states we are licensed in, and where we are expanding next.</p>
+        </div>
+        <a class="ii-arrow-link" href="/services/#coverage">Service areas and licensing<svg class="ii-icon" data-ii-icon="arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12l14 0" /> <path d="M13 18l6 -6" /> <path d="M13 6l6 6" /></svg></a>
+      </div>
+      <!-- CoverageMap: canonical markup and how to mark a state in src/partials/site/coverage.html.
+           Change a state's tile data-status and its list entry together. Real data only. -->
+      <figure class="ii-coverage" data-ii-reveal>
+        <ol class="ii-usmap" aria-hidden="true">
+          <li class="ii-usmap__tile" data-state="AK">AK</li>
+          <li class="ii-usmap__tile" data-state="ME">ME</li>
+          <li class="ii-usmap__tile" data-state="VT">VT</li>
+          <li class="ii-usmap__tile" data-state="NH">NH</li>
+          <li class="ii-usmap__tile" data-state="WA">WA</li>
+          <li class="ii-usmap__tile" data-state="ID">ID</li>
+          <li class="ii-usmap__tile" data-state="MT">MT</li>
+          <li class="ii-usmap__tile" data-state="ND">ND</li>
+          <li class="ii-usmap__tile" data-state="MN">MN</li>
+          <li class="ii-usmap__tile" data-state="IL">IL</li>
+          <li class="ii-usmap__tile" data-state="WI">WI</li>
+          <li class="ii-usmap__tile" data-state="MI">MI</li>
+          <li class="ii-usmap__tile" data-state="NY">NY</li>
+          <li class="ii-usmap__tile" data-state="RI">RI</li>
+          <li class="ii-usmap__tile" data-state="MA">MA</li>
+          <li class="ii-usmap__tile" data-state="OR" data-status="office">OR</li>
+          <li class="ii-usmap__tile" data-state="NV">NV</li>
+          <li class="ii-usmap__tile" data-state="WY">WY</li>
+          <li class="ii-usmap__tile" data-state="SD">SD</li>
+          <li class="ii-usmap__tile" data-state="IA">IA</li>
+          <li class="ii-usmap__tile" data-state="IN">IN</li>
+          <li class="ii-usmap__tile" data-state="OH">OH</li>
+          <li class="ii-usmap__tile" data-state="PA">PA</li>
+          <li class="ii-usmap__tile" data-state="NJ">NJ</li>
+          <li class="ii-usmap__tile" data-state="CT">CT</li>
+          <li class="ii-usmap__tile" data-state="CA">CA</li>
+          <li class="ii-usmap__tile" data-state="UT">UT</li>
+          <li class="ii-usmap__tile" data-state="CO" data-status="office">CO</li>
+          <li class="ii-usmap__tile" data-state="NE">NE</li>
+          <li class="ii-usmap__tile" data-state="MO">MO</li>
+          <li class="ii-usmap__tile" data-state="KY">KY</li>
+          <li class="ii-usmap__tile" data-state="WV">WV</li>
+          <li class="ii-usmap__tile" data-state="VA">VA</li>
+          <li class="ii-usmap__tile" data-state="MD">MD</li>
+          <li class="ii-usmap__tile" data-state="DE">DE</li>
+          <li class="ii-usmap__tile" data-state="AZ">AZ</li>
+          <li class="ii-usmap__tile" data-state="NM">NM</li>
+          <li class="ii-usmap__tile" data-state="KS">KS</li>
+          <li class="ii-usmap__tile" data-state="AR">AR</li>
+          <li class="ii-usmap__tile" data-state="TN">TN</li>
+          <li class="ii-usmap__tile" data-state="NC">NC</li>
+          <li class="ii-usmap__tile" data-state="SC">SC</li>
+          <li class="ii-usmap__tile" data-state="DC">DC</li>
+          <li class="ii-usmap__tile" data-state="OK">OK</li>
+          <li class="ii-usmap__tile" data-state="LA">LA</li>
+          <li class="ii-usmap__tile" data-state="MS">MS</li>
+          <li class="ii-usmap__tile" data-state="AL">AL</li>
+          <li class="ii-usmap__tile" data-state="GA">GA</li>
+          <li class="ii-usmap__tile" data-state="HI">HI</li>
+          <li class="ii-usmap__tile" data-state="TX">TX</li>
+          <li class="ii-usmap__tile" data-state="FL">FL</li>
+        </ol>
+        <div class="ii-coverage__key">
+          <dl class="ii-coverage__list">
+            <div class="ii-coverage__group" data-status="office">
+              <dt><span class="ii-coverage__swatch" data-status="office" aria-hidden="true"></span>Offices</dt>
+              <dd class="ii-coverage__item"><span class="ii-coverage__name">Oregon</span> <span class="ii-coverage__meta">Sherwood office</span></dd>
+              <dd class="ii-coverage__item"><span class="ii-coverage__name">Colorado</span> <span class="ii-coverage__meta">Centennial office</span></dd>
+            </div>
+            <div class="ii-coverage__group" data-status="licensed">
+              <dt><span class="ii-coverage__swatch" data-status="licensed" aria-hidden="true"></span>Licensed</dt>
+              <dd class="ii-coverage__item"><span class="ii-pending">Client to provide</span></dd>
+            </div>
+            <div class="ii-coverage__group" data-status="expansion">
+              <dt><span class="ii-coverage__swatch" data-status="expansion" aria-hidden="true"></span>Expansion</dt>
+              <dd class="ii-coverage__item"><span class="ii-pending">Client to provide</span></dd>
+            </div>
+          </dl>
+        </div>
+        <figcaption class="ii-coverage__caption">Coverage by state, one tile per state. Plain tiles have no listed status.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="ii-section ii-values ii-values--rail" aria-labelledby="values-title" data-ii-rail>
+    <div class="ii-container">
+      <div class="ii-section-head" data-ii-reveal>
+        <h2 class="ii-h2" id="values-title">Doing what&rsquo;s right when nobody is looking.</h2>
+        <p class="ii-lead ii-muted">Our mantra, and the six Ways of BEING.</p>
+      </div>
+      <div class="ii-rail ii-home-rail" tabindex="0" role="region" aria-label="Ways of BEING">
+        <ol class="ii-rail__track" role="list" aria-label="Our Ways of BEING" data-ii-rail-track>
+          <li class="ii-rail__item ii-shell"><span class="ii-rail__index">01</span><p class="ii-rail__word">Be <em>generous.</em></p></li>
+          <li class="ii-rail__item ii-shell"><span class="ii-rail__index">02</span><p class="ii-rail__word">Be <em>accountable.</em></p></li>
+          <li class="ii-rail__item ii-shell"><span class="ii-rail__index">03</span><p class="ii-rail__word">Be <em>coachable.</em></p></li>
+          <li class="ii-rail__item ii-shell"><span class="ii-rail__index">04</span><p class="ii-rail__word">Be <em>safe.</em></p></li>
+          <li class="ii-rail__item ii-shell"><span class="ii-rail__index">05</span><p class="ii-rail__word">Be <em>caring.</em></p></li>
+          <li class="ii-rail__item ii-shell"><span class="ii-rail__index">06</span><p class="ii-rail__word">Always be <em>better.</em></p></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="ii-section" aria-labelledby="paths-title">
+    <div class="ii-container">
+      <div class="ii-section-head" data-ii-reveal>
+        <h2 class="ii-h2" id="paths-title">Work with Integrity</h2>
+      </div>
+      <div data-ii-glow>
+        <ul class="ii-paths" role="list" data-ii-reveal="stagger">
+          <li class="ii-path ii-path--feature ii-shell">
+            <div class="ii-media"><picture>
+              <source type="image/avif" srcset="/src/img/photos/night-van-splicer-640.avif 640w, /src/img/photos/night-van-splicer-1024.avif 1024w, /src/img/photos/night-van-splicer-1600.avif 1600w" sizes="(min-width: 1440px) 760px, (min-width: 1024px) 56vw, 100vw">
+              <source type="image/webp" srcset="/src/img/photos/night-van-splicer-640.webp 640w, /src/img/photos/night-van-splicer-1024.webp 1024w, /src/img/photos/night-van-splicer-1600.webp 1600w" sizes="(min-width: 1440px) 760px, (min-width: 1024px) 56vw, 100vw">
+              <img src="/src/img/photos/night-van-splicer.jpg" alt="A technician in a hard hat and high-visibility hoodie prepares fiber at a van workbench at night" width="2000" height="1333" loading="lazy" decoding="async">
+            </picture></div>
+            <div class="ii-path__body">
+              <h3 class="ii-h4">Hire us for your next project</h3>
+              <p class="ii-muted">Long-haul fiber, underground, aerial and restoration work for carriers, utilities, builders and public agencies.</p>
+              <a class="ii-arrow-link" href="/contact/#quote">Request a quote<svg class="ii-icon" data-ii-icon="arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12l14 0" /> <path d="M13 18l6 -6" /> <path d="M13 6l6 6" /></svg></a>
+            </div>
+          </li>
+          <li class="ii-path ii-shell">
+            <svg class="ii-icon ii-icon--lg ii-accent-text" data-ii-icon="users-group" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /> <path d="M8 21v-1a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v1" /> <path d="M15 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /> <path d="M17 10h2a2 2 0 0 1 2 2v1" /> <path d="M5 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /> <path d="M3 13v-1a2 2 0 0 1 2 -2h2" /></svg>
+            <h3 class="ii-h4">Join the crew</h3>
+            <p class="ii-muted">Field and office roles in Oregon and Colorado, with a company built around growing its people.</p>
+            <a class="ii-arrow-link" href="/careers/">View open roles<svg class="ii-icon" data-ii-icon="arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12l14 0" /> <path d="M13 18l6 -6" /> <path d="M13 6l6 6" /></svg></a>
+          </li>
+          <li class="ii-path ii-shell">
+            <svg class="ii-icon ii-icon--lg ii-accent-text" data-ii-icon="heart-handshake" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" /> <path d="M12 6l-3.293 3.293a1 1 0 0 0 0 1.414l.543 .543c.69 .69 1.81 .69 2.5 0l1 -1a3.182 3.182 0 0 1 4.5 0l2.25 2.25" /> <path d="M12.5 15.5l2 2" /> <path d="M15 13l2 2" /></svg>
+            <h3 class="ii-h4">Partner with us</h3>
+            <p class="ii-muted">Subcontractors: tell us about your crews, equipment and service area.</p>
+            <a class="ii-arrow-link" href="/subcontractors/">Start an inquiry<svg class="ii-icon" data-ii-icon="arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12l14 0" /> <path d="M13 18l6 -6" /> <path d="M13 6l6 6" /></svg></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="ii-section" aria-labelledby="quotes-title">
+    <div class="ii-container">
+      <div class="ii-section-head" data-ii-reveal>
+        <h2 class="ii-h2" id="quotes-title">What partners say</h2>
+        <p class="ii-lead ii-muted">Reviews from the people we build for, published with their name and where they said it.</p>
+      </div>
+      <div data-ii-glow>
+        <ul class="ii-quotes" role="list" data-ii-reveal="stagger">
+          <li class="ii-quotes__item ii-shell">
+            <figure class="ii-quote">
+              <span class="ii-quote__mark" aria-hidden="true">&ldquo;</span>
+              <blockquote class="ii-quote__text"><p>They were prompt, efficient, and took great pride in their work. They were a pleasure to work with, and did a fabulous job. I recommend them most highly.</p></blockquote>
+              <figcaption class="ii-quote__cite"><span class="ii-quote__name">Barbara Barbour</span><span class="ii-quote__source">Google review</span></figcaption>
+            </figure>
+          </li>
+          <li class="ii-quotes__item ii-quotes__item--pending">
+            <svg class="ii-icon" data-ii-icon="quote" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 11h-4a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1h3a1 1 0 0 1 1 1v6c0 2.667 -1.333 4.333 -4 5" /> <path d="M19 11h-4a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1h3a1 1 0 0 1 1 1v6c0 2.667 -1.333 4.333 -4 5" /></svg>
+            <p class="ii-quotes__label">Partner review</p>
+            <p>A review from a carrier, utility or builder partner, with permission to publish.</p>
+            <p><span class="ii-pending">Client to provide</span></p>
+          </li>
+          <li class="ii-quotes__item ii-quotes__item--pending">
+            <svg class="ii-icon" data-ii-icon="quote" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 11h-4a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1h3a1 1 0 0 1 1 1v6c0 2.667 -1.333 4.333 -4 5" /> <path d="M19 11h-4a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1h3a1 1 0 0 1 1 1v6c0 2.667 -1.333 4.333 -4 5" /></svg>
+            <p class="ii-quotes__label">Partner review</p>
+            <p><span class="ii-pending">Client to provide</span></p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="ii-section" aria-labelledby="faq-title">
+    <div class="ii-container ii-faq-layout">
+      <div class="ii-section-head">
+        <h2 class="ii-h2" id="faq-title">Frequently asked questions</h2>
+      </div>
+      <div class="ii-faq">
+        <details class="ii-faq__item" name="faq" open>
+          <summary class="ii-faq__q"><span>What industries do you serve?</span><svg class="ii-icon ii-faq__icon" data-ii-icon="plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5l0 14" /> <path d="M5 12l14 0" /></svg></summary>
+          <div class="ii-faq__a"><p>We work with telecommunications companies, utilities, construction firms, government agencies and private businesses.</p></div>
+        </details>
+        <details class="ii-faq__item" name="faq">
+          <summary class="ii-faq__q"><span>Do you install internet service inside homes?</span><svg class="ii-icon ii-faq__icon" data-ii-icon="plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5l0 14" /> <path d="M5 12l14 0" /></svg></summary>
+          <div class="ii-faq__a"><p>No. We build the network up to residential locations, and the internet provider handles installation inside the home.</p></div>
+        </details>
+        <details class="ii-faq__item" name="faq">
+          <summary class="ii-faq__q"><span>Do you offer maintenance and emergency repair?</span><svg class="ii-icon ii-faq__icon" data-ii-icon="plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5l0 14" /> <path d="M5 12l14 0" /></svg></summary>
+          <div class="ii-faq__a"><p>Yes. We provide scheduled maintenance and emergency repair so your infrastructure stays operational and reliable.</p></div>
+        </details>
+        <details class="ii-faq__item" name="faq">
+          <summary class="ii-faq__q"><span>Where do you work?</span><svg class="ii-icon ii-faq__icon" data-ii-icon="plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5l0 14" /> <path d="M5 12l14 0" /></svg></summary>
+          <div class="ii-faq__a"><p>Our offices are in Sherwood, Oregon and Centennial, Colorado, and the <a href="#footprint">coverage map</a> shows the states we work in. Tell us where your project is and we will confirm coverage.</p></div>
+        </details>
+        <details class="ii-faq__item" name="faq">
+          <summary class="ii-faq__q"><span>How do I start a project with you?</span><svg class="ii-icon ii-faq__icon" data-ii-icon="plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5l0 14" /> <path d="M5 12l14 0" /></svg></summary>
+          <div class="ii-faq__a"><p>Send the scope, location and timing through the <a href="/contact/#quote">quote form</a>, or call <a href="tel:+15035025339">(503) 502-5339</a>.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="ii-section ii-cta-band" aria-labelledby="cta-title">
+    <div class="ii-container" data-ii-glow>
+      <div class="ii-cta-band__inner ii-shell" data-ii-reveal>
+        <div class="ii-cta-band__copy">
+          <h2 class="ii-h2" id="cta-title">Let&rsquo;s work together</h2>
+          <p class="ii-lead ii-muted">Tell us about the scope, location and schedule. We will put the right crew on it.</p>
+        </div>
+        <div class="ii-cta-band__actions">
+          <a class="ii-call" href="tel:+15035025339"><span class="ii-call__label">Call for a quote</span><span class="ii-call__number">(503) 502-5339</span></a>
+          <a class="ii-btn ii-btn--primary ii-btn--lg ii-btn--orb" href="/contact/#quote" data-ii-magnetic>Request a quote<svg class="ii-icon ii-icon--trail" data-ii-icon="arrow-up-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M17 7l-10 10" /> <path d="M8 7l9 0l0 9" /></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+<footer class="ii-footer">
+  <div class="ii-container">
+    <div class="ii-footer__grid">
+      <div class="ii-footer__brand">
+        <img class="ii-logo ii-logo--for-dark" src="/src/img/logo/integrity-infrastructure-logo.svg" alt="Integrity Infrastructure" width="360" height="150" loading="lazy" decoding="async">
+        <p class="ii-muted">Fiber and utility construction, from long-haul routes to residential locations.</p>
+      </div>
+      <nav aria-labelledby="ii-footer-company">
+        <p class="ii-footer__heading" id="ii-footer-company">Company</p>
+        <ul class="ii-footer__list" role="list">
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/safety/">Safety</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/careers/">Careers</a></li>
+          <li><a href="/subcontractors/">Subcontractors</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </nav>
+      <div>
+        <p class="ii-footer__heading">Offices</p>
+        <address class="ii-footer__office"><strong>Oregon</strong><br>13565 SW Tualatin Sherwood Road, Suite 800<br>Sherwood, OR 97140</address>
+        <address class="ii-footer__office"><strong>Colorado</strong><br>8085 S Chester St, Suite 220<br>Centennial, CO 80112</address>
+      </div>
+      <div>
+        <p class="ii-footer__heading">Contact</p>
+        <ul class="ii-footer__list" role="list">
+          <li><a href="tel:+15035025339">(503) 502-5339</a></li>
+          <li><a href="mailto:info@integrityinfrastructure.com">info@<wbr>integrityinfrastructure.com</a></li>
+        </ul>
+        <ul class="ii-social" role="list">
+          <li><a href="https://www.linkedin.com/company/integrity-infrastructurellc/" aria-label="Integrity Infrastructure on LinkedIn"><svg class="ii-icon" data-ii-icon="brand-linkedin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 11v5" /> <path d="M8 8v.01" /> <path d="M12 16v-5" /> <path d="M16 16v-3a2 2 0 1 0 -4 0" /> <path d="M3 7a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v10a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4l0 -10" /></svg></a></li>
+          <li><a href="https://www.instagram.com/integrity_infrastructure/" aria-label="Integrity Infrastructure on Instagram"><svg class="ii-icon" data-ii-icon="brand-instagram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 8a4 4 0 0 1 4 -4h8a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4l0 -8" /> <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /> <path d="M16.5 7.5v.01" /></svg></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ii-footer__legal">
+      <p>&copy; <span data-ii-year>2026</span> Integrity Infrastructure. All rights reserved.</p>
+      <p>Contractor licenses: <span class="ii-pending">Client to provide</span></p>
+    </div>
+  </div>
+</footer>
+</body>
 </html>

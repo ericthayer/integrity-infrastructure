@@ -12,8 +12,8 @@ The site header in two forms: the sticky bar (logo, one-line nav from 1024px, ph
 ## Consumer provides
 Nav items and hrefs, the current page, the phone number and the quote link.
 
-## Oxygen
-Header template with the classes; the drawer as a sibling section; enqueue the bundle once.
+## WordPress
+A header template with the classes, the drawer as a sibling element, the SVG logo; enqueue the bundle once.
 
 ## Avoid
 A second nav row, more than six items, hiding the phone on desktop, and placing the drawer inside the header element.

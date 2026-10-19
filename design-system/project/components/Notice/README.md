@@ -9,8 +9,8 @@ A short message with an icon and a title: info, success or danger. Status is nev
 ## Consumer provides
 Tone, title, sentence, optional link.
 
-## Oxygen
-A Component with a tone property.
+## WordPress
+A reusable block with a tone property.
 
 ## Avoid
 Stacking several notices, and toasts for anything a person must act on.

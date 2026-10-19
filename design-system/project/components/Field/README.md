@@ -10,8 +10,8 @@ A form field with its label above, optional hint, the control, and the error bel
 ## Consumer provides
 Label, name, type, autocomplete, hint, and any custom error message (`data-ii-error`).
 
-## Oxygen
-Map the form plugin's markup to these classes (see oxygen-handoff.md).
+## WordPress
+Map the form plugin's markup to these classes (the Forms section of `oxygen-handoff.md` applies to any plugin).
 
 ## Avoid
 Placeholder-only labels, errors above the field, and red borders without a message.

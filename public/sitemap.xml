@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Documents the website's URL set for the review build. The WordPress build generates its own
+     sitemap (core wp-sitemap.xml or the SEO plugin's), which replaces this file at launch. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://integrityinfrastructure.com/</loc><lastmod>2026-10-19</lastmod></url>
+  <url><loc>https://integrityinfrastructure.com/about/</loc><lastmod>2026-10-19</lastmod></url>
+  <url><loc>https://integrityinfrastructure.com/services/</loc><lastmod>2026-10-19</lastmod></url>
+  <url><loc>https://integrityinfrastructure.com/safety/</loc><lastmod>2026-10-19</lastmod></url>
+  <url><loc>https://integrityinfrastructure.com/careers/</loc><lastmod>2026-10-19</lastmod></url>
+  <url><loc>https://integrityinfrastructure.com/subcontractors/</loc><lastmod>2026-10-19</lastmod></url>
+  <url><loc>https://integrityinfrastructure.com/contact/</loc><lastmod>2026-10-19</lastmod></url>
+</urlset>

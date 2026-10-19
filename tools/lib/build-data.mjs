@@ -12,6 +12,10 @@ export const ICON_NAMES = [
   'plug-connected', 'backhoe', 'crane', 'building-broadcast-tower', 'road', 'route', 'home-signal', 'network',
   'shield-check', 'first-aid-kit', 'certificate', 'cone', 'clipboard-check', 'eye-check', 'users-group', 'user-check',
   'briefcase', 'school', 'trending-up', 'heart-handshake', 'steering-wheel', 'truck', 'tools', 'license', 'award', 'camera',
+  // Website v1.
+  'receipt', 'ruler-measure', 'building', 'map-pins', 'helmet', 'hand-stop', 'file-certificate', 'file-check',
+  'list-check', 'checklist', 'file-search', 'quote', 'home', 'home-off', 'traffic-cone', 'world', 'medal',
+  'user-shield', 'id-badge-2', 'user-plus', 'star', 'message-circle', 'hammer', 'player-pause', 'player-play',
 ];
 
 export function loadIcons() {

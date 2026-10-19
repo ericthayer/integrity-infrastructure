@@ -70,12 +70,13 @@ const dupes = names.filter((n, i) => names.indexOf(n) !== i);
 dupes.length ? fail(`duplicate token names: ${dupes.join(', ')}`) : pass('token names unique across families');
 
 // Copy and markup rules on the pages people will see (design-taste-frontend pre-flight).
-const pageRoots = ['concepts', 'brandkit', 'src/ds'].map((p) => join(root, p)).filter(existsSync);
+const pageRoots = ['about', 'services', 'safety', 'careers', 'subcontractors', 'contact', 'concepts', 'brandkit', 'src/ds', 'src/partials/site']
+  .map((p) => join(root, p)).filter(existsSync);
 const walk = (dir) => readdirSync(dir).flatMap((f) => {
   const p = join(dir, f);
   return statSync(p).isDirectory() ? walk(p) : [p];
 });
-const pages = pageRoots.flatMap(walk).filter((p) => extname(p) === '.html');
+const pages = [join(root, 'index.html'), join(root, '404.html'), ...pageRoots.flatMap(walk)].filter((p) => extname(p) === '.html');
 const visibleText = (html) => html
   .replace(/<!--[\s\S]*?-->/g, ' ')
   .replace(/<(script|style)[\s\S]*?<\/\1>/gi, ' ')

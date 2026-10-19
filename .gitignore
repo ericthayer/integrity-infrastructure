@@ -26,3 +26,5 @@ exports/
 *.log
 __pycache__/
 *.py[cod]
+# Temporary component previews during development
+.preview/

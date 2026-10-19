@@ -1,0 +1,87 @@
+<!-- CoverageMap (ii-coverage): a U.S. tile-grid cartogram, one equal tile per state plus DC.
+     Styles: src/css/site/coverage.css. No JavaScript. Used in Home #footprint and Services #coverage.
+
+     To mark a state, change both places so the map and its text equivalent always agree:
+       1. Map: on the state's tile in .ii-usmap, set data-status to "office", "licensed" or
+          "expansion". No attribute means no listed status. Tiles are positioned in CSS by
+          data-state; never reorder them by hand or add inline styles.
+       2. List: in .ii-coverage__list, add the full state name to the matching group as
+          <dd class="ii-coverage__item"><span class="ii-coverage__name">Washington</span></dd>,
+          then remove that group's "Client to provide" placeholder once it has a real entry.
+     An office state keeps data-status="office" on its tile; once the client confirms its
+     license, list it under Licensed as well.
+     Real, client-confirmed data only. v1 knows the two offices (Oregon, Colorado); licensed
+     and expansion states are client inputs and stay ii-pending until supplied. -->
+<figure class="ii-coverage">
+  <ol class="ii-usmap" aria-hidden="true">
+    <li class="ii-usmap__tile" data-state="AK">AK</li>
+    <li class="ii-usmap__tile" data-state="ME">ME</li>
+    <li class="ii-usmap__tile" data-state="VT">VT</li>
+    <li class="ii-usmap__tile" data-state="NH">NH</li>
+    <li class="ii-usmap__tile" data-state="WA">WA</li>
+    <li class="ii-usmap__tile" data-state="ID">ID</li>
+    <li class="ii-usmap__tile" data-state="MT">MT</li>
+    <li class="ii-usmap__tile" data-state="ND">ND</li>
+    <li class="ii-usmap__tile" data-state="MN">MN</li>
+    <li class="ii-usmap__tile" data-state="IL">IL</li>
+    <li class="ii-usmap__tile" data-state="WI">WI</li>
+    <li class="ii-usmap__tile" data-state="MI">MI</li>
+    <li class="ii-usmap__tile" data-state="NY">NY</li>
+    <li class="ii-usmap__tile" data-state="RI">RI</li>
+    <li class="ii-usmap__tile" data-state="MA">MA</li>
+    <li class="ii-usmap__tile" data-state="OR" data-status="office">OR</li>
+    <li class="ii-usmap__tile" data-state="NV">NV</li>
+    <li class="ii-usmap__tile" data-state="WY">WY</li>
+    <li class="ii-usmap__tile" data-state="SD">SD</li>
+    <li class="ii-usmap__tile" data-state="IA">IA</li>
+    <li class="ii-usmap__tile" data-state="IN">IN</li>
+    <li class="ii-usmap__tile" data-state="OH">OH</li>
+    <li class="ii-usmap__tile" data-state="PA">PA</li>
+    <li class="ii-usmap__tile" data-state="NJ">NJ</li>
+    <li class="ii-usmap__tile" data-state="CT">CT</li>
+    <li class="ii-usmap__tile" data-state="CA">CA</li>
+    <li class="ii-usmap__tile" data-state="UT">UT</li>
+    <li class="ii-usmap__tile" data-state="CO" data-status="office">CO</li>
+    <li class="ii-usmap__tile" data-state="NE">NE</li>
+    <li class="ii-usmap__tile" data-state="MO">MO</li>
+    <li class="ii-usmap__tile" data-state="KY">KY</li>
+    <li class="ii-usmap__tile" data-state="WV">WV</li>
+    <li class="ii-usmap__tile" data-state="VA">VA</li>
+    <li class="ii-usmap__tile" data-state="MD">MD</li>
+    <li class="ii-usmap__tile" data-state="DE">DE</li>
+    <li class="ii-usmap__tile" data-state="AZ">AZ</li>
+    <li class="ii-usmap__tile" data-state="NM">NM</li>
+    <li class="ii-usmap__tile" data-state="KS">KS</li>
+    <li class="ii-usmap__tile" data-state="AR">AR</li>
+    <li class="ii-usmap__tile" data-state="TN">TN</li>
+    <li class="ii-usmap__tile" data-state="NC">NC</li>
+    <li class="ii-usmap__tile" data-state="SC">SC</li>
+    <li class="ii-usmap__tile" data-state="DC">DC</li>
+    <li class="ii-usmap__tile" data-state="OK">OK</li>
+    <li class="ii-usmap__tile" data-state="LA">LA</li>
+    <li class="ii-usmap__tile" data-state="MS">MS</li>
+    <li class="ii-usmap__tile" data-state="AL">AL</li>
+    <li class="ii-usmap__tile" data-state="GA">GA</li>
+    <li class="ii-usmap__tile" data-state="HI">HI</li>
+    <li class="ii-usmap__tile" data-state="TX">TX</li>
+    <li class="ii-usmap__tile" data-state="FL">FL</li>
+  </ol>
+  <div class="ii-coverage__key">
+    <dl class="ii-coverage__list">
+      <div class="ii-coverage__group" data-status="office">
+        <dt><span class="ii-coverage__swatch" data-status="office" aria-hidden="true"></span>Offices</dt>
+        <dd class="ii-coverage__item"><span class="ii-coverage__name">Oregon</span> <span class="ii-coverage__meta">Sherwood office</span></dd>
+        <dd class="ii-coverage__item"><span class="ii-coverage__name">Colorado</span> <span class="ii-coverage__meta">Centennial office</span></dd>
+      </div>
+      <div class="ii-coverage__group" data-status="licensed">
+        <dt><span class="ii-coverage__swatch" data-status="licensed" aria-hidden="true"></span>Licensed</dt>
+        <dd class="ii-coverage__item"><span class="ii-pending">Client to provide</span></dd>
+      </div>
+      <div class="ii-coverage__group" data-status="expansion">
+        <dt><span class="ii-coverage__swatch" data-status="expansion" aria-hidden="true"></span>Expansion</dt>
+        <dd class="ii-coverage__item"><span class="ii-pending">Client to provide</span></dd>
+      </div>
+    </dl>
+  </div>
+  <figcaption class="ii-coverage__caption">Coverage by state, one tile per state. Plain tiles have no listed status.</figcaption>
+</figure>

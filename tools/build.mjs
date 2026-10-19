@@ -31,6 +31,7 @@ copy('src/data', 'src/data');
 const ASSETS = {
   'Logos/integrity-infrastructure-logo.png': 'src/img/logo/integrity-infrastructure-logo.png',
   'Logos/integrity-infrastructure-logo-reversed.png': 'src/img/logo/integrity-infrastructure-logo-reversed.png',
+  'Logos/integrity-infrastructure-logo.svg': 'src/img/logo/integrity-infrastructure-logo.svg',
   'Photography/fleet-mountains.jpg': 'src/img/photos/fleet-mountains.jpg',
   'Photography/night-van-crew.jpg': 'src/img/photos/night-van-crew.jpg',
   'Photography/night-van-splicer.jpg': 'src/img/photos/night-van-splicer.jpg',
@@ -191,5 +192,5 @@ ${harnessLinks.map(({ comp, height, group }) => `<section><h2>${group ? group + 
 </body></html>
 `);
 
-console.log(`built: exports/ (Oxygen assets, design-system/project/, harness/; ${previews.length} previews)`);
+console.log(`built: exports/ (standalone assets, design-system/project/, harness/; ${previews.length} previews)`);
 if (warnings.length) { console.log(`\n${warnings.length} warning(s):`); for (const w of [...new Set(warnings)]) console.log(`  - ${w}`); }

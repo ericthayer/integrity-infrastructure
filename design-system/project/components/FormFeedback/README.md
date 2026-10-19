@@ -9,7 +9,7 @@ The error summary shown on a failed submit and the success panel shown after a g
 ## Consumer provides
 Titles and the success message (what happens next, and the phone number for urgent work).
 
-## Oxygen
+## WordPress
 Map to the form plugin's validation and confirmation messages.
 
 ## Avoid
