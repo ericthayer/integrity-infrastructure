@@ -76,7 +76,7 @@ const walk = (dir) => readdirSync(dir).flatMap((f) => {
   const p = join(dir, f);
   return statSync(p).isDirectory() ? walk(p) : [p];
 });
-const pages = [join(root, 'index.html'), ...pageRoots.flatMap(walk)].filter((p) => extname(p) === '.html');
+const pages = [join(root, 'index.html'), join(root, '404.html'), ...pageRoots.flatMap(walk)].filter((p) => extname(p) === '.html');
 const visibleText = (html) => html
   .replace(/<!--[\s\S]*?-->/g, ' ')
   .replace(/<(script|style)[\s\S]*?<\/\1>/gi, ' ')
