@@ -20,3 +20,33 @@
     X-Robots-Tag = "noindex"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Client review deployment: the design-exploration pages (concept prototypes and brand
+# boards) still contain the Integrity Corps lockup line and the sister-company fleet
+# photo, so they are not served. Their files stay in the build and the tests, and the
+# original-site snapshot at /reference/ stays reachable for before/after comparison.
+# To restore the concepts for internal review, delete the rules below. At launch, drop
+# these pages from the build as well (tasks/website-todo.md, "Before launch").
+[[redirects]]
+  from = "/concepts"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/concepts/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/brandkit"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/brandkit/*"
+  to = "/404.html"
+  status = 404
+  force = true
