@@ -187,3 +187,18 @@ a:hover > .ii-media > picture > img,
     display: none;
   }
 }
+
+/* ------------------------------------------------------------ first-screen reveals
+   behaviors/reveal-seen.ts marks every [data-ii-reveal] element that is on screen at load.
+   Without this, an element partly in the first viewport sits mid-animation (translucent,
+   shifted) until the first scroll. Specificity: the base rules in components.css are
+   [data-ii-reveal]:not([data-ii-reveal="stagger"]) (0,2,0) and [data-ii-reveal="stagger"] > *
+   (0,1,0); @media and @supports add none. These are (0,3,0) and (0,2,0), so they win
+   whatever the CSS order. */
+[data-ii-reveal][data-ii-reveal-seen]:not([data-ii-reveal="stagger"]),
+[data-ii-reveal="stagger"][data-ii-reveal-seen] > * {
+  animation: none;
+  opacity: 1;
+  transform: none;
+  filter: none;
+}

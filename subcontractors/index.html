@@ -163,7 +163,9 @@
         </ul>
       </div>
       <div class="ii-subcontractors-form-shell ii-shell" data-ii-glow>
-        <form class="ii-form" action="#" method="post" enctype="multipart/form-data" data-ii-form data-ii-demo aria-label="Subcontractor inquiry">
+        <form class="ii-form" name="subcontractor" method="post" enctype="multipart/form-data" data-netlify="true" data-netlify-honeypot="bot-field" data-ii-form data-ii-netlify aria-label="Subcontractor inquiry">
+          <input type="hidden" name="form-name" value="subcontractor">
+          <p hidden><label>Leave this field empty <input name="bot-field"></label></p>
           <div class="ii-notice ii-notice--danger" data-ii-error-summary tabindex="-1" hidden>
             <svg class="ii-icon" data-ii-icon="alert-triangle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 9v4" /> <path d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0" /> <path d="M12 16h.01" /></svg>
             <div class="ii-notice__body">
@@ -228,7 +230,7 @@
           <div class="ii-form__row ii-form__row--2">
             <div class="ii-field">
               <label class="ii-field__label" for="sub-coi">Certificate of insurance <span class="ii-field__opt">(optional)</span></label>
-              <p class="ii-field__hint" id="sub-coi-hint" data-ii-file-names="PDF or image">PDF or image</p>
+              <p class="ii-field__hint" id="sub-coi-hint" data-ii-file-names="PDF or image, up to 8 MB">PDF or image, up to 8 MB</p>
               <input class="ii-file" id="sub-coi" name="coi" type="file" accept=".pdf,image/*" aria-describedby="sub-coi-hint">
             </div>
             <div class="ii-field">
@@ -246,6 +248,13 @@
             <button class="ii-btn ii-btn--primary ii-btn--lg" type="submit"><svg class="ii-icon ii-icon--spin" data-ii-icon="loader-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3a9 9 0 1 0 9 9" /></svg>Start an inquiry<svg class="ii-icon ii-icon--trail" data-ii-icon="arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12l14 0" /> <path d="M13 18l6 -6" /> <path d="M13 6l6 6" /></svg></button>
           </div>
         </form>
+        <div class="ii-notice ii-notice--danger ii-form-submit-error" data-ii-submit-error role="alert" tabindex="-1" hidden>
+          <svg class="ii-icon" data-ii-icon="alert-triangle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 9v4" /> <path d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0" /> <path d="M12 16h.01" /></svg>
+          <div class="ii-notice__body">
+            <p class="ii-notice__title">We could not send your inquiry</p>
+            <p>Check your connection and try again. If you attached a file, make sure it is under 8 MB. If it still does not send, call <a href="tel:+15035025339">(503) 502-5339</a> or email <a href="mailto:info@integrityinfrastructure.com">info@integrityinfrastructure.com</a>.</p>
+          </div>
+        </div>
         <div class="ii-notice ii-notice--success" data-ii-success tabindex="-1" hidden>
           <svg class="ii-icon" data-ii-icon="circle-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /> <path d="M9 12l2 2l4 -4" /></svg>
           <div class="ii-notice__body">

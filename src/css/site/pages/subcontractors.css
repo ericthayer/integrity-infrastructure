@@ -173,3 +173,8 @@
     padding: calc(var(--shell-inset, 0px) + var(--space-8)) calc(var(--shell-inset, 0px) + var(--space-10));
   }
 }
+
+/* The send-failure notice sits under the form it belongs to. */
+.ii-form-submit-error {
+  margin-top: var(--space-5);
+}

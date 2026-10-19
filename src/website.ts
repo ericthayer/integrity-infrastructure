@@ -19,13 +19,17 @@ import './css/site/pages/subcontractors.css';
 import './css/site/pages/contact.css';
 import { IntegrityDS } from './behaviors/site';
 import { loadEnhancements } from './behaviors/enhancements';
+import { netlifyForms } from './behaviors/netlify-forms';
 import { prefill } from './behaviors/prefill';
+import { revealSeen } from './behaviors/reveal-seen';
 import { sceneToggle } from './behaviors/scene-toggle';
 import { topicFields } from './behaviors/topic-fields';
 
 function boot(): void {
+  revealSeen();
   prefill();
   topicFields();
+  netlifyForms();
   sceneToggle();
   void loadEnhancements(document, window, IntegrityDS);
 }

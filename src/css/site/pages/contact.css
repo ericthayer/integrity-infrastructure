@@ -136,3 +136,8 @@
 .ii-contact-faq-answer {
   --stack-gap: var(--space-3);
 }
+
+/* The send-failure notice sits under the form it belongs to. */
+.ii-form-submit-error {
+  margin-top: var(--space-5);
+}

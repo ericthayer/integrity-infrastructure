@@ -61,7 +61,7 @@ Look at `concepts/lit-fiber/index.html` (Home) for production markup, and `src/d
 | Two-column head + body | `.ii-two-col` (sticky section head on desktop) |
 | FAQ | `.ii-faq-layout` with `details.ii-faq__item[name="faq"]` |
 | CTA band | `section.ii-section.ii-cta-band` (copy from the concept, without `data-ii-magnetic`) |
-| Forms | `src/partials/forms/quote-form.html`, `subcontractor-form.html` (`data-ii-form data-ii-demo`) |
+| Forms | `src/partials/forms/quote-form.html`, `subcontractor-form.html` (`data-ii-form`; website pages use `data-ii-netlify` plus the Netlify attributes, see `contact/index.html`; `data-ii-demo` is for previews only) |
 | Jobs | `src/partials/careers/job-list.html` with `data-src="/data/jobs.json"` |
 | Coverage map | `src/partials/site/coverage.html` |
 | Route (scope) | `src/partials/site/route.html` |
