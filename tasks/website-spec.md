@@ -132,7 +132,7 @@ Section stacks; component names in parentheses. Eyebrows at most one per three s
 
 | Component | Classes | File | Notes |
 |---|---|---|---|
-| CoverageMap | `ii-coverage`, `ii-usmap`, `ii-usmap__tile[data-state][data-status]`, `ii-coverage__key`, `ii-coverage__list` | `src/css/site/coverage.css` | Tile grid, 11 x 8; tiles positioned by `data-state` in CSS; statuses by fill + glyph; reduced-motion safe pulse on office tiles |
+| CoverageMap | `ii-coverage`, `ii-usmap`, `ii-usmap__tile[data-state][data-status]`, `ii-usmap__pin`, `ii-coverage__key`, `ii-coverage__list`, `ii-coverage__office`, `ii-coverage__contact` | `src/css/site/coverage.css`, `src/css/site/coverage-offices.css` | Tile grid, 11 x 8; tiles positioned by `data-state` in CSS; statuses by fill + glyph; reduced-motion safe pulse on office tiles; office rows are `<details>` with address and map link, opened from their tile (`coverage-offices.ts`), plus company phone and email |
 | RouteDiagram | `ii-route`, `ii-route__stage`, `ii-route__stage--out` | `src/css/site/route.css` | Ordered list; hairline fiber with a CSS light pulse; vertical under 768 px; the out-of-scope node is dashed and muted |
 | PageHeader, Lit | `ii-page-header--lit` | `src/css/site/page-header.css` | Glow veil, optional media column, eyebrow pill |
 | Testimonial set | `ii-quotes` | `src/css/site/proof.css` | Grid of `ii-quote` cards in shells plus pending review slots |

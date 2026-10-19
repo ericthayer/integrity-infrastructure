@@ -39,6 +39,7 @@ Behaviors attach to `data-ii-*` attributes, so they work with markup rendered by
 | `data-ii-glow` | `site.ts` | Pointer glow on glass cards (fine pointers only) |
 | `data-ii-sheet-host` + `<dialog class="ii-sheet">` | `site.ts` | Home: service tile opens a sheet (native dialog, view transition) |
 | `data-ii-words`, `data-ii-magnetic`, `data-ii-stack`, `data-ii-rail` | `site.ts` + GSAP | Home only: headline word masks, magnetic buttons, card stack, values rail |
+| `data-ii-offices`, `data-ii-office-pin`, `data-ii-office-entry` (sets `data-ii-office-active`, `data-ii-active`, `data-ii-open`) | `coverage-offices.ts` | Coverage map: an office tile opens its key row (address, map link) and tiles and rows highlight each other. Without JS the tile is an in-page link that opens the row |
 | `data-ii-scene`, `data-ii-scene-toggle`, `data-ii-scene-paused` | `site.ts` + three.js, `scene-toggle.ts` | Home hero strand scene and its pause control (WCAG 2.2.2) |
 | `data-ii-form`, `data-ii-error-summary`, `data-ii-success`, `data-ii-error` | `site.ts` | Inline validation, error summary that takes focus, fix-it messages |
 | `data-ii-prefill-from`, `data-ii-key` | `prefill.ts` | `/contact/?topic=safety&service=boring#quote` preselects the Topic and a service |
@@ -69,12 +70,12 @@ Suggested editable content, whatever the builder:
 | Content | Fields | Used on |
 |---|---|---|
 | Service lines (5) | Name, anchor, icon, short description, scope list, method, typical scope, equipment, photo | Home bento and sheet, Services sections, quote form services |
-| Coverage | Per state: status (office, licensed, expansion); office city | Home `#footprint`, Services `#coverage` (tile map and its state lists must stay in sync) |
+| Coverage | Per state: status (office, licensed, expansion); office city, address and map link (shared with Offices); company phone and email | Home `#footprint`, Services `#coverage` (tile map and its state lists must stay in sync) |
 | Safety record | EMR, TRIR, DART, OSHA recordables, reporting year; certification categories | Home teaser, Safety |
 | Leaders | Name, title, short bio, portrait | About |
 | Testimonials | Quote, name, source (for example "Google review"), permission confirmed | Home |
 | FAQ items | Question, answer, page | Home, Services, Careers, Contact |
-| Offices | Label, address, map link | Footer, About, Contact |
+| Offices | Label, address, map link | Footer, About, Contact, coverage map key |
 | Jobs | From Paylocity: title, location, department, posted date, apply URL | Careers |
 
 ## Requirements to preserve
