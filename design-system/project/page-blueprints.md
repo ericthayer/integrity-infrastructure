@@ -14,7 +14,7 @@ Site-wide: SiteHeader (island) and SiteFooter on every page; one label per inten
 ## About `/about/`
 
 - **For**: subcontractors, job seekers and PE buyers alike: who runs the company, how it works, where it is going.
-- **Sections**: PageHeader (the mantra as title; lead: an independent fiber and utility construction company, with its own leadership, crews and offices) → mission `#mission` (FeatureSplit, "Build by building people") → company at a glance `#company` (SpecPlate: ownership, headquarters, offices, licensed states, founded, crew size, pending where unknown) → history `#history` (Timeline: founding, the Colorado office, an independent company; years pending) → Ways of BEING (static grid, no GSAP) → leadership `#leadership` (LeaderCard grid with PhotoSlot portraits) → offices `#offices` → AudiencePaths → CTABand.
+- **Sections**: PageHeader (the mantra as title; lead: an independent fiber and utility construction company, with its own leadership, crews and offices) → mission `#mission` (FeatureSplit, "Growing People. Connecting Possibilities.") → company at a glance `#company` (SpecPlate: ownership, headquarters, offices, licensed states, founded, crew size, pending where unknown) → history `#history` (Timeline: founding, the Colorado office, an independent company; years pending) → Ways of BEING (static grid, no GSAP) → leadership `#leadership` (LeaderCard grid with PhotoSlot portraits) → offices `#offices` → AudiencePaths → CTABand.
 - **Primary action**: Request a quote; secondary paths to Careers and Subcontractor Inquiry.
 - **Client inputs**: founding year and milestones; leadership names, titles, short bios and portraits; headquarters; crew size if they want it published; office addresses after the separation.
 
@@ -35,7 +35,7 @@ Site-wide: SiteHeader (island) and SiteFooter on every page; one label per inten
 ## Careers `/careers/`
 
 - **For**: field technicians, splicers, drill operators, lineworkers, CDL drivers and office staff, mostly on phones.
-- **Sections**: PageHeader (people-first, crew photo, "Build by building people.") → why Integrity `#why` (BenefitList: training and coaching, safety, values, pay and benefits pending) → roles we hire `#roles` (trade tags and short descriptions) → open roles `#open-roles` (JobList from the Paylocity feed, with a direct link to the Paylocity board) → hiring process `#hiring` (Timeline as steps) → crew voice (Testimonial slot, pending) → FAQ → CTABand "View open roles".
+- **Sections**: PageHeader (people-first, crew photo, "Growing People. Connecting Possibilities..") → why Integrity `#why` (BenefitList: training and coaching, safety, values, pay and benefits pending) → roles we hire `#roles` (trade tags and short descriptions) → open roles `#open-roles` (JobList from the Paylocity feed, with a direct link to the Paylocity board) → hiring process `#hiring` (Timeline as steps) → crew voice (Testimonial slot, pending) → FAQ → CTABand "View open roles".
 - **Primary action**: View open roles, then apply on Paylocity.
 - **Client inputs**: the Paylocity company ID, plugin and feed; benefits and pay practices; the hiring steps; crew photos and a short quote from a crew member (with permission).
 - **Replace**: the live nav's Careers link points to CareerPlug; retire it.
@@ -67,6 +67,6 @@ Site-wide: SiteHeader (island) and SiteFooter on every page; one label per inten
 - Master orange: the site CSS uses `#E87722`, the logo art `#F27C25`.
 - Logo: approval of the vector reversed lockup the website uses, a vector full-color lockup without the old third line, and a compact lockup for small sizes.
 - The shot list: aerial bucket truck, drill rig, finished restoration, training, leadership portraits, and a fleet photo of the company's own trucks.
-- Approval of the working tagline "Build by building people".
+- Approval of the working tagline "Growing People. Connecting Possibilities.".
 - Social profiles: the website links LinkedIn and Instagram only. The live site's Facebook icon pointed to another company's page and is removed.
 - Which WordPress theme or page builder will carry the site, and which form plugin will carry the two forms (quote with topics, subcontractor inquiry).

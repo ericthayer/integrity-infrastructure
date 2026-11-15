@@ -6,7 +6,7 @@ Integrity Infrastructure sounds like a foreman who respects your time: direct, s
 
 - **"Doing what's right when nobody is looking."**: the mantra. Always in quotes when quoted; on the website it is the About page title and the Home values section title.
 - **Ways of BEING**: be generous, be accountable, be coachable, be safe, be caring, always be better. Keep BEING in capitals.
-- **Build by building people**: a working tagline until the client confirms the wording. It appears only as the Careers page headline and the About mission title. Never the footer line, never a Home hero.
+- **Growing People. Connecting Possibilities.**: a working tagline until the client confirms the wording. It appears only as the Careers page headline and the About mission title. Never the footer line, never a Home hero.
 - Service names, in this order: Long-haul fiber construction, Fiber splicing, Boring, Aerial installations, Concrete and asphalt restoration.
 - Footer brand line: "Fiber and utility construction, from long-haul routes to residential locations."
 

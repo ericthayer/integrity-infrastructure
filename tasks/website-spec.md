@@ -41,7 +41,7 @@ Ship the Integrity Infrastructure website as seven real pages in the Lit Fiber c
 8. **Coverage map** is a tile-grid cartogram (one equal tile per state, postal code inside), not geographic paths: every state is legible at 375 px including the Northeast, no map data dependency, about 4 KB of HTML. Status per tile via `data-status="office|licensed|expansion"`; statuses are shown by fill **and** a glyph pattern plus legend, never by color alone. The visual grid is `aria-hidden`; the accessible content is a visible list of states per status beside it.
    - Known: Oregon and Colorado have offices. Licensed and expansion states are client inputs, rendered as `ii-pending` until supplied. Data is authored in the HTML (attributes and list), documented in the component comment.
 9. **Paylocity.** Careers uses the existing JobList (`[data-ii-jobs][data-src]`). v1 points it at a same-origin stub `/data/jobs.json` (Vite `public/`, sample roles labeled "(sample)"). Production options, in order: the WordPress Paylocity plugin's markup styled with `ii-job*` classes; a server-side proxy of the Recruiting job feed (the feed is customer-provisioned and authenticated, so never fetched from the browser); last resort an iframe in `ii-embed`. A direct link to the company's Paylocity board (`recruiting.paylocity.com/Recruiting/Jobs/All/<companyId>`, client to provide) is always visible. Production wiring is owned by the WordPress developers.
-10. **Tagline.** "Build by building people" appears on Careers (page title) and About (mission section) only; not in the footer or on Home. Working copy until Bradley confirms with Jeff.
+10. **Tagline.** "Growing People. Connecting Possibilities." appears on Careers (page title) and About (mission section) only; not in the footer or on Home. Working copy until Bradley confirms with Jeff.
 11. **Brand pillars to copy.** Mission-oriented, top-quality execution, honest, professional, integrity. Differentiators, in this order: accurate billing, quality execution, investment in people. The Home card stack carries them.
 12. **Pending data** never gets a plausible guess: `ii-pending` "Client to provide". Applies to metrics, license numbers, licensed states, leadership, history, benefits, insurance minimums.
 13. **Forms** (Contact quote, Subcontractor inquiry) submit through Netlify Forms on the review deploy (`data-netlify`, honeypot, `src/behaviors/netlify-forms.ts`); the concept pages and design-system previews keep demo mode (`data-ii-demo`). The production WordPress build replaces this with the chosen form plugin. Submissions reach people only after notifications are set per form in the Netlify UI. Contact preselects its topic and service from the URL (`/contact/?topic=safety#quote`, `?service=boring`).
@@ -78,7 +78,7 @@ Section stacks; component names in parentheses. Eyebrows at most one per three s
 
 ### About `/about/`
 1. Page header. H1: the mantra. Lead: independent fiber and utility construction company, own leadership, crews and offices.
-2. Mission (FeatureSplit, photo): "Build by building people."
+2. Mission (FeatureSplit, photo): "Growing People. Connecting Possibilities.."
 3. Company at a glance (SpecPlate): headquarters, offices, licensed states, founded, crew size, ownership; pending where unknown.
 4. History (Timeline): founding, Colorado office, becomes an independent company; years pending.
 5. Ways of BEING (static glass grid; no GSAP).
@@ -105,7 +105,7 @@ Section stacks; component names in parentheses. Eyebrows at most one per three s
 7. CTA band.
 
 ### Careers `/careers/`
-1. Page header (people-first, photo): "Build by building people."
+1. Page header (people-first, photo): "Growing People. Connecting Possibilities.."
 2. Why Integrity (BenefitList: training and growth, safety, values, pay and benefits pending).
 3. Roles we hire (trade tags + short descriptions).
 4. Open roles `#open-roles` (JobList, Paylocity).
