@@ -37,7 +37,7 @@
   pointer-events: none;
 }
 .ii-page-header--lit .ii-page-header__inner {
-  align-items: center;
+  align-items: start;
   gap: var(--space-6);
   max-width: none;
 }
@@ -46,6 +46,7 @@
   flex-direction: column;
   gap: var(--space-6);
   max-width: 52rem;
+  padding-block-start: var(--space-10);
 }
 .ii-page-header--lit .ii-display {
   font-size: min(var(--fs-display-lg), 12vw);
@@ -139,5 +140,14 @@
   }
   .ii-page-header--media .ii-page-header__media .ii-media {
     --ratio: 4 / 4;
+  }
+}
+
+@media (min-height: 768px) {
+  .ii-page-header--media .ii-page-header__inner {
+    align-items: center;
+  }
+  .ii-page-header--lit .ii-page-header__copy {
+    padding-block-start: 0;
   }
 }
