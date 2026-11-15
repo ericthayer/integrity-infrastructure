@@ -21,7 +21,7 @@ Never edit the skip link, header, drawer or footer on one page only: they must s
 - Links are root-absolute (`/services/#boring`, `/contact/?topic=safety#quote`) and only to anchors in the contract below.
 - Copy: `design-system/project/voice.md`. Sentence case, short sentences, no em or en dashes, no filler words, no invented numbers, names, dates or certifications; unknowns are `<span class="ii-pending">Client to provide</span>`. One label per intent: **Request a quote**, **Call (503) 502-5339**, **View open roles**, **Start an inquiry**, **Request our safety packet**.
 - Never mention Integrity Corps, Integrity Traffic or Integrity Equipment Services; never use `fleet-mountains.jpg`; never say "ISP installation". The company builds long-haul fiber and the infrastructure that reaches residential locations; it does not install service inside homes.
-- "Build by building people" appears only on Careers (page title) and About (mission section).
+- "Growing People. Connecting Possibilities." appears only on Careers (page title) and About (mission section).
 
 ## Anchor contract
 

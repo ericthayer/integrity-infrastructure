@@ -37,6 +37,7 @@
   pointer-events: none;
 }
 .ii-page-header--lit .ii-page-header__inner {
+  align-items: center;
   gap: var(--space-6);
   max-width: none;
 }
@@ -131,13 +132,12 @@
   .ii-page-header--media .ii-page-header__inner {
     display: grid;
     grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-    align-items: end;
     gap: var(--space-16);
   }
   .ii-page-header--media .ii-page-header__media {
     margin: 0;
   }
   .ii-page-header--media .ii-page-header__media .ii-media {
-    --ratio: 4 / 5;
+    --ratio: 4 / 4;
   }
 }

@@ -2441,7 +2441,7 @@ a:hover > .ii-media > img,
    One large photo tile plus four glass tiles on a 12-column grid. */
 .ii-services--bento {
   display: grid;
-  gap: var(--space-4);
+  gap: var(--space-6);
 }
 .ii-services--bento .ii-service {
   display: flex;
@@ -2469,7 +2469,8 @@ a:hover > .ii-media > img,
   padding-right: 3rem;
 }
 .ii-services--bento .ii-service__desc {
-  max-width: 40ch;
+  max-width: 60ch;
+  margin-block-end: var(--space-3);
 }
 .ii-services--bento .ii-service__icon {
   width: 3rem;

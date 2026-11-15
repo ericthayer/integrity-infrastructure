@@ -221,7 +221,7 @@ test('contact prefill links name real options, and topic-dependent fields fall b
 
 test('the working tagline appears only on Careers and About', () => {
   for (const [page, html] of Object.entries(pages)) {
-    const has = /build by building people/i.test(visibleText(html).replace(/\s+/g, ' '));
+    const has = /Growing People. Connecting Possibilities./i.test(visibleText(html).replace(/\s+/g, ' '));
     assert.equal(has, ['careers/index.html', 'about/index.html'].includes(page), `${page}: tagline placement`);
   }
 });

@@ -2922,7 +2922,8 @@ a:hover > .ii-media > img,
   padding-right: 3rem;
 }
 .ii-services--bento .ii-service__desc {
-  max-width: 40ch;
+  max-width: 60ch;
+  margin-block-end: var(--space-6);
 }
 .ii-services--bento .ii-service__icon {
   width: 2rem;
