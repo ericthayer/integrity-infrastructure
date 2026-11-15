@@ -45,3 +45,79 @@
 .ii-home-rail:focus-visible {
   outline-offset: -3px;
 }
+
+/* Short screens: the rail cells and the section around them shrink with the viewport
+   height so a whole cell stays on screen. From 1024px the section pins at the top of the
+   viewport, so a cell taller than the room under the heading is cut off for the whole
+   sideways scroll. Each value is min(its approved size, a height-based size), so nothing
+   changes on screens tall enough for the approved layout (about 800px and up).
+   --ii-rail-fit is the room left for a cell: the viewport minus the space above the cells
+   and a --space-6 gap under them. Below 1024px that is the island header's clearance;
+   from 1024px it is the section padding, the two-line heading (line-height 1.1), the head
+   margin and the rail padding, so the sum has to change if those do.
+   --ii-rail-cell is the cell width: the approved --ii-rail-base until the height binds.
+   --ii-rail-shrink is how far it gave up; the word and the cell padding shrink in step
+   with it, and the line art (sized in % of the cell) follows the cell. The
+   track's max-height caps the row: the widest word makes its cell wider than the others,
+   and its square would otherwise stretch the whole row taller than --ii-rail-fit. The cap
+   sits on the track, not the cells, so it can't narrow that cell through its aspect-ratio. */
+.ii-home-rail {
+  --ii-rail-fit: calc(100svh - var(--space-4) - var(--header-h) - var(--space-10) - var(--space-6));
+  --ii-rail-base: min(74vw, 400px);
+  --ii-rail-cell: min(var(--ii-rail-base), var(--ii-rail-fit));
+  --ii-rail-shrink: calc(var(--ii-rail-base) - var(--ii-rail-cell));
+}
+.ii-home-rail .ii-rail__track {
+  max-height: var(--ii-rail-fit);
+}
+.ii-home-rail .ii-rail__item {
+  flex-basis: var(--ii-rail-cell);
+  padding: calc(var(--shell-inset, 0px) + max(var(--space-4), var(--space-8) - var(--ii-rail-shrink) * 0.08));
+}
+.ii-home-rail .ii-rail__word {
+  font-size: max(var(--fs-heading-md), var(--fs-display-lg) - var(--ii-rail-shrink) * 0.16);
+}
+@media (min-width: 1024px) {
+  .ii-home-values {
+    --ii-values-pad: min(var(--section-space), max(var(--space-4) + var(--header-h), 16svh));
+    --ii-values-head-gap: min(var(--space-12), 6svh);
+    --ii-values-rail-pad: min(var(--space-10), 5svh);
+    padding-top: var(--ii-values-pad);
+  }
+  .ii-home-values .ii-section-head {
+    margin-bottom: var(--ii-values-head-gap);
+  }
+  .ii-home-values .ii-home-rail {
+    --ii-rail-fit: calc(
+      100svh - var(--ii-values-pad) - 2.2 * var(--fs-heading-xl) - var(--ii-values-head-gap)
+        - var(--ii-values-rail-pad) - var(--space-6)
+    );
+    padding-top: var(--ii-values-rail-pad);
+  }
+}
+
+/* ------------------------------------------------------------ services bento
+   Short screens: the lead tile's photo gives up height first, so the whole tile fits
+   under the island header; the photo crops (object-fit: cover) instead of stretching.
+   --ii-bento-text is the tile's icon, copy and padding plus the header's clearance; the
+   copy wraps more on narrow tiles, so it is larger on phones and at 1024px, where the
+   tile is narrowest. The cap only binds when the viewport is shorter than the approved
+   tile (about 850px and up at desktop widths). 9rem is the shortest photo it keeps, so
+   below about 560px tall the tile still needs a scroll. */
+.ii-home-bento {
+  --ii-bento-text: 36rem;
+}
+.ii-home-bento > .ii-service:first-child .ii-media {
+  width: 100%;
+  max-height: max(9rem, 100svh - var(--ii-bento-text));
+}
+@media (min-width: 768px) {
+  .ii-home-bento {
+    --ii-bento-text: 28.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  .ii-home-bento {
+    --ii-bento-text: clamp(26rem, 48rem - 30vw, 29rem);
+  }
+}
