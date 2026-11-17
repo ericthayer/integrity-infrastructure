@@ -14,18 +14,57 @@ const visibleText = html => html.replace(/<!--[\s\S]*?-->/g, ' ').replace(/<(scr
   .replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ');
 const block = (html, pattern) => pattern.exec(html)?.[0] ?? '';
 const withoutComments = html => html.replace(/<!--[\s\S]*?-->/g, ' ');
-const shellOf = html => [/<a class="ii-skip"[\s\S]*?<\/header>/, /<div class="ii-drawer[\s\S]*?\n<\/div>/, /<footer class="ii-footer">[\s\S]*?<\/footer>/]
-  .map(pattern => block(html, pattern).replace(/ aria-current="page"/g, ''));
+function elementBlock(html, name, predicate = () => true) {
+  const markup = html.replace(/<!--[\s\S]*?-->|<(script|style)\b[^>]*>[\s\S]*?<\/\1\s*>/gi,
+    match => ' '.repeat(match.length));
+  const token = /<\/?([a-z][\w:-]*)\b(?:"[^"]*"|'[^']*'|[^'">])*>/gi;
+  let start = -1;
+  let depth = 0;
+  for (const match of markup.matchAll(token)) {
+    const raw = match[0];
+    const tagName = match[1].toLowerCase();
+    if (tagName !== name) continue;
+    if (start === -1) {
+      if (raw.startsWith('</') || !predicate(tags(raw)[0])) continue;
+      start = match.index;
+      depth = 1;
+    } else if (raw.startsWith('</')) {
+      if (--depth === 0) return html.slice(start, match.index + raw.length);
+    } else if (!raw.endsWith('/>')) {
+      depth++;
+    }
+  }
+  return '';
+}
+const hasClass = name => tag => (tag?.attrs.class ?? '').split(/\s+/).includes(name);
+const shellSignature = html => JSON.stringify({
+  elements: tags(html).map(({ name, attrs }) => [name,
+    Object.fromEntries(Object.entries(attrs).filter(([key]) => key !== 'aria-current').sort(([a], [b]) => a.localeCompare(b)))]),
+  text: visibleText(html).trim(),
+});
+const shellOf = html => {
+  const skip = block(html, /<a\b(?=[^>]*\bclass="[^"]*\bii-skip\b")[^>]*>[\s\S]*?<\/a\s*>/i);
+  const header = elementBlock(html, 'header');
+  const drawer = elementBlock(html, 'div', hasClass('ii-drawer'));
+  const footer = elementBlock(html, 'footer', hasClass('ii-footer'));
+  return [skip + header, drawer, footer].map(shellSignature);
+};
 
 test('all seven website pages exist on the Lit Fiber theme with the website entry', () => {
   for (const [page, html] of Object.entries(pages)) {
-    assert.match(html, /<html lang="en" data-theme="lit-fiber">/, `${page}: theme`);
-    assert.match(html, /<script type="module" src="\/src\/website\.ts"><\/script>/, `${page}: website entry`);
-    assert.doesNotMatch(html, /src="\/src\/main\.ts"/, `${page}: must not load the concept entry directly`);
-    assert.match(html, /<meta name="robots" content="noindex">/, `${page}: staging pages stay out of search`);
+    const pageTags = tags(html);
+    const htmlTag = pageTags.find(tag => tag.name === 'html');
+    assert.equal(htmlTag?.attrs.lang, 'en', `${page}: language`);
+    assert.equal(htmlTag?.attrs['data-theme'], 'lit-fiber', `${page}: theme`);
+    assert.ok(pageTags.some(tag => tag.name === 'script' && tag.attrs.type === 'module'
+      && tag.attrs.src === '/src/website.ts'), `${page}: website entry`);
+    assert.ok(!pageTags.some(tag => tag.name === 'script' && tag.attrs.src === '/src/main.ts'),
+      `${page}: must not load the concept entry directly`);
+    assert.ok(pageTags.some(tag => tag.name === 'meta' && tag.attrs.name === 'robots'
+      && tag.attrs.content === 'noindex'), `${page}: staging pages stay out of search`);
     const title = /<title>([^<]+)<\/title>/.exec(html)?.[1] ?? '';
     assert.match(title, /Integrity Infrastructure/, `${page}: title names the company`);
-    const description = /<meta name="description" content="([^"]+)">/.exec(html)?.[1] ?? '';
+    const description = pageTags.find(tag => tag.name === 'meta' && tag.attrs.name === 'description')?.attrs.content ?? '';
     assert.ok(description.length > 50 && description.length <= 160, `${page}: description length ${description.length}`);
     assert.doesNotMatch(html, /data-concept-chrome|cx-bar/, `${page}: no concept presentation chrome`);
   }
@@ -38,11 +77,11 @@ test('header, drawer and footer are identical on every page, with the current pa
       assert.ok(part.length > 200, `${page}: shell part ${index} missing`);
       assert.equal(part, reference[index], `${page}: shell part ${index} differs from Home`);
     });
-    const current = tags(block(html, /<header[\s\S]*?<\/header>/)).filter(tag => tag.attrs['aria-current'] === 'page');
+    const current = tags(elementBlock(html, 'header')).filter(tag => tag.attrs['aria-current'] === 'page');
     assert.equal(current.length, 1, `${page}: one current link in the header`);
     assert.equal(current[0].attrs.href, urlFor(page), `${page}: header marks its own URL`);
     if (page !== 'index.html') {
-      const drawer = tags(block(html, /<div class="ii-drawer[\s\S]*?\n<\/div>/)).filter(tag => tag.attrs['aria-current'] === 'page');
+      const drawer = tags(elementBlock(html, 'div', hasClass('ii-drawer'))).filter(tag => tag.attrs['aria-current'] === 'page');
       assert.deepEqual(drawer.map(tag => tag.attrs.href), [urlFor(page)], `${page}: drawer marks its own URL`);
     }
   }
