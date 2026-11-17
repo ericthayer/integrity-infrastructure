@@ -184,7 +184,7 @@
 }
 .ii-btn--secondary:hover {
   --btn-bg: var(--surface-hover);
-  --btn-line: var(--text);
+  --btn-line: var(--surface-hover);
 }
 .ii-btn--ghost {
   --btn-line: transparent;
@@ -247,7 +247,7 @@
   align-items: center;
   gap: var(--space-2);
   min-height: 44px;
-  font-weight: 700;
+  font-weight: 500;
   color: var(--accent-text);
   text-decoration: none;
 }
@@ -945,7 +945,7 @@ a:hover > .ii-media > img,
 .ii-plate__value {
   margin: 0;
   font-size: var(--fs-heading-sm);
-  font-weight: 650;
+  font-weight: 450;
   line-height: 1.35;
   font-variant-numeric: tabular-nums lining-nums;
 }
