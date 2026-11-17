@@ -54,19 +54,29 @@ export function tags(html) {
     .map(match => ({ name: match[1].toLowerCase(), raw: match[0], attrs: attributes(match[0]) }));
 }
 
-export function srcsetUrls(value) {
-  const urls = [];
+// Splits a srcset into { url, descriptor } candidates. The HTML spec treats the whitespace
+// around and between candidates as insignificant, and Vite rewrites it to "url descriptor, ...".
+export function srcsetCandidates(value) {
+  const candidates = [];
   let remaining = value.trim();
   while (remaining) {
     remaining = remaining.replace(/^[\s,]+/, '');
     if (!remaining) break;
     const token = /^\S+/.exec(remaining)[0];
     const url = token.replace(/,+$/, '');
-    urls.push(url);
     remaining = remaining.slice(token.length);
-    if (!token.endsWith(',')) remaining = remaining.replace(/^[^,]*(?:,|$)/, '');
+    let descriptor = '';
+    if (!token.endsWith(',')) {
+      descriptor = /^[^,]*/.exec(remaining)[0];
+      remaining = remaining.slice(descriptor.length).replace(/^,/, '');
+    }
+    candidates.push({ url, descriptor: descriptor.trim().split(/\s+/).filter(Boolean).join(' ') });
   }
-  return urls;
+  return candidates;
+}
+
+export function srcsetUrls(value) {
+  return srcsetCandidates(value).map(candidate => candidate.url);
 }
 
 export function cssUrls(css) {
@@ -128,9 +138,11 @@ export function normalizeAssetRefs(html, owner, root) {
         let normalized = value;
         if (key === 'style') normalized = normalizeCss(value);
         else if (['srcset', 'imagesrcset'].includes(key)) {
-          for (const url of srcsetUrls(value).sort((a, b) => b.length - a.length)) {
-            normalized = normalized.split(url).join(resourceIdentity(url, owner, root));
-          }
+          // Map each candidate by bytes, then canonicalize separators the way Vite emits them.
+          // URLs, descriptors and candidate order still have to match exactly.
+          normalized = srcsetCandidates(value)
+            .map(({ url, descriptor }) => [resourceIdentity(url, owner, root), descriptor].filter(Boolean).join(' '))
+            .join(', ');
         } else if (['src', 'poster'].includes(key) || (key === 'data' && name === 'object')
           || (['href', 'xlink:href'].includes(key) && ['link', 'image', 'use'].includes(name))) {
           normalized = resourceIdentity(value, owner, root);
