@@ -88,7 +88,7 @@
    Five categories: three across, then two, on wide screens. */
 .ii-safety-certs {
   display: grid;
-  gap: var(--space-4);
+  gap: var(--space-5);
   margin: 0;
   padding: 0;
   list-style: none;

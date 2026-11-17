@@ -107,7 +107,7 @@ a:hover > .ii-media > picture > img,
 /* ------------------------------------------------------------ office card */
 .ii-offices {
   display: grid;
-  gap: var(--space-4);
+  gap: var(--space-5);
   margin: 0;
   padding: 0;
   list-style: none;
