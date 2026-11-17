@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { join, relative, sep } from 'node:path';
 import { test } from 'node:test';
-import { ROOT, DIST, PAGES, filesUnder, attributes, tags, srcsetUrls, cssUrls,
+import { ROOT, DIST, PAGES, filesUnder, attributes, tags, srcsetCandidates, srcsetUrls, cssUrls,
   htmlUrls, localFile, normalizeAssetRefs, sha256, fileMap } from '../lib/site-files.mjs';
 
 const read = file => readFileSync(file, 'utf8');
@@ -227,6 +227,29 @@ for (const [name, source, mutation] of [
       { code: 'ERR_ASSERTION', message: new RegExp(`${name} changed`) });
   });
 }
+
+test('srcset parity accepts Vite\'s candidate formatting but rejects changed candidates', () => {
+  // A formatter may wrap a srcset across lines; Vite rewrites it to "url descriptor, url descriptor".
+  const source = '<source type="image/avif" srcset="\n  /src/img/photos/night-van-splicer-640.avif   640w,\n'
+    + '  /src/img/photos/night-van-splicer-1024.avif 1024w\n">';
+  const sourceSet = normalizeAssetRefs(source, join(ROOT, 'safety/index.html'), ROOT);
+  const built = tags(read(join(DIST, 'safety/index.html')))
+    .find(tag => tag.name === 'source' && tag.attrs.srcset?.includes('night-van-splicer-640')).attrs.srcset;
+  const [small, medium, large] = srcsetCandidates(built).map(candidate => candidate.url);
+  assert.ok(small && medium && large, 'Safety must emit three built night-van candidates');
+  const output = srcset => normalizeAssetRefs(`<source type="image/avif" srcset="${srcset}">`, join(DIST, 'safety/index.html'), DIST);
+  assertPreserved(output(`${small} 640w, ${medium} 1024w`), sourceSet, 'Equivalent srcset formatting');
+  for (const [name, mutation] of [
+    ['descriptor', `${small} 640w, ${medium} 1600w`],
+    ['candidate order', `${medium} 1024w, ${small} 640w`],
+    ['candidate count', `${small} 640w`],
+    ['image bytes', `${small} 640w, ${large} 1024w`],
+  ]) {
+    assert.throws(() => assertPreserved(output(mutation), sourceSet, `srcset ${name} changed`),
+      { code: 'ERR_ASSERTION', message: new RegExp(`srcset ${name} changed`) });
+  }
+  assert.deepEqual(srcsetCandidates(' /a.png\n  1x ,\n/b.png   2x '), [{ url: '/a.png', descriptor: '1x' }, { url: '/b.png', descriptor: '2x' }]);
+});
 
 test('resource extraction covers srcsets, CSS backgrounds and fonts but not prototype navigation', () => {
   assert.deepEqual(srcsetUrls('/small.png 1x, /large.png 2x'), ['/small.png', '/large.png']);
